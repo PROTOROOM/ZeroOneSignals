@@ -9,6 +9,8 @@ class HubNetwork {
     {0, 0, 0, 0, 0, 0, 0, 0}, 
     {0, 0, 0, 0, 0, 0, 0, 0}, 
   };
+  int[] hubData = {0, 0, 0, 0, 0, 0, 0, 0};
+  
   UDP udp;
   String[] hubs;
   int port;
@@ -31,6 +33,7 @@ class HubNetwork {
   void receive(byte[] data) {
     if (data.length > 1) {
       bits[data[0]-1] = toBits(data[1]);
+      hubData[data[0]-1] = data[1];
     }
   }
 

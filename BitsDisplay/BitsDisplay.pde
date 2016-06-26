@@ -28,12 +28,14 @@ color b1Color, b2Color;
 int c=0;
 
 ModeScreen blank, testScreen, basicBitsScreen;
+ModeScreen modeColorFall;
 HubNetwork hubNetwork;
 UDP udp;
 
 int TEST = -1;
 int M0 = 0;
-int screenMode = M0;
+int M1 = 1;
+int screenMode = M1;
 
 
 void setup() {
@@ -55,6 +57,10 @@ void setupScreens() {
   blank = new ModeScreen(width, height);
   testScreen = new TestModeScreen(width, height);
   basicBitsScreen = new BasicBitsScreen(width, height);
+  basicBitsScreen.setHubNetwork(hubNetwork);
+  
+  modeColorFall = new ColorFall(width, height);
+  modeColorFall.setHubNetwork(hubNetwork);
 }
 
 
@@ -64,8 +70,11 @@ void draw() {
   }
 
   if (screenMode == M0) {
-    basicBitsScreen.setHubNetwork(hubNetwork);
     basicBitsScreen.show();
+  }
+  
+  if (screenMode == M1) {
+    modeColorFall.show();
   }
 }
 

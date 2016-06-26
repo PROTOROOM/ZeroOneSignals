@@ -7,7 +7,7 @@ class ModeScreen {
     sWidth = w;
     sHeight = h;
   }
-  
+
   void setHubNetwork(HubNetwork hn) {
     hubNetwork = hn;
   }
@@ -64,32 +64,35 @@ class TestModeScreen extends ModeScreen {
 
 
 class BasicBitsScreen extends ModeScreen {
-  
+  int nodePerHub;
+  float bitBarWidth;
+
+
   BasicBitsScreen(float w, float h) {
     super(w, h);
+    nodePerHub = 8;
+    bitBarWidth = 30;
   }
 
 
   void show() {
     background(0);
-    for (int i=0; i<8; i++) {
-      drawBars(i*20+70, hubNetwork.bits[i]);
+    for (int i=0; i<hubNetwork.bits.length; i++) {
+      float startX = sWidth/2 - bitBarWidth*nodePerHub/2;
+      drawNodeBars(startX, i*20+70, bitBarWidth, hubNetwork.bits[i]);
     }
   }
 
 
-  void drawBars(float sy, int[] bits) {
-    int nodeNumber = 8;
-    float nw = 30;
-    float startX = sWidth/2 - nw*nodeNumber/2;
-
-    for (int i=0; i<nodeNumber; i++) {
+  void drawNodeBars(float sx, float sy, float bw, int[] bits) {
+    noStroke();
+    for (int i=0; i<nodePerHub; i++) {
       if (bits[i] == 1) {
         fill(200);
       } else {
         fill(50);
       }
-      rect(startX+nw*i, sy, nw, nw/7);
+      rect(sx+bw*i, sy, bw, bw/7);
     }
   }
 }
