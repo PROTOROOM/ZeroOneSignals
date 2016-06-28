@@ -39,7 +39,10 @@ int screenMode = M1;
 
 
 void setup() {
-  size(640, 720, P2D);
+  //size(640, 720, P2D);
+  size(1920, 2160, P2D);
+  
+  noCursor();
 
   background(0);
   b1Color = color(50);
@@ -58,7 +61,7 @@ void setupScreens() {
   testScreen = new TestModeScreen(width, height);
   basicBitsScreen = new BasicBitsScreen(width, height);
   basicBitsScreen.setHubNetwork(hubNetwork);
-  
+
   modeColorFall = new ColorFall(width, height);
   modeColorFall.setHubNetwork(hubNetwork);
 }
@@ -72,7 +75,7 @@ void draw() {
   if (screenMode == M0) {
     basicBitsScreen.show();
   }
-  
+
   if (screenMode == M1) {
     modeColorFall.show();
   }
@@ -89,8 +92,8 @@ void keyReleased() {
 
 
 /**
-  handle UDP data
-**/
+ handle UDP data
+ **/
 void receive(byte[] data) {
   hubNetwork.receive(data);
 }
