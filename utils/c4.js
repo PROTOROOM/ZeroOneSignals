@@ -26,8 +26,8 @@ setInterval(function() {
     // console.log(t);
     // var bits = [randBit(t, 0), randBit(t, 1), randBit(t, 2), randBit(t, 3), 
     //             randBit(t, 32), randBit(t, 32), randBit(t, 16), randBit(t, 4)];
-    bits = [b1.p(t, 6), b2.p(t, 2), b3.p(t, 13), b4.p(t, 4),
-            b5.p(t, 40), b6.p(t, 6), b7.p(t, 3), b8.p(t, 16)];
+    bits = [b1.p(t, 60), b2.p(t, 32), b3.p(t, 13), b4.p(t, 24),
+            b5.p(t, 40), b6.p(t, 46), b7.p(t, 33), b8.p(t, 16)];
     // bits = [b1.p(t, 2), 0, 0, 0, 0, 0, 0, 0];
 
     var b = new Uint8Array(2);

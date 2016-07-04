@@ -10,17 +10,22 @@
 
 /* ========== Network Setup ========== */
 // [CHECK] : give a number 1 to 9(switch) for hubID
-byte hubID = 2;
+byte hubID = 3;
 byte ipD = 170 + hubID;
 
 // update mac address from WIZ550io device.
 byte mac[] = {
-  0x00, 0x0B, 0xDC, 0x1D, 0x4F, 0x97
+//  0x00, 0x0B, 0xDC, 0x50, 0xB2, 0xFE
+//  0x00, 0x0B, 0xDC, 0x1D, 0x4F, 0x97 // 2
   //  0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED
+  0x00, 0x08, 0xDC, 0x50, 0xB2, 0xFF // 3
+//  0x00, 0x08, 0xDC, 0x50, 0xB2, 0xF9 // 4
+  
 };
-IPAddress ip(192, 168, 0, ipD); // hub ip
+IPAddress ip(192, 168, 1, ipD); // hub ip
 unsigned int localPort = 8888; // hub port
-IPAddress rHostIP(192, 168, 0, 2); // display host ip
+IPAddress rHostIP(192, 168, 1, 100); // display host ip
+//IPAddress rHostIP(192, 168, 0, 2); // display host ip
 unsigned int rHostPort = 6000; // display host port
 
 /* ========== Variables ========== */
@@ -31,8 +36,8 @@ int bits[] = {0, 0, 0, 0, 0, 0, 0, 0};
 int ports[] = {A0, A1, A2, A3, A4, A5, 6, 8};
 unsigned char v;
 
-boolean isDebugging = true;
-boolean isSimulation = false;
+boolean isDebugging = false;
+boolean isSimulation = true;
 
 EthernetUDP Udp;
 
@@ -42,7 +47,7 @@ void setup() {
   Udp.begin(localPort);
 
   for (int i=0; i<8; i++) {
-    pinMode(ports[i], INPUT_PULLUP);
+    pinMode(ports[i], INPUT);
   }
 
   
@@ -72,7 +77,7 @@ void loop() {
   }
 
 
-  delay(20);
+  delay(30);
   showStatusLED();
 }
 
@@ -106,6 +111,7 @@ void sendNodeSignal(char signal) {
   ReplyBuffer[1] = signal;
   Udp.write(ReplyBuffer, 2);
   Udp.endPacket();
+//  Serial.println("send signal");
 }
 
 

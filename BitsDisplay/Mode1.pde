@@ -1,14 +1,15 @@
 class ColorFall extends BasicBitsScreen {
   ArrayList<YLine> lines = new ArrayList<YLine>();
-  float sX, dWidth;
+  float sX, sY, dWidth;
   float dropSpeed;
   
 
   ColorFall(float w, float h) {
     super(w, h);
     sX = sWidth / 3;
+    sY = dWidth / 64 * 7;
     dWidth = sWidth / 3;
-    dropSpeed = sMultiple*2; 
+    dropSpeed = sMultiple; 
   }
 
   void show() {
@@ -17,8 +18,8 @@ class ColorFall extends BasicBitsScreen {
     
     color lineColor1 = color(hubNetwork.hubData[0], hubNetwork.hubData[1], hubNetwork.hubData[2], hubNetwork.hubData[3]);
     color lineColor2 = color(hubNetwork.hubData[4], hubNetwork.hubData[5], hubNetwork.hubData[6], hubNetwork.hubData[7]);
-    YLine newLine1 = new YLine(sX, dWidth, lineColor1);
-    YLine newLine2 = new YLine(sX, dWidth, lineColor2);
+    YLine newLine1 = new YLine(sX, sY, dWidth/2, lineColor1);
+    YLine newLine2 = new YLine(sX+dWidth/2, sY+1, dWidth/2, lineColor2);
     lines.add(newLine1);
     lines.add(newLine2);
 
@@ -26,7 +27,7 @@ class ColorFall extends BasicBitsScreen {
       YLine line = lines.get(i);
       if (line.isOut) lines.remove(i);
 
-      line.move(dropSpeed);
+      line.move(dropSpeed/3);
       line.show();
     }
     
@@ -38,7 +39,7 @@ class ColorFall extends BasicBitsScreen {
     bitBarWidth = dWidth / 64;
     for (int i=0; i<hubNetwork.bits.length; i++) {
       float startX = sX + (i*bitBarWidth*nodePerHub);     
-      drawNodeBars(startX, 0, bitBarWidth, bitBarWidth*6, hubNetwork.bits[i]);
+      drawNodeBars(startX, 0, bitBarWidth, bitBarWidth*5, hubNetwork.bits[i]);
     }
   }
 }
@@ -49,9 +50,9 @@ class YLine {
   color c;
   boolean isOut;
 
-  YLine(float sX, float w, color initColor) {
+  YLine(float sX, float sY, float w, color initColor) {
     x = sX;
-    y = 0;
+    y = sY;
     lineWidth = w; 
     c = initColor;
     isOut = false;
@@ -66,5 +67,7 @@ class YLine {
     stroke(c);
     strokeCap(SQUARE);
     line(x, y, x+lineWidth, y);
+    //fill(c);
+    //rect(x, y, lineWidth, 1);
   }
 }

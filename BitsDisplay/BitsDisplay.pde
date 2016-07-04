@@ -27,7 +27,7 @@ color b1Color, b2Color;
 
 int c=0;
 
-ModeScreen blank, testScreen, basicBitsScreen;
+ModeScreen blank, testScreen, basicBitsScreen, fullBitsScreen;
 ModeScreen modeColorFall;
 HubNetwork hubNetwork;
 UDP udp;
@@ -37,10 +37,12 @@ int M0 = 0;
 int M1 = 1;
 int screenMode = M1;
 
+PShader blur;
 
 void setup() {
+  fullScreen(P2D, SPAN);
   //size(640, 720, P2D);
-  size(1920, 2160, P2D);
+  //size(1920, 2160, P2D);
   
   noCursor();
 
@@ -54,6 +56,7 @@ void setup() {
   hubNetwork.setPort(hubPort);
 
   setupScreens();
+  blur = loadShader("blur.glsl");
 }
 
 void setupScreens() {
@@ -61,6 +64,8 @@ void setupScreens() {
   testScreen = new TestModeScreen(width, height);
   basicBitsScreen = new BasicBitsScreen(width, height);
   basicBitsScreen.setHubNetwork(hubNetwork);
+  fullBitsScreen = new FullBitsScreen(width, height);
+  fullBitsScreen.setHubNetwork(hubNetwork);
 
   modeColorFall = new ColorFall(width, height);
   modeColorFall.setHubNetwork(hubNetwork);
@@ -68,17 +73,23 @@ void setupScreens() {
 
 
 void draw() {
+  filter(blur);
   if (screenMode == TEST) {
     testScreen.show();
   }
 
   if (screenMode == M0) {
-    basicBitsScreen.show();
+    fullBitsScreen.show();
+    //fullBitsScreen.up();
   }
 
   if (screenMode == M1) {
+    //if (frameCount % 3 == 0) {
     modeColorFall.show();
+    //}
   }
+  
+  
 }
 
 
@@ -88,6 +99,11 @@ void keyReleased() {
     int hubID = int(key) - int('0');
     hubNetwork.toggleSimulation(hubID);
   }
+  
+  if (key == 'q') screenMode = TEST;
+  if (key == 'w') screenMode = 0;
+  if (key == 'e') screenMode = 1;
+  
 }
 
 

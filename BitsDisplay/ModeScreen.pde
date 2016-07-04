@@ -24,6 +24,9 @@ class ModeScreen {
 
   void showOnce() {
   }
+  
+  //void up() {
+  //}
 }
 
 
@@ -95,5 +98,8 @@ class BasicBitsScreen extends ModeScreen {
       }
       rect(sx+bw*i, sy, bw, bh);
     }
+  }
+  
+  void up() {
   }
 }
