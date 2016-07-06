@@ -79,7 +79,7 @@ void setup() {
 void loop() {
   int heartBeatSize = Udp.parsePacket();
   if (heartBeatSize > 0) {
-    Serial.println("get heaerbeat");
+//    Serial.println("get heaerbeat");
     Udp.read(packetBuffer, UDP_TX_PACKET_MAX_SIZE);
     toggleSimulation();
   }
