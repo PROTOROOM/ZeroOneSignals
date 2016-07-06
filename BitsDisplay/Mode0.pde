@@ -17,7 +17,8 @@ class FullBitsScreen extends BasicBitsScreen {
 
     //dH = dH - 0.2*sMultiple;
     //dT = dT + 0.4*sMultiple;
-    middle();
+    //middle();
+    up();
   }
 
   void up() {
