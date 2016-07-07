@@ -4,11 +4,12 @@
  */
 
 import hypermedia.net.*;
-
+import websockets.*;
 
 // ########## Configurations ########## 
 int port = 6000;
 int hubPort = 8888;
+int wsPort = 8080;
 String hubBaseIP = "192.168.1.";
 String[] hubs = {
   hubBaseIP+"171", 
@@ -30,8 +31,10 @@ int c=0;
 
 ModeScreen blank, testScreen, basicBitsScreen, fullBitsScreen;
 ModeScreen modeColorFall;
+
 HubNetwork hubNetwork;
 UDP udp;
+WebsocketServer ws;
 
 int TEST = -1;
 int M0 = 0;
@@ -41,8 +44,8 @@ int screenMode = M1;
 PShader blur;
 
 void setup() {
-  fullScreen(P2D, SPAN);
-  //size(640, 720, P2D);
+  //fullScreen(P2D, SPAN);
+  size(640, 720, P2D);
   //size(1920, 2160, P2D);
   
   noCursor();
@@ -52,9 +55,11 @@ void setup() {
   b2Color = color(200);
 
   udp = new UDP(this, port);
+  ws = new WebsocketServer(this, wsPort, "/modehub");
   hubNetwork = new HubNetwork(udp);
   hubNetwork.setHubs(hubs);
   hubNetwork.setPort(hubPort);
+  hubNetwork.setModeHubServer(ws);
 
   setupScreens();
   blur = loadShader("blur.glsl");
@@ -113,4 +118,12 @@ void keyReleased() {
  **/
 void receive(byte[] data) {
   hubNetwork.receive(data);
+}
+
+
+/**
+  handle Websocket data
+**/
+void webSocketServerEvent(String msg) {
+  println(msg);
 }

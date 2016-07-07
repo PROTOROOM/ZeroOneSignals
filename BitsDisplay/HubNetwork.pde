@@ -9,10 +9,12 @@ class HubNetwork {
     {0, 0, 0, 0, 0, 0, 0, 0}, 
     {0, 0, 0, 0, 0, 0, 0, 0}, 
   };
+  int modeBitData, oldModeBitData;
   int[] blank8Bits = {0, 0, 0, 0, 0, 0, 0, 0};
   int[] hubData = {0, 0, 0, 0, 0, 0, 0, 0};
-  
+
   UDP udp;
+  WebsocketServer ws;
   String[] hubs;
   int port;
 
@@ -21,24 +23,44 @@ class HubNetwork {
     udp = aUDP;
     udp.listen(true);
   }
-  
+
   void setHubs(String[] aHubs) {
     hubs = aHubs;
   }
-  
+
   void setPort(int aPort) {
     port = aPort;
+  }
+
+  void setModeHubServer(WebsocketServer aServer) {
+    ws = aServer;
   }
 
 
   void receive(byte[] data) {
     if (data.length > 1) {
       //bits[data[0]-1] = blank8Bits;
-      bits[data[0]-1] = toBits(data[1]);
-      hubData[data[0]-1] = data[1];
+      if (data[0] == 9) {
+        modeBitData = data[1];
+        sendDataToModeDisplay(modeBitData);
+      } else {
+        bits[data[0]-1] = toBits(data[1]);
+        hubData[data[0]-1] = data[1];
+      }
     }
   }
 
+  void sendDataToModeDisplay(int data) {
+    println("ws :" + str(data));
+    if (oldModeBitData != data) {
+      try {
+        ws.sendMessage(str(data));
+      } 
+      catch (Exception e) {
+      }
+      oldModeBitData = data;
+    }
+  }
 
   int[] toBits(byte b) {
     int[] bits = new int[8];
@@ -56,8 +78,8 @@ class HubNetwork {
     }
     println();
   }
-  
-  
+
+
   void toggleSimulation(int aHubID) {
     udp.send("tgsm", hubs[aHubID-1], port);
   }
