@@ -51,8 +51,9 @@ class HubNetwork {
   }
 
   void sendDataToModeDisplay(int data) {
-    println("ws :" + str(data));
     if (oldModeBitData != data) {
+      //println("ws :" + str(data));
+
       try {
         ws.sendMessage(str(data));
       } 
