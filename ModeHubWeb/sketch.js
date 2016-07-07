@@ -1,21 +1,39 @@
-var socket;
+var ws;
 var modebit;
 var bgColor;
-var d;
+var d, alpha;
+var isSimulation;
+var isDebug;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
+	isSimulation = false;
+	isDebug = false;
+	
 	bgColor = color(150, 220, 10);
 	background(bgColor);
 	modebit = 0;
-// 	socket = io.connect('http://192.168.1.100:8080');
-// 	
-// 	socket.on('modebit',
-// 		function(data) {
-// 			modebit = data;
-// 		}
-// 	);
+
+	if (!isSimulation) {
+		ws = new WebSocket("ws://localhost:8080/modehub");
+	
+		ws.onopen = function() {
+			console.log("connected");
+		};
+	
+		ws.onmessage = function(evt) {
+			var data = evt.data;
+			if (isDebug) { console.log(data); }
+			modebit = Number(data);
+		};
+	
+		ws.onclose = function() {
+			console.log("closed...");
+		};
+	}
+	
 	d = 200;
+	alpha = 200;
 }
 
 function draw() {
@@ -25,16 +43,18 @@ function draw() {
 	
 	if (modebit == 1) {
 		fill(color(0, 200, 0));	
-		d = min(200, d + 9);
+		d = min(200, d + 20);
+		alpha = 255;
 	} else {
-		fill(color(200, 220, 200));
-		d = max(100, d - 3);
+		alpha = alpha - 5;
+		fill(color(200, 220, 200, max(0, alpha)));
+		d = max(50, d - 10);
 	}
 	
 	ellipse(width/2, height/2, d, d);
 	
 	
-	simulateBits(20);
+	if (isSimulation) simulateBits(60);
 
 }
 
