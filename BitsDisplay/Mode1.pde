@@ -31,6 +31,7 @@ class ColorFall extends BasicBitsScreen {
       YLine line = lines.get(i);
       if (line.isOut) lines.remove(i);
 
+      dropSpeed = dropSpeed * 1.02;
       line.move(dropSpeed/3);
       line.show();
     }
@@ -53,6 +54,7 @@ class YLine {
   float x, y, lineWidth;
   color c;
   boolean isOut;
+  float dropSpeed;
 
   YLine(float sX, float sY, float w, color initColor) {
     x = sX;
@@ -60,12 +62,20 @@ class YLine {
     lineWidth = w; 
     c = initColor;
     isOut = false;
+    dropSpeed = sMultiple;
   }
 
-  void move(float dropSpeed) {
+  void move(float speed) {
+    y = y + speed;
+    if (y > height) isOut = true;
+  }
+
+  void drop() {
+    dropSpeed = dropSpeed * 1.02;
     y = y + dropSpeed;
     if (y > height) isOut = true;
   }
+
 
   void show() {
     stroke(c);

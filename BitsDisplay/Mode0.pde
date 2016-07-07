@@ -1,10 +1,13 @@
 class FullBitsScreen extends BasicBitsScreen {
   float dH, dT;
+  float upSpeed;
 
   FullBitsScreen(float w, float h) {
     super(w, h);
     dH = sHeight;
     dT = 0;
+    //upSpeed = 0.2*sMultiple;
+    upSpeed = 20;
   }
 
   void show() {
@@ -22,7 +25,8 @@ class FullBitsScreen extends BasicBitsScreen {
   }
 
   void up() {
-    dH = dH - 0.2*sMultiple;
+    upSpeed = max(1, upSpeed*0.97);
+    dH = dH - upSpeed;
   }
 
   void middle() {
