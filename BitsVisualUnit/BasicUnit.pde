@@ -51,7 +51,7 @@ class BitsUnit {
   void moveTo(float px, float py) {
     x = px;
     y = py;
-    rad = rad + 0.01;
+    rad = rad + 0.1;
   }
   
   void move() {

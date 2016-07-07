@@ -44,7 +44,7 @@ void setup() {
 }
 
 void draw() {
-  fill(0, 1);
+  fill(0, 10);
   rect(0, 0, width, height);
   bits.show();
   bits.moveTo(mouseX, mouseY);
