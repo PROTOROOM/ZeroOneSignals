@@ -23,6 +23,7 @@ HubNetwork hubNetwork;
 UDP udp;
 
 BitsUnit bits;
+SoundUnit sound;
 
 void setup() {
   //fullScreen(P2D, SPAN);
@@ -41,6 +42,9 @@ void setup() {
 
   bits = new BitsUnit(width/2, height/2, 1);
   bits.setHubNetwork(hubNetwork);
+  sound = new SoundUnit();
+  sound.setHubNetwork(hubNetwork);
+  
 }
 
 void draw() {
@@ -48,6 +52,10 @@ void draw() {
   rect(0, 0, width, height);
   bits.show();
   bits.moveTo(mouseX, mouseY);
+  
+  if (frameCount % 300 == 0) {
+    sound.trigger();
+  }
 }
 
 /**

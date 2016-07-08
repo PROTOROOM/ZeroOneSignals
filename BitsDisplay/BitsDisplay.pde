@@ -50,7 +50,7 @@ void setup() {
   
   noCursor();
 
-  background(0);
+  background(255);
   b1Color = color(50);
   b2Color = color(200);
 
@@ -80,6 +80,7 @@ void setupScreens() {
 
 void draw() {
   filter(blur);
+
   if (screenMode == TEST) {
     testScreen.show();
   }
@@ -95,7 +96,7 @@ void draw() {
     //}
   }
   
-  
+
 }
 
 

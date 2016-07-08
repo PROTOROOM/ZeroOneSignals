@@ -6,9 +6,11 @@ class ColorFall extends BasicBitsScreen {
 
   ColorFall(float w, float h) {
     super(w, h);
-    sX = sWidth / 3;
-    sY = dWidth / 64 * 7;
     dWidth = sWidth / 3;
+    sX = sWidth / 3;
+    sY = dWidth / 64 * 6;
+
+
     dropSpeed = sMultiple;
   }
 
@@ -16,7 +18,7 @@ class ColorFall extends BasicBitsScreen {
 
     strokeWeight(sMultiple*3);
 
-    color lineColor1 = color(hubNetwork.hubData[0], hubNetwork.hubData[1], hubNetwork.hubData[2], hubNetwork.hubData[3]);
+    color lineColor1 = color(hubNetwork.hubData[0], hubNetwork.hubData[1], hubNetwork.hubData[2], 255-hubNetwork.hubData[3]);
     color lineColor2 = color(hubNetwork.hubData[4], hubNetwork.hubData[5], hubNetwork.hubData[6], hubNetwork.hubData[7]);
     //YLine newLine1 = new YLine(sX, sY, dWidth/2, lineColor1);
     //YLine newLine2 = new YLine(sX+dWidth/2, sY+1, dWidth/2, lineColor2);
@@ -31,8 +33,9 @@ class ColorFall extends BasicBitsScreen {
       YLine line = lines.get(i);
       if (line.isOut) lines.remove(i);
 
-      dropSpeed = dropSpeed * 1.02;
-      line.move(dropSpeed/3);
+
+      //line.move(dropSpeed/3);
+      line.drop();
       line.show();
     }
 
@@ -54,7 +57,7 @@ class YLine {
   float x, y, lineWidth;
   color c;
   boolean isOut;
-  float dropSpeed;
+  float dropSpeed, sRatio;
 
   YLine(float sX, float sY, float w, color initColor) {
     x = sX;
@@ -62,7 +65,10 @@ class YLine {
     lineWidth = w; 
     c = initColor;
     isOut = false;
-    dropSpeed = sMultiple;
+    dropSpeed = 1;
+
+    //sRatio = random(1.01, 1.03);
+    sRatio = 1.01;
   }
 
   void move(float speed) {
@@ -71,7 +77,7 @@ class YLine {
   }
 
   void drop() {
-    dropSpeed = dropSpeed * 1.02;
+    dropSpeed = dropSpeed * sRatio;
     y = y + dropSpeed;
     if (y > height) isOut = true;
   }

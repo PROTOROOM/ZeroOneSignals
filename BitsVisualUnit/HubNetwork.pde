@@ -33,7 +33,7 @@ class HubNetwork {
 
 
   void receive(byte[] data) {
-    if (data.length > 1) {
+    if (data.length > 1 && data[0] < 9) {
       //bits[data[0]-1] = blank8Bits;
       bits[data[0]-1] = toBits(data[1]);
       hubData[data[0]-1] = data[1];
