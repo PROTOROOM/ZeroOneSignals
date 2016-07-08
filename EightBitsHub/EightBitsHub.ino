@@ -10,7 +10,7 @@
 
 /* ========== Network Setup ========== */
 // [CHECK] : give a number 1 to 9(switch) for hubID
-byte hubID = 8;
+byte hubID = 5;
 byte ipD = 170 + hubID;
 
 /* update mac address from WIZ550io device.

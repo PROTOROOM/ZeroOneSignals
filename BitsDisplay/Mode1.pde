@@ -18,13 +18,14 @@ class ColorFall extends BasicBitsScreen {
 
     strokeWeight(sMultiple*3);
 
-    color lineColor1 = color(hubNetwork.hubData[0], hubNetwork.hubData[1], hubNetwork.hubData[2], 255-hubNetwork.hubData[3]);
+    color lineColor1 = color(hubNetwork.hubData[0], hubNetwork.hubData[1], hubNetwork.hubData[2], hubNetwork.hubData[3]);
     color lineColor2 = color(hubNetwork.hubData[4], hubNetwork.hubData[5], hubNetwork.hubData[6], hubNetwork.hubData[7]);
-    //YLine newLine1 = new YLine(sX, sY, dWidth/2, lineColor1);
-    //YLine newLine2 = new YLine(sX+dWidth/2, sY+1, dWidth/2, lineColor2);
+    YLine newLine1 = new YLine(sX, sY, dWidth/2, lineColor1);
+    YLine newLine2 = new YLine(sX+dWidth/2, sY+1, dWidth/2, lineColor2);
+    println(hubNetwork.hubData[4]);
 
-    YLine newLine1 = new YLine(sX, sY, dWidth, lineColor1);
-    YLine newLine2 = new YLine(sX, sY+1, dWidth, lineColor2);
+    //YLine newLine1 = new YLine(sX, sY, dWidth, lineColor1);
+    //YLine newLine2 = new YLine(sX, sY+1, dWidth, lineColor2);
 
     lines.add(newLine1);
     lines.add(newLine2);

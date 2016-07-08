@@ -45,7 +45,8 @@ class HubNetwork {
         sendDataToModeDisplay(modeBitData);
       } else {
         bits[data[0]-1] = toBits(data[1]);
-        hubData[data[0]-1] = data[1];
+        //hubData[data[0]-1] = data[1];
+        hubData[data[0]-1] = toNum(bits[data[0]-1]);
       }
     }
   }
@@ -70,6 +71,14 @@ class HubNetwork {
     }
 
     return bits;
+  }
+  
+  int toNum(int[] bits) {
+    int result=0;
+    for (int i=0; i<8; i++) {
+      result = result + int(pow(2, i))*bits[i];
+    }
+    return result;
   }
 
 
