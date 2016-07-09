@@ -41,6 +41,7 @@ int M0 = 0;
 int M1 = 1;
 int screenMode = M1;
 int oldScreenMode;
+boolean isRealScreenMode = true;
 
 PShader blur;
 
@@ -48,7 +49,7 @@ void setup() {
   //fullScreen(P2D, SPAN);
   size(640, 720, P2D);
   //size(1920, 2160, P2D);
-  
+
   noCursor();
 
   background(255);
@@ -83,9 +84,11 @@ void setupScreens() {
 
 void draw() {
   filter(blur);
-  
 
-  screenMode = hubNetwork.getCurrentMode();
+
+  if (isRealScreenMode) {
+    screenMode = hubNetwork.getCurrentMode();
+  }
   clearScreenOnce();
 
   if (screenMode == TEST) {
@@ -93,26 +96,24 @@ void draw() {
   }
 
   if (screenMode == M0) {
-    
+
     fullBitsScreen.show();
     //fullBitsScreen.up();
   }
 
   if (screenMode == M1) {
-    
+
     //if (frameCount % 3 == 0) {
     modeColorFall.show();
     //}
   }
-  
-
 }
 
 void clearScreenOnce() {
   if (screenMode != oldScreenMode) {
     background(255);
     oldScreenMode = screenMode;
-  } 
+  }
 }
 
 
@@ -122,11 +123,22 @@ void keyReleased() {
     int hubID = int(key) - int('0');
     hubNetwork.toggleSimulation(hubID);
   }
-  
+
   if (key == 'q') screenMode = TEST;
   if (key == 'w') screenMode = 0;
   if (key == 'e') screenMode = 1;
   
+  if (key == 'r') {
+    toggleRealScreenMode();
+  }
+}
+
+void toggleRealScreenMode() {
+  if (isRealScreenMode) {
+    isRealScreenMode = false;
+  } else {
+    isRealScreenMode = true;
+  }
 }
 
 
@@ -139,8 +151,8 @@ void receive(byte[] data) {
 
 
 /**
-  handle Websocket data
-**/
+ handle Websocket data
+ **/
 void webSocketServerEvent(String msg) {
   println(msg);
 }
