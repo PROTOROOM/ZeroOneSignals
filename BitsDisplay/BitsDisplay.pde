@@ -86,10 +86,9 @@ void draw() {
   
 
   screenMode = hubNetwork.getCurrentMode();
-  //clearScreenOnce();
+  clearScreenOnce();
 
   if (screenMode == TEST) {
-    
     testScreen.show();
   }
 

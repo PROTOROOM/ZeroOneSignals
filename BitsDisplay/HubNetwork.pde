@@ -26,7 +26,7 @@ class HubNetwork {
   HubNetwork(UDP aUDP) {
     udp = aUDP;
     udp.listen(true);
-    
+
     bitOnTime = 0;
     bitOffTime = 0;
   }
@@ -74,9 +74,7 @@ class HubNetwork {
       catch (Exception e) {
       }
       oldModeBitData = data;
-      
     } else {
-      
     }
   }
 
@@ -113,26 +111,31 @@ class HubNetwork {
 
 
   int getCurrentMode() {
-    print(currentMode);print(" ");print(bitOnTime);print(" ");println(bitOffTime);
-    
+    print(currentMode);
+    print(" ");
+    print(bitOnTime);
+    print(" ");
+    println(bitOffTime);
+
+
     int gapOnOff = abs(bitOffTime - bitOnTime);
-    if ((millis() - bitOffTime) > max(1000*3, gapOnOff)) {
+    if ((millis() - bitOffTime) > max(1000*2, gapOnOff)) {
       currentMode = 0;
-    }
-    
+    } 
+
     if (oldModeBitData != 0) {
       currentMode = oldModeBitData;
     }
-    
+
     return currentMode;
   }
-  
+
 
   // XXX old implementation. not so good.. 
   //int getCurrentModeXXX() {
   //  int currentMode = -1;
   //  modeDecisionCount = 200;
-    
+
   //  if (modeBitData == 1) {
   //    //m0 = max(50, m0 - 20);
   //    m1 = min(modeDecisionCount, m1 + 2);
@@ -162,7 +165,7 @@ class HubNetwork {
   //  } else {
   //    currentMode = 0;
   //  }
-    
+
   //  return currentMode;
   //}
 }
