@@ -6,8 +6,8 @@ class ColorFall extends BasicBitsScreen {
 
   ColorFall(float w, float h) {
     super(w, h);
-    dWidth = sWidth / 3;
-    sX = sWidth / 3;
+    dWidth = sWidth / 3 / 12 * 10;
+    sX = 0 + (sWidth/3/12); //sWidth / 3;
     sY = dWidth / 64 * 6;
 
 
@@ -22,7 +22,6 @@ class ColorFall extends BasicBitsScreen {
     color lineColor2 = color(hubNetwork.hubData[4], hubNetwork.hubData[5], hubNetwork.hubData[6], hubNetwork.hubData[7]);
     YLine newLine1 = new YLine(sX, sY, dWidth/2, lineColor1);
     YLine newLine2 = new YLine(sX+dWidth/2, sY+1, dWidth/2, lineColor2);
-    println(hubNetwork.hubData[4]);
 
     //YLine newLine1 = new YLine(sX, sY, dWidth, lineColor1);
     //YLine newLine2 = new YLine(sX, sY+1, dWidth, lineColor2);

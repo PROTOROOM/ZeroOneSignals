@@ -53,9 +53,10 @@ void draw() {
   bits.show();
   bits.moveTo(mouseX, mouseY);
   
-  if (frameCount % 300 == 0) {
-    sound.trigger();
-  }
+  //if (frameCount % 300 == 0) {
+  //  sound.trigger();
+  //}
+  sound.addBitsAndTrigger();
 }
 
 /**

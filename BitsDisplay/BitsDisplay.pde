@@ -54,6 +54,8 @@ void setup() {
   b1Color = color(50);
   b2Color = color(200);
 
+  // network setup, HubNetwork handles UDP, Websocket.
+  // 'void receive()' method is necessary, check below.
   udp = new UDP(this, port);
   ws = new WebsocketServer(this, wsPort, "/modehub");
   hubNetwork = new HubNetwork(udp);

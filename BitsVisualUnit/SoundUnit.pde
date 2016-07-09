@@ -10,6 +10,7 @@ class SoundUnit {
   float[] sample1, sample2;
   float waveSampleRate;
   int sampleLength;
+  int index;
 
   SoundUnit() {
     sampleLength = 1024*64;
@@ -18,6 +19,7 @@ class SoundUnit {
     waveSampleRate = 44100f;
 
     minim = new Minim(this);
+    index = 0;
   }
 
   void setHubNetwork(HubNetwork hn) {
@@ -32,7 +34,15 @@ class SoundUnit {
       f = f + random(-30, 30);
       sample2[i] = f/100;
     }
+  }
 
+  void trigger() {
+    makeNewSample();
+    createSample();
+    wave.trigger();
+  }
+
+  void createSample() {
     AudioFormat format = new AudioFormat( waveSampleRate, // sample rate
       16, // sample size in bits
       2, // channels
@@ -47,8 +57,60 @@ class SoundUnit {
       );
   }
 
-  void trigger() {
-    makeNewSample();
-    wave.trigger();
+  void addBitsAndTrigger() {
+    if (index < (1024*64)) {
+
+      for (int j=0; j<32; j++) {
+        for (int i=0; i<4; i++) {
+          //sample1[index] = hubNetwork.hubData[i]/300.2;
+          //sample2[index] = hubNetwork.hubData[4+i]/300.2;
+          //index = index + 1;
+
+          sample1[index] = hubNetwork.hubData[i];
+          sample2[index] = hubNetwork.hubData[4+i];
+          index = index + 1;
+
+          //sample1[index] = hubNetwork.hubData[i]/50.2;
+          //sample2[index] = hubNetwork.hubData[4+i]/50.2;
+          //index = index + 1;
+        }
+        //sample1[index] = hubNetwork.hubData[0]/4.2;
+        //sample2[index] = hubNetwork.hubData[1]/4.2;
+        //index = index + 1;
+        //sample1[index] = hubNetwork.hubData[7]/4.2;
+        //sample2[index] = hubNetwork.hubData[6]/4.2;
+        //index = index + 1;
+      }
+      //sample1[index] = hubNetwork.hubData[0];
+      //sample2[index] = hubNetwork.hubData[4];
+      //index = index + 1;
+      //sample1[index] = hubNetwork.hubData[1];
+      //sample2[index] = hubNetwork.hubData[5];
+      //index = index + 1;
+      //sample1[index] = hubNetwork.hubData[2];
+      //sample2[index] = hubNetwork.hubData[6];
+      //index = index + 1;
+      //sample1[index] = hubNetwork.hubData[3];
+      //sample2[index] = hubNetwork.hubData[7];
+      //index = index + 1;
+
+      //sample1[index] = hubNetwork.hubData[0];
+      //sample2[index] = hubNetwork.hubData[4];
+      //index = index + 1;
+      //sample1[index] = hubNetwork.hubData[1];
+      //sample2[index] = hubNetwork.hubData[5];
+      //index = index + 1;
+      //sample1[index] = hubNetwork.hubData[2];
+      //sample2[index] = hubNetwork.hubData[6];
+      //index = index + 1;
+      //sample1[index] = hubNetwork.hubData[3];
+      //sample2[index] = hubNetwork.hubData[7];
+      //index = index + 1;
+    } else {
+      index = 0;
+      createSample();
+      wave.trigger();
+    }
+    println(index);
   }
 }
