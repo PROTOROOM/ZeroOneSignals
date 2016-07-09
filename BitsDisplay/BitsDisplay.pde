@@ -40,6 +40,7 @@ int TEST = -1;
 int M0 = 0;
 int M1 = 1;
 int screenMode = M1;
+int oldScreenMode;
 
 PShader blur;
 
@@ -82,23 +83,37 @@ void setupScreens() {
 
 void draw() {
   filter(blur);
+  
+
+  screenMode = hubNetwork.getCurrentMode();
+  //clearScreenOnce();
 
   if (screenMode == TEST) {
+    
     testScreen.show();
   }
 
   if (screenMode == M0) {
+    
     fullBitsScreen.show();
     //fullBitsScreen.up();
   }
 
   if (screenMode == M1) {
+    
     //if (frameCount % 3 == 0) {
     modeColorFall.show();
     //}
   }
   
 
+}
+
+void clearScreenOnce() {
+  if (screenMode != oldScreenMode) {
+    background(255);
+    oldScreenMode = screenMode;
+  } 
 }
 
 

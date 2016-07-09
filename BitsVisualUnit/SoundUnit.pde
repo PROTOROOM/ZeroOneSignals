@@ -58,7 +58,7 @@ class SoundUnit {
   }
 
   void addBitsAndTrigger() {
-    if (index < (1024*64)) {
+    if (index < (1024*64)-(32*4)) {
 
       for (int j=0; j<32; j++) {
         for (int i=0; i<4; i++) {
@@ -66,12 +66,14 @@ class SoundUnit {
           //sample2[index] = hubNetwork.hubData[4+i]/300.2;
           //index = index + 1;
 
-          sample1[index] = hubNetwork.hubData[i];
-          sample2[index] = hubNetwork.hubData[4+i];
+          sample1[index] = hubNetwork.hubData[i]*0.001;
+          sample2[index] = hubNetwork.hubData[4+i]*0.001;
           index = index + 1;
+          
+          
 
-          //sample1[index] = hubNetwork.hubData[i]/50.2;
-          //sample2[index] = hubNetwork.hubData[4+i]/50.2;
+          //sample1[index] = index%500/10.0;
+          //sample2[index] = index%300/10.0;
           //index = index + 1;
         }
         //sample1[index] = hubNetwork.hubData[0]/4.2;
