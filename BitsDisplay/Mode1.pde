@@ -1,6 +1,6 @@
 class ColorFall extends BasicBitsScreen {
   ArrayList<YLine> lines = new ArrayList<YLine>();
-  float sX, sY, dWidth;
+  float dWidth;
   float dropSpeed;
 
 

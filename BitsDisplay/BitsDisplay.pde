@@ -97,7 +97,8 @@ void draw() {
 
   if (screenMode == M0) {
 
-    fullBitsScreen.show();
+    basicBitsScreen.show();
+    //fullBitsScreen.show();
     //fullBitsScreen.up();
   }
 
@@ -124,10 +125,10 @@ void keyReleased() {
     hubNetwork.toggleSimulation(hubID);
   }
 
-  if (key == 'q') screenMode = TEST;
-  if (key == 'w') screenMode = 0;
-  if (key == 'e') screenMode = 1;
-  
+  if (key == 'q') screenMode = 0;
+  if (key == 'w') screenMode = 1;
+  if (key == 'e') screenMode = 2;
+  if (key == 't') screenMode = TEST;
   if (key == 'r') {
     toggleRealScreenMode();
   }
