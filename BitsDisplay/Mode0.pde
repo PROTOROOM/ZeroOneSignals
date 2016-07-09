@@ -1,3 +1,12 @@
+class NodeToHub extends ModeScreen {
+  NodeToHub(float w, float h) {
+    super(w, h);
+    
+  }
+}
+
+
+
 class FullBitsScreen extends BasicBitsScreen {
   float dH, dT;
   float upSpeed;

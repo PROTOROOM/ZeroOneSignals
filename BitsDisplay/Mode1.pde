@@ -1,14 +1,15 @@
 class ColorFall extends BasicBitsScreen {
   ArrayList<YLine> lines = new ArrayList<YLine>();
-  float dWidth;
+
+  float lineY;
   float dropSpeed;
 
 
   ColorFall(float w, float h) {
     super(w, h);
-    dWidth = sWidth / 3 / 12 * 10;
-    sX = 0 + (sWidth/3/12); //sWidth / 3;
-    sY = dWidth / 64 * 6;
+    //dWidth = sWidth / 3 / 12 * 10;
+    //sX = 0 + (sWidth/3/12); //sWidth / 3;
+    lineY = dWidth / 64 * 6;
 
 
     dropSpeed = sMultiple;
@@ -20,11 +21,11 @@ class ColorFall extends BasicBitsScreen {
 
     color lineColor1 = color(hubNetwork.hubData[0], hubNetwork.hubData[1], hubNetwork.hubData[2], hubNetwork.hubData[3]);
     color lineColor2 = color(hubNetwork.hubData[4], hubNetwork.hubData[5], hubNetwork.hubData[6], hubNetwork.hubData[7]);
-    YLine newLine1 = new YLine(sX, sY, dWidth/2, lineColor1);
-    YLine newLine2 = new YLine(sX+dWidth/2, sY+1, dWidth/2, lineColor2);
+    YLine newLine1 = new YLine(sX, lineY, dWidth/2, lineColor1);
+    YLine newLine2 = new YLine(sX+dWidth/2, lineY+1, dWidth/2, lineColor2);
 
-    //YLine newLine1 = new YLine(sX, sY, dWidth, lineColor1);
-    //YLine newLine2 = new YLine(sX, sY+1, dWidth, lineColor2);
+    //YLine newLine1 = new YLine(sX, lineY, dWidth, lineColor1);
+    //YLine newLine2 = new YLine(sX, lineY+1, dWidth, lineColor2);
 
     lines.add(newLine1);
     lines.add(newLine2);
@@ -47,7 +48,7 @@ class ColorFall extends BasicBitsScreen {
     bitBarWidth = dWidth / 64;
     for (int i=0; i<hubNetwork.bits.length; i++) {
       float startX = sX + (i*bitBarWidth*nodePerHub);     
-      drawNodeBars(startX, 0, bitBarWidth, bitBarWidth*5, hubNetwork.bits[i]);
+      drawNodeBars(startX, sY, bitBarWidth, bitBarWidth*5, hubNetwork.bits[i]);
     }
   }
 }

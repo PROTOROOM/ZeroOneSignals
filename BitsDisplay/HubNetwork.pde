@@ -111,11 +111,11 @@ class HubNetwork {
 
 
   int getCurrentMode() {
-    print(currentMode);
-    print(" ");
-    print(bitOnTime);
-    print(" ");
-    println(bitOffTime);
+    //print(currentMode);
+    //print(" ");
+    //print(bitOnTime);
+    //print(" ");
+    //println(bitOffTime);
 
 
     int gapOnOff = abs(bitOffTime - bitOnTime);

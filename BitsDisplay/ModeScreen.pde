@@ -2,6 +2,7 @@ class ModeScreen {
   HubNetwork hubNetwork;
   float sWidth, sHeight, sMultiple;
   float sX, sY;
+  float dWidth;
   int c;
 
   ModeScreen(float w, float h) {
@@ -9,32 +10,37 @@ class ModeScreen {
     sHeight = h;
     sMultiple = w / 640;
     setStartPosition(0, 0);
+    dWidth = sWidth;
   }
 
   void setHubNetwork(HubNetwork hn) {
     hubNetwork = hn;
   }
-  
+
   void setStartPosition(float sx, float sy) {
     sX = sx;
     sY = sy;
   }
+  
+  void setDisplayWidth(float dw) {
+    dWidth = dw;
+  }
 
   void show() {
     fill(255, 0, 0);
-    rect(0, 0, sWidth, sHeight);
+    rect(0, 0, dWidth, sHeight);
     stroke(255);
     strokeWeight(4);
-    line(0, 0, sWidth, sHeight);
-    line(sWidth, 0, 0, sHeight);
+    line(0, 0, dWidth, sHeight);
+    line(dWidth, 0, 0, sHeight);
   }
-  
+
   void reset() {
   }
 
   void showOnce() {
   }
-  
+
   void up() {
   }
 }
@@ -86,7 +92,7 @@ class BasicBitsScreen extends ModeScreen {
     super(w, h);
     nodePerHub = 8;
     bitBarWidth = 30*sMultiple;
-    
+
     float startX = sWidth/2 - bitBarWidth*nodePerHub/2;
     setStartPosition(startX, 0);
   }
@@ -111,5 +117,4 @@ class BasicBitsScreen extends ModeScreen {
       rect(sx+bw*i, sy, bw, bh);
     }
   }
-  
 }

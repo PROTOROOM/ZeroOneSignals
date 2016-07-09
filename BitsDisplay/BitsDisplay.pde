@@ -25,12 +25,11 @@ String[] hubs = {
 
 // ########## Variables ##########
 color bgColor;
-color b1Color, b2Color;
 
 int c=0;
 
 ModeScreen blank, testScreen, basicBitsScreen, fullBitsScreen;
-ModeScreen modeColorFall;
+ModeScreen modeReady, modeColorFall;
 
 HubNetwork hubNetwork;
 UDP udp;
@@ -51,10 +50,8 @@ void setup() {
   //size(1920, 2160, P2D);
 
   noCursor();
-
-  background(255);
-  b1Color = color(50);
-  b2Color = color(200);
+  bgColor = color(240);
+  background(bgColor);
 
   // network setup, HubNetwork handles UDP, Websocket.
   // 'void receive()' method is necessary, check below.
@@ -77,8 +74,15 @@ void setupScreens() {
   fullBitsScreen = new FullBitsScreen(width, height);
   fullBitsScreen.setHubNetwork(hubNetwork);
 
+  modeReady = new NodeToHub(width, height);
+  modeReady.setHubNetwork(hubNetwork);
+  modeReady.setStartPosition(0, 0);
+  modeReady.setDisplayWidth(width/3);
+  
   modeColorFall = new ColorFall(width, height);
   modeColorFall.setHubNetwork(hubNetwork);
+  modeColorFall.setDisplayWidth(width/3/12*10);
+  modeColorFall.setStartPosition(width/3/12, 0);
 }
 
 
@@ -89,15 +93,17 @@ void draw() {
   if (isRealScreenMode) {
     screenMode = hubNetwork.getCurrentMode();
   }
-  clearScreenOnce();
+
+  clearScreenOnceWhenModeSwitched();
+
 
   if (screenMode == TEST) {
     testScreen.show();
   }
 
   if (screenMode == M0) {
-
-    basicBitsScreen.show();
+    modeReady.show();
+    //basicBitsScreen.show();
     //fullBitsScreen.show();
     //fullBitsScreen.up();
   }
@@ -108,11 +114,14 @@ void draw() {
     modeColorFall.show();
     //}
   }
+
+  showModeStatus();
 }
 
-void clearScreenOnce() {
+
+void clearScreenOnceWhenModeSwitched() {
   if (screenMode != oldScreenMode) {
-    background(255);
+    background(bgColor);
     oldScreenMode = screenMode;
   }
 }
@@ -130,15 +139,25 @@ void keyReleased() {
   if (key == 'e') screenMode = 2;
   if (key == 't') screenMode = TEST;
   if (key == 'r') {
+    background(bgColor);
     toggleRealScreenMode();
   }
 }
+
 
 void toggleRealScreenMode() {
   if (isRealScreenMode) {
     isRealScreenMode = false;
   } else {
     isRealScreenMode = true;
+  }
+}
+
+
+void showModeStatus() {
+  if (!isRealScreenMode) {
+    fill(100);
+    text("Switching Mode by Hand "+screenMode, width/2, 100);
   }
 }
 
