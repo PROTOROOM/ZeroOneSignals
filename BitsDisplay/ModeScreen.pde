@@ -4,6 +4,7 @@ class ModeScreen {
   float sX, sY;
   float dWidth;
   int c;
+  int state;
 
   ModeScreen(float w, float h) {
     sWidth = w;
@@ -11,6 +12,7 @@ class ModeScreen {
     sMultiple = w / 640;
     setStartPosition(0, 0);
     dWidth = sWidth;
+    state = 0;
   }
 
   void setHubNetwork(HubNetwork hn) {
@@ -36,6 +38,7 @@ class ModeScreen {
   }
 
   void reset() {
+    state = 0;
   }
 
   void showOnce() {
@@ -117,4 +120,5 @@ class BasicBitsScreen extends ModeScreen {
       rect(sx+bw*i, sy, bw, bh);
     }
   }
+  
 }

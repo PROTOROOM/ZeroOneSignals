@@ -1,7 +1,15 @@
-class NodeToHub extends ModeScreen {
+class NodeToHub extends BasicBitsScreen {
   NodeToHub(float w, float h) {
     super(w, h);
-    
+    //bitBarWidth = dWidth / 64;
+  }
+
+  void show() {
+    bitBarWidth = dWidth / 64;
+    for (int i=0; i<hubNetwork.bits.length; i++) {
+      float startX = sX + (i*bitBarWidth*nodePerHub);     
+      drawNodeBars(startX, sY, bitBarWidth, sHeight, hubNetwork.bits[i]);
+    }
   }
 }
 

@@ -46,8 +46,8 @@ PShader blur;
 
 void setup() {
   //fullScreen(P2D, SPAN);
-  size(640, 720, P2D);
-  //size(1920, 2160, P2D);
+  //size(640, 720, P2D);
+  size(1920, 2160, P2D);
 
   noCursor();
   bgColor = color(240);
@@ -76,8 +76,8 @@ void setupScreens() {
 
   modeReady = new NodeToHub(width, height);
   modeReady.setHubNetwork(hubNetwork);
-  modeReady.setStartPosition(0, 0);
-  modeReady.setDisplayWidth(width/3);
+  modeReady.setStartPosition(width/3/12, 0);
+  modeReady.setDisplayWidth(width/3/12*10);
   
   modeColorFall = new ColorFall(width, height);
   modeColorFall.setHubNetwork(hubNetwork);
@@ -110,9 +110,8 @@ void draw() {
 
   if (screenMode == M1) {
 
-    //if (frameCount % 3 == 0) {
     modeColorFall.show();
-    //}
+
   }
 
   showModeStatus();
@@ -123,7 +122,13 @@ void clearScreenOnceWhenModeSwitched() {
   if (screenMode != oldScreenMode) {
     background(bgColor);
     oldScreenMode = screenMode;
+    resetModeScreens();
   }
+}
+
+
+void resetModeScreens() {
+  if (oldScreenMode != M1) modeColorFall.reset();
 }
 
 
