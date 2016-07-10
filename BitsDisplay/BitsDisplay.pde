@@ -78,7 +78,7 @@ void setupScreens() {
   modeReady.setHubNetwork(hubNetwork);
   modeReady.setStartPosition(width/3/12, 0);
   modeReady.setDisplayWidth(width/3/12*10);
-  
+
   modeColorFall = new ColorFall(width, height);
   modeColorFall.setHubNetwork(hubNetwork);
   modeColorFall.setDisplayWidth(width/3/12*10);
@@ -111,7 +111,6 @@ void draw() {
   if (screenMode == M1) {
     filter(blur);
     modeColorFall.show();
-
   }
 
   showModeStatus();
