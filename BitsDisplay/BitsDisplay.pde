@@ -46,8 +46,8 @@ PShader blur;
 
 void setup() {
   //fullScreen(P2D, SPAN);
-  //size(640, 720, P2D);
-  size(1920, 2160, P2D);
+  size(640, 720, P2D);
+  //size(1920, 2160, P2D);
 
   noCursor();
   bgColor = color(240);
@@ -87,7 +87,7 @@ void setupScreens() {
 
 
 void draw() {
-  filter(blur);
+  //filter(blur);
 
 
   if (isRealScreenMode) {
@@ -109,7 +109,7 @@ void draw() {
   }
 
   if (screenMode == M1) {
-
+    filter(blur);
     modeColorFall.show();
 
   }

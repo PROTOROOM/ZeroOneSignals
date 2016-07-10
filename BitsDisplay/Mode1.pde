@@ -58,30 +58,8 @@ class ColorFall extends BasicBitsScreen {
     }
 
     if (state == 3) {
-      strokeWeight(sMultiple*3);
-      lineY = dWidth / 64 * 6;
-
-      color lineColor1 = color(hubNetwork.hubData[0], hubNetwork.hubData[1], hubNetwork.hubData[2], hubNetwork.hubData[3]);
-      color lineColor2 = color(hubNetwork.hubData[4], hubNetwork.hubData[5], hubNetwork.hubData[6], hubNetwork.hubData[7]);
-      YLine newLine1 = new YLine(sX, lineY, dWidth/2, lineColor1);
-      YLine newLine2 = new YLine(sX+dWidth/2, lineY+1, dWidth/2, lineColor2);
-
-      //YLine newLine1 = new YLine(sX, lineY, dWidth, lineColor1);
-      //YLine newLine2 = new YLine(sX, lineY+1, dWidth, lineColor2);
-
-      lines.add(newLine1);
-      lines.add(newLine2);
-
-      for (int i=lines.size()-1; i>=0; i--) {
-        YLine line = lines.get(i);
-        if (line.isOut) lines.remove(i);
-
-
-        //line.move(dropSpeed/3);
-        line.drop();
-        line.show();
-      }
-
+      //dropOneLine();
+      dropTwoLines();
       drawTopHubBits();
     }
   }
@@ -104,44 +82,58 @@ class ColorFall extends BasicBitsScreen {
     sY = sY + upSpeed;
     upSpeed = min(-sMultiple, upSpeed * 0.98);
   }
-}
 
 
-class YLine {
-  float x, y, lineWidth;
-  color c;
-  boolean isOut;
-  float dropSpeed, sRatio;
+  void dropOneLine() {
+    lineY = dWidth / 64 * 6;
 
-  YLine(float sX, float sY, float w, color initColor) {
-    x = sX;
-    y = sY;
-    lineWidth = w; 
-    c = initColor;
-    isOut = false;
-    dropSpeed = 1;
+    color lineColor1 = color(hubNetwork.hubData[0], hubNetwork.hubData[1], hubNetwork.hubData[2], hubNetwork.hubData[3]);
+    color lineColor2 = color(hubNetwork.hubData[4], hubNetwork.hubData[5], hubNetwork.hubData[6], hubNetwork.hubData[7]);
 
-    //sRatio = random(1.01, 1.03);
-    sRatio = 1.01;
-  }
+    YLine newLine1 = new YLine(sX, lineY, dWidth, lineColor1);
+    YLine newLine2 = new YLine(sX, lineY+1, dWidth, lineColor2);
+    
+    newLine1.initDropSpeed(sMultiple);
+    newLine2.initDropSpeed(sMultiple);
+    
+    newLine1.setStrokeWeight(sMultiple*3);
+    newLine2.setStrokeWeight(sMultiple*3);
 
-  void move(float speed) {
-    y = y + speed;
-    if (y > height) isOut = true;
-  }
+    lines.add(newLine1);
+    lines.add(newLine2);
 
-  void drop() {
-    dropSpeed = dropSpeed * sRatio;
-    y = y + dropSpeed;
-    if (y > height) isOut = true;
+    for (int i=lines.size()-1; i>=0; i--) {
+      YLine line = lines.get(i);
+      if (line.isOut) lines.remove(i);
+      line.drop();
+      line.show();
+    }
   }
 
 
-  void show() {
-    stroke(c);
-    strokeCap(SQUARE);
-    line(x, y, x+lineWidth, y);
-    //fill(c);
-    //rect(x, y, lineWidth, 1);
+  void dropTwoLines() {
+    lineY = dWidth / 64 * 6;
+
+    color lineColor1 = color(hubNetwork.hubData[0], hubNetwork.hubData[1], hubNetwork.hubData[2], hubNetwork.hubData[3]);
+    color lineColor2 = color(hubNetwork.hubData[4], hubNetwork.hubData[5], hubNetwork.hubData[6], hubNetwork.hubData[7]);
+    
+    YLine newLine1 = new YLine(sX, lineY, dWidth/2, lineColor1);
+    YLine newLine2 = new YLine(sX+dWidth/2, lineY+1, dWidth/2, lineColor2);
+
+    newLine1.initDropSpeed(sMultiple);
+    newLine2.initDropSpeed(sMultiple);
+    
+    newLine1.setStrokeWeight(sMultiple*3);
+    newLine2.setStrokeWeight(sMultiple*3);
+
+    lines.add(newLine1);
+    lines.add(newLine2);
+
+    for (int i=lines.size()-1; i>=0; i--) {
+      YLine line = lines.get(i);
+      if (line.isOut) lines.remove(i);
+      line.drop();
+      line.show();
+    }
   }
 }
