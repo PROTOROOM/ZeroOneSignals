@@ -23,7 +23,7 @@ class ModeScreen {
     sX = sx;
     sY = sy;
   }
-  
+
   void setDisplayWidth(float dw) {
     dWidth = dw;
   }
@@ -120,5 +120,37 @@ class BasicBitsScreen extends ModeScreen {
       rect(sx+bw*i, sy, bw, bh);
     }
   }
-  
+
+  void drawNodeBars01(float sx, float sy, float bw, float bh, int[] bits) {
+    noStroke();
+    //fill(0);
+    char num;
+    for (int i=0; i<nodePerHub; i++) {
+      if (bits[i] == 1) {
+        //fill(200);
+        num = '1';
+      } else {
+        //fill(20);
+        num = '0';
+      }
+      fill(0);
+      rect(sx+bw*i, sy, bw, bh);
+      fill(255);
+      textAlign(CENTER, BOTTOM);
+      textSize(sMultiple*5);
+      text(num, sx+bw*i, sy+sMultiple*3);
+    }
+  }
+
+  void drawNodeBars(float sx, float sy, float bw, float bh, int[] bits, color onColor, color offColor) {
+    noStroke();
+    for (int i=0; i<nodePerHub; i++) {
+      if (bits[i] == 1) {
+        fill(onColor);
+      } else {
+        fill(offColor);
+      }
+      rect(sx+bw*i, sy, bw, bh);
+    }
+  }
 }

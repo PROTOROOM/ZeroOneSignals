@@ -48,9 +48,10 @@ void setup() {
   //fullScreen(P2D, SPAN);
   size(640, 720, P2D);
   //size(1920, 2160, P2D);
-
+  colorMode(RGB, 255);
+  
   noCursor();
-  bgColor = color(240);
+  bgColor = color(255);
   background(bgColor);
 
   // network setup, HubNetwork handles UDP, Websocket.
@@ -103,13 +104,14 @@ void draw() {
 
   if (screenMode == M0) {
     modeReady.show();
+    println(char(hubNetwork.hubData[2] + hubNetwork.hubData[5]));
     //basicBitsScreen.show();
     //fullBitsScreen.show();
     //fullBitsScreen.up();
   }
 
   if (screenMode == M1) {
-    filter(blur);
+    //filter(blur);
     modeColorFall.show();
   }
 
