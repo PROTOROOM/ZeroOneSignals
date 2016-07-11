@@ -76,8 +76,8 @@ class YLine {
     isOut = false;
     dropSpeed = 1;
 
-    //sRatio = random(1.01, 1.03);
-    sRatio = 1.01;
+    //sRatio = random(1.005, 1.01);
+    sRatio = 1.02;
   }
 
   void initDropSpeed(float s) {
@@ -96,6 +96,7 @@ class YLine {
   void drop() {
     dropSpeed = dropSpeed * sRatio;
     y = y + dropSpeed;
+    sWeight = sWeight * sRatio;
     if (y > height) isOut = true;
   }
 

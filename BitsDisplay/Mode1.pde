@@ -4,11 +4,13 @@ class ColorFall extends BasicBitsScreen {
   float lineY;
   float dropSpeed, upSpeed, downSpeed, shrinkSpeed;
   float fullBarY, fullBarH;
+  float bH, topHubBitsHeight;
 
   int stateTime;
   int scene;
 
   color bitsBarColor;
+  
 
 
   ColorFall(float w, float h) {
@@ -37,6 +39,8 @@ class ColorFall extends BasicBitsScreen {
       shrinkSpeed = sMultiple*3;
 
       bitBarWidth = dWidth / 64;
+      topHubBitsHeight = bitBarWidth * 10; 
+      bH = 0;
 
       //scene = int(random(3));
       if (scene > 0) {
@@ -70,35 +74,46 @@ class ColorFall extends BasicBitsScreen {
         stateTime = millis();
       }
     }
-
+    
     if (state == 3) {
-      filter(blur);
-      if (scene == 0) dropOneLine();
-      if (scene == 1) dropTwoLines();
-      if (scene == 2) dropMultiYLines(); 
-      if (scene == 3) dropMultiColorLines();
+      drawTopHubBits(bH);
+      bH = bH + sMultiple;
       
-      //dropMultiYLines();
-      //dropOneLine();
-      //dropTwoLines();
-      //dropMultiColorLines();
-      drawTopHubBits();
-
-      if ((millis() - stateTime) > 6000) {
-        bitsBarColor = color(hubNetwork.hubData[0], hubNetwork.hubData[1], hubNetwork.hubData[2], 30);
-        //bitsBarColor = color(0, hubNetwork.hubData[0], 0, 60);
+      if (bH > topHubBitsHeight) {
         state++;
         stateTime = millis();
       }
     }
 
     if (state == 4) {
-      filter(blur);
+      //filter(blur);
+      if (scene == 0) dropOneLine(topHubBitsHeight);
+      if (scene == 1) dropTwoLines(topHubBitsHeight);
+      if (scene == 2) dropMultiYLines(topHubBitsHeight); 
+      if (scene == 3) dropMultiColorLines(topHubBitsHeight);
+      
+      //dropMultiYLines();
+      //dropOneLine();
+      //dropTwoLines();
+      //dropMultiColorLines();
+      drawTopHubBits(topHubBitsHeight);
+      
+
+      if ((millis() - stateTime) > 15000) {
+        bitsBarColor = color(hubNetwork.hubData[0], hubNetwork.hubData[1], hubNetwork.hubData[2], 10);
+        //bitsBarColor = color(0, hubNetwork.hubData[0], 0, 60);
+        state++;
+        stateTime = millis();
+      }
+    }
+
+    if (state == 5) {
+
       for (int i=lines.size()-1; i>=0; i--) {
         lines.remove(i);
       }
       moveDownHubBits(bitsBarColor);
-
+      filter(blur);
       if ((millis() - stateTime) > 3000) {
         state = 0;
         //sY = sHeight;
@@ -107,11 +122,12 @@ class ColorFall extends BasicBitsScreen {
   }
 
 
-  void drawTopHubBits() {
+  void drawTopHubBits(float barHeight) {
     //bitBarWidth = dWidth / 64;
     for (int i=0; i<hubNetwork.bits.length; i++) {
       float startX = sX + (i*bitBarWidth*nodePerHub);     
-      drawNodeBars(startX, sY, bitBarWidth, bitBarWidth*5, hubNetwork.bits[i]);
+      drawNodeBars(startX, sY, bitBarWidth, barHeight, hubNetwork.bits[i]);
+      //drawNodeBars(startX, sY, bitBarWidth, bitBarWidth*5, hubNetwork.bits[i]);
       //drawNodeBars01(startX, sY+sMultiple*10, bitBarWidth, bitBarWidth*2, hubNetwork.bits[i]);
     }
   }
@@ -131,15 +147,16 @@ class ColorFall extends BasicBitsScreen {
     //bitBarWidth = dWidth / 64;
     for (int i=0; i<hubNetwork.bits.length; i++) {
       float startX = sX + (i*bitBarWidth*nodePerHub);     
-      drawNodeBars(startX, sY, bitBarWidth, bitBarWidth*sMultiple*15, hubNetwork.bits[i], barColor, color(255, 30));
+      drawNodeBars(startX, sY, bitBarWidth, bitBarWidth*sMultiple*15, hubNetwork.bits[i], barColor, color(255, 10));
     }
     sY = sY + downSpeed;
-    downSpeed = max(5*sMultiple, downSpeed + 0.5*sMultiple);
+    downSpeed = max(10*sMultiple, downSpeed + sMultiple);
   }
 
 
-  void dropOneLine() {
-    lineY = dWidth / 64 * 6;
+  void dropOneLine(float y) {
+    //lineY = dWidth / 64 * 6;
+    lineY = y;
 
     color lineColor1 = color(hubNetwork.hubData[0], hubNetwork.hubData[1], hubNetwork.hubData[2], hubNetwork.hubData[3]);
     color lineColor2 = color(hubNetwork.hubData[4], hubNetwork.hubData[5], hubNetwork.hubData[6], hubNetwork.hubData[7]);
@@ -165,14 +182,15 @@ class ColorFall extends BasicBitsScreen {
   }
 
 
-  void dropTwoLines() {
-    lineY = dWidth / 64 * 6;
+  void dropTwoLines(float y) {
+    //lineY = dWidth / 64 * 6;
+    lineY = y;
 
     color lineColor1 = color(hubNetwork.hubData[0], hubNetwork.hubData[1], hubNetwork.hubData[2], hubNetwork.hubData[3]);
     color lineColor2 = color(hubNetwork.hubData[4], hubNetwork.hubData[5], hubNetwork.hubData[6], hubNetwork.hubData[7]);
 
     YLine newLine1 = new YLine(sX, lineY, dWidth/2, lineColor1);
-    YLine newLine2 = new YLine(sX+dWidth/2, lineY+1, dWidth/2, lineColor2);
+    YLine newLine2 = new YLine(sX+dWidth/2, lineY, dWidth/2, lineColor2);
 
     newLine1.initDropSpeed(sMultiple);
     newLine2.initDropSpeed(sMultiple);
@@ -191,8 +209,9 @@ class ColorFall extends BasicBitsScreen {
     }
   }
 
-  void dropMultiYLines() {
-    lineY = dWidth / 64 * 6;
+  void dropMultiYLines(float y) {
+    //lineY = dWidth / 64 * 6;
+    lineY = y;
 
     for (int i=0; i<hubNetwork.bits.length; i++) {
       color lineColor1 = make8BitColor(hubNetwork.bits[i]);
@@ -217,8 +236,9 @@ class ColorFall extends BasicBitsScreen {
     return color(r, g, b);
   }
 
-  void dropMultiColorLines() {
-    lineY = dWidth / 64 * 6;
+  void dropMultiColorLines(float y) {
+    //lineY = dWidth / 64 * 6;
+    lineY = y;
 
     MultiYLine newLine = new MultiYLine(sX, lineY, dWidth, hubNetwork.hubData);
     newLine.initDropSpeed(sMultiple);
