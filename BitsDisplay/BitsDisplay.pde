@@ -29,7 +29,7 @@ color bgColor;
 int c=0;
 
 ModeScreen blank, testScreen, basicBitsScreen, fullBitsScreen;
-ModeScreen modeReady, modeColorFall;
+ModeScreen modeReady, modeColorFall, modeSoundSprout;
 
 HubNetwork hubNetwork;
 UDP udp;
@@ -38,7 +38,8 @@ WebsocketServer ws;
 int TEST = -1;
 int M0 = 0;
 int M1 = 1;
-int screenMode = M1;
+int M2 = 2;
+int screenMode = M0;
 int oldScreenMode;
 boolean isRealScreenMode = true;
 
@@ -84,6 +85,11 @@ void setupScreens() {
   modeColorFall.setHubNetwork(hubNetwork);
   modeColorFall.setDisplayWidth(width/3/12*10);
   modeColorFall.setStartPosition(width/3/12, 0);
+  
+  modeSoundSprout = new SoundSprout(width, height);
+  modeSoundSprout.setHubNetwork(hubNetwork);
+  modeSoundSprout.setDisplayWidth(width/3/12*10);
+  modeSoundSprout.setStartPosition(width/3/12, 0);
 }
 
 
@@ -113,6 +119,10 @@ void draw() {
   if (screenMode == M1) {
     //filter(blur);
     modeColorFall.show();
+  }
+  
+  if (screenMode == M2) {
+    modeSoundSprout.show();
   }
 
   showModeStatus();

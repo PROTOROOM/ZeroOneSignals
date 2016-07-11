@@ -1,16 +1,21 @@
-class BlackWhiteFall extends ColorFall {
+class SoundSprout extends BasicBitsScreen {
+  SoundUnit sound;
 
-  BlackWhiteFall(float w, float h) {
+  int stateTime;
+  int scene;
+  
+  SoundSprout(float w, float h) {
     super(w, h);
+    sound = new SoundUnit();
   }
   
   
+  void setHubNetwork(HubNetwork hn) {
+    hubNetwork = hn;
+    sound.setHubNetwork(hubNetwork);    
+  }
+
   void show() {
+    sound.addBitsAndTrigger();
   }
 }
-
-
-//class BlackWhiteLine extends YLine {
-//  BlackWhiteLine() {
-//  }
-//}
