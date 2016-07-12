@@ -43,6 +43,7 @@ int screenMode = M0;
 int oldScreenMode;
 boolean isRealScreenMode = true;
 
+
 PShader blur;
 
 void setup() {
@@ -50,7 +51,7 @@ void setup() {
   //size(640, 720, P2D);
   size(1920, 2160, P2D);
   colorMode(RGB, 255);
-  
+
   noCursor();
   bgColor = color(255);
   background(bgColor);
@@ -69,6 +70,11 @@ void setup() {
 }
 
 void setupScreens() {
+  //float startPos = (width/3/12); 
+  //float dWidth = width/3/12*10; 
+  float startPosX = 506 - 135;
+  float dWidth = 270; 
+
   blank = new ModeScreen(width, height);
   testScreen = new TestModeScreen(width, height);
   basicBitsScreen = new BasicBitsScreen(width, height);
@@ -78,18 +84,19 @@ void setupScreens() {
 
   modeReady = new NodeToHub(width, height);
   modeReady.setHubNetwork(hubNetwork);
-  modeReady.setStartPosition(width/3/12, 0);
-  modeReady.setDisplayWidth(width/3/12*10);
+  modeReady.setStartPosition(startPosX, 0);
+  modeReady.setDisplayWidth(dWidth);
 
   modeColorFall = new ColorFall(width, height);
   modeColorFall.setHubNetwork(hubNetwork);
-  modeColorFall.setDisplayWidth(width/3/12*10);
-  modeColorFall.setStartPosition(width/3/12, 0);
-  
+  modeColorFall.setDisplayWidth(dWidth);
+  modeColorFall.setStartPosition(startPosX, 0);
+
+
   modeSoundSprout = new SoundSprout(width, height);
   modeSoundSprout.setHubNetwork(hubNetwork);
-  modeSoundSprout.setDisplayWidth(width/3/12*10);
-  modeSoundSprout.setStartPosition(width/3/12, 0);
+  modeSoundSprout.setDisplayWidth(dWidth);
+  modeSoundSprout.setStartPosition(startPosX, 0);
 }
 
 
@@ -120,7 +127,7 @@ void draw() {
     //filter(blur);
     modeColorFall.show();
   }
-  
+
   if (screenMode == M2) {
     modeSoundSprout.show();
   }
