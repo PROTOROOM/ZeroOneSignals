@@ -72,7 +72,8 @@ class BWLine extends YLine {
     bits = aBits;
   }
 
-  void show() {
+  void show() {  
+    bitH = dropSpeed;
     for (int i=0; i<bits.length; i++) {
       if (bits[i] == 1) {
         fill(255);
@@ -83,7 +84,6 @@ class BWLine extends YLine {
     }
 
     //bitH = bitH + dropSpeed;
-    bitH = dropSpeed;
   }
 
   void drop() {

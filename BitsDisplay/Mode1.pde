@@ -10,6 +10,7 @@ class ColorFall extends BasicBitsScreen {
   int scene;
 
   color bitsBarColor;
+  color dropLine64Color;
 
   float[] color8FallingSpeed = new float[8];
 
@@ -46,7 +47,7 @@ class ColorFall extends BasicBitsScreen {
       if (scene > 0) {
         scene = scene - 1;
       } else {
-        scene = 3;
+        scene = 4;
       }
       println("scene : " + str(scene));
       state++;
@@ -85,19 +86,28 @@ class ColorFall extends BasicBitsScreen {
           state++;
           stateTime = millis();
           color8FallingSpeed = getFallingSpeed(8);
+          if (scene == 0) {
+            //dropLine64Color = color(hubNetwork.hubData[0], hubNetwork.hubData[1], hubNetwork.hubData[2]);
+            dropLine64Color = color(random(255), random(255), random(255));
+          }
         }
       }
     }
 
     if (state == 4) {
       //filter(blur);
-      //if (scene == 0) dropLine64(topHubBitsHeight);
-      //if (scene == 1) dropLine32(topHubBitsHeight);
-      //if (scene == 2) dropLine8(topHubBitsHeight, color8FallingSpeed);
-      //if (scene == 3) dropMultiColorLines(topHubBitsHeight);
-      //if (scene == 4) dropLine1(topHubBitsHeight);
+      if (scene == 0) { 
+        //filter(blur); 
+        dropLine64(topHubBitsHeight);
+      }
+      if (scene == 1) dropLine32(topHubBitsHeight);
+      if (scene == 2) dropLine8(topHubBitsHeight, color8FallingSpeed);
+      if (scene == 3) dropMultiColorLines(topHubBitsHeight);
+      if (scene == 4) {
+        if (frameCount % 5 == 0) dropLine1(topHubBitsHeight);
+      }
 
-      if (frameCount % 5 == 0) dropLine1(topHubBitsHeight);
+      //if (frameCount % 5 == 0) dropLine1(topHubBitsHeight);
       //dropMultiYLines();
       //dropOneLine();
       //dropTwoLines();
@@ -164,20 +174,51 @@ class ColorFall extends BasicBitsScreen {
     //lineY = dWidth / 64 * 6;
     lineY = y;
 
-    color lineColor1 = color(hubNetwork.hubData[0], hubNetwork.hubData[1], hubNetwork.hubData[2], hubNetwork.hubData[3]);
-    color lineColor2 = color(hubNetwork.hubData[4], hubNetwork.hubData[5], hubNetwork.hubData[6], hubNetwork.hubData[7]);
+    //color lineColor1 = color(hubNetwork.hubData[0], hubNetwork.hubData[1], hubNetwork.hubData[2], hubNetwork.hubData[3]);
+    //color lineColor2 = color(hubNetwork.hubData[4], hubNetwork.hubData[5], hubNetwork.hubData[6], hubNetwork.hubData[7]);
 
-    YLine newLine1 = new YLine(sX, lineY, dWidth, lineColor1);
-    YLine newLine2 = new YLine(sX, lineY+1, dWidth, lineColor2);
+    int r = int((hubNetwork.hubData[0] + hubNetwork.hubData[4]) / 2);
+    int g = int((hubNetwork.hubData[1] + hubNetwork.hubData[5]) / 2);
+    int b = int((hubNetwork.hubData[2] + hubNetwork.hubData[6]) / 2);
+    int a = int((hubNetwork.hubData[3] + hubNetwork.hubData[7]) / 2);
+
+    // Failed Experiment. bad.. XXX 
+    //int r, g, b, a;
+    //int gap = 3;
+    //if (hubNetwork.hubData[0] > hubNetwork.hubData[4]) {
+    //  r = int(min(255, red(dropLine64Color) + gap));
+    //} else {
+    //  r = int(max(0, red(dropLine64Color) - gap));
+    //}
+    //if (hubNetwork.hubData[1] > hubNetwork.hubData[5]) {
+    //  g = int(min(255, green(dropLine64Color) + gap));
+    //} else {
+    //  g = int(max(0, green(dropLine64Color) - gap));
+    //}
+    //if (hubNetwork.hubData[2] > hubNetwork.hubData[6]) {
+    //  b = int(min(255, blue(dropLine64Color) + gap));
+    //} else {
+    //  b = int(max(0, blue(dropLine64Color) - gap));
+    //}
+    //if (hubNetwork.hubData[3] > hubNetwork.hubData[7]) {
+    //  a = int(min(255, alpha(dropLine64Color) + gap));
+    //} else {
+    //  a = int(max(0, alpha(dropLine64Color) - gap));
+    //}
+    
+    dropLine64Color = color(r, g, b, a);
+
+    YLine newLine1 = new YLine(sX, lineY, dWidth, dropLine64Color);
+    //YLine newLine2 = new YLine(sX, lineY+1, dWidth, lineColor2);
 
     newLine1.initDropSpeed(sMultiple);
-    newLine2.initDropSpeed(sMultiple);
+    //newLine2.initDropSpeed(sMultiple);
 
-    newLine1.setStrokeWeight(sMultiple*3);
-    newLine2.setStrokeWeight(sMultiple*3);
+    newLine1.setStrokeWeight(sMultiple*2);
+    //newLine2.setStrokeWeight(sMultiple*2);
 
     lines.add(newLine1);
-    lines.add(newLine2);
+    //lines.add(newLine2);
 
     for (int i=lines.size()-1; i>=0; i--) {
       YLine line = lines.get(i);
@@ -262,8 +303,9 @@ class ColorFall extends BasicBitsScreen {
     for (int i=lines.size()-1; i>=0; i--) {
       YLine line = lines.get(i);
       if (line.isOut) lines.remove(i);
-      line.drop();
       line.show();
+      line.drop();
+
 
       //if (line.rail == 1) line.setSRatio(1.4);
     }
