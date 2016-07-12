@@ -72,8 +72,8 @@ void setup() {
 void setupScreens() {
   //float startPos = (width/3/12); 
   //float dWidth = width/3/12*10; 
-  float startPosX = 506 - 135;
-  float dWidth = 270; 
+  float startPosX = 506 - 270;
+  float dWidth = 270*2; 
 
   blank = new ModeScreen(width, height);
   testScreen = new TestModeScreen(width, height);
