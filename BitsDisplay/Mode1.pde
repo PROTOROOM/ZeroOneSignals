@@ -10,8 +10,8 @@ class ColorFall extends BasicBitsScreen {
   int scene;
 
   color bitsBarColor;
-  
 
+  float[] color8FallingSpeed = new float[8];
 
   ColorFall(float w, float h) {
     super(w, h);
@@ -74,30 +74,34 @@ class ColorFall extends BasicBitsScreen {
         stateTime = millis();
       }
     }
-    
+
     if (state == 3) {
       drawTopHubBits(bH);
       bH = bH + sMultiple;
-      
+
       if (bH > topHubBitsHeight) {
-        state++;
-        stateTime = millis();
+        bH = topHubBitsHeight;
+        if (millis() - stateTime > 1000) {
+          state++;
+          stateTime = millis();
+          color8FallingSpeed = getFallingSpeed(8);
+        }
       }
     }
 
     if (state == 4) {
       //filter(blur);
-      if (scene == 0) dropOneLine(topHubBitsHeight);
-      if (scene == 1) dropTwoLines(topHubBitsHeight);
-      if (scene == 2) dropMultiYLines(topHubBitsHeight); 
+      if (scene == 0) dropLine64(topHubBitsHeight);
+      if (scene == 1) dropLine32(topHubBitsHeight);
+      if (scene == 2) dropLine8(topHubBitsHeight, color8FallingSpeed);
       if (scene == 3) dropMultiColorLines(topHubBitsHeight);
-      
+
       //dropMultiYLines();
       //dropOneLine();
       //dropTwoLines();
       //dropMultiColorLines();
       drawTopHubBits(topHubBitsHeight);
-      
+
 
       if ((millis() - stateTime) > 15000) {
         bitsBarColor = color(hubNetwork.hubData[0], hubNetwork.hubData[1], hubNetwork.hubData[2], 10);
@@ -140,7 +144,7 @@ class ColorFall extends BasicBitsScreen {
       //drawNodeBars01(startX, sY, bitBarWidth, bitBarWidth*2, hubNetwork.bits[i]);
     }
     sY = sY + upSpeed;
-    upSpeed = min(-sMultiple, upSpeed * 0.98);
+    upSpeed = min(-2*sMultiple, upSpeed * 0.98);
   }
 
   void moveDownHubBits(color barColor) {
@@ -154,7 +158,7 @@ class ColorFall extends BasicBitsScreen {
   }
 
 
-  void dropOneLine(float y) {
+  void dropLine64(float y) {
     //lineY = dWidth / 64 * 6;
     lineY = y;
 
@@ -182,7 +186,7 @@ class ColorFall extends BasicBitsScreen {
   }
 
 
-  void dropTwoLines(float y) {
+  void dropLine32(float y) {
     //lineY = dWidth / 64 * 6;
     lineY = y;
 
@@ -209,14 +213,24 @@ class ColorFall extends BasicBitsScreen {
     }
   }
 
-  void dropMultiYLines(float y) {
+  float[] getFallingSpeed(int num) {
+    float[] fSpeed = new float[num];
+
+    for (int i=0; i<num; i++) {
+      fSpeed[i] = random(sMultiple, 1.5*sMultiple);
+    }
+
+    return fSpeed;
+  }
+
+  void dropLine8(float y, float[] speed) {
     //lineY = dWidth / 64 * 6;
     lineY = y;
 
     for (int i=0; i<hubNetwork.bits.length; i++) {
       color lineColor1 = make8BitColor(hubNetwork.bits[i]);
       YLine newLine1 = new YLine(sX+dWidth/8*i, lineY, dWidth/8, lineColor1);
-      newLine1.initDropSpeed(sMultiple);
+      newLine1.initDropSpeed(speed[i]);
       newLine1.setStrokeWeight(sMultiple*3);
       lines.add(newLine1);
     }
