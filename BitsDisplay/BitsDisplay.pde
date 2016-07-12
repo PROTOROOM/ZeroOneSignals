@@ -47,8 +47,8 @@ PShader blur;
 
 void setup() {
   //fullScreen(P2D, SPAN);
-  size(640, 720, P2D);
-  //size(1920, 2160, P2D);
+  //size(640, 720, P2D);
+  size(1920, 2160, P2D);
   colorMode(RGB, 255);
   
   noCursor();

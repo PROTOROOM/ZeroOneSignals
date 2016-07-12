@@ -67,6 +67,7 @@ class YLine {
   color c;
   boolean isOut;
   float dropSpeed, sRatio;
+  int rail;
 
   YLine(float sX, float sY, float w, color initColor) {
     x = sX;
@@ -78,6 +79,7 @@ class YLine {
 
     //sRatio = random(1.005, 1.01);
     sRatio = 1.02;
+    rail = -1;
   }
 
   void initDropSpeed(float s) {
@@ -86,6 +88,14 @@ class YLine {
 
   void setStrokeWeight(float value) {
     sWeight = value;
+  }
+  
+  void setRail(int n) {
+    rail = n;
+  }
+  
+  void setSRatio(float r) {
+    sRatio = r;
   }
 
   void move(float speed) {

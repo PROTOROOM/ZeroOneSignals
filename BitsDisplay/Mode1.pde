@@ -232,6 +232,7 @@ class ColorFall extends BasicBitsScreen {
       YLine newLine1 = new YLine(sX+dWidth/8*i, lineY, dWidth/8, lineColor1);
       newLine1.initDropSpeed(speed[i]);
       newLine1.setStrokeWeight(sMultiple*3);
+      newLine1.setRail(i);
       lines.add(newLine1);
     }
 
@@ -240,6 +241,8 @@ class ColorFall extends BasicBitsScreen {
       if (line.isOut) lines.remove(i);
       line.drop();
       line.show();
+      
+      if (line.rail == 1) line.setSRatio(1.4);
     }
   }
 
