@@ -47,9 +47,9 @@ boolean isRealScreenMode = true;
 PShader blur;
 
 void setup() {
-  //fullScreen(P2D, SPAN);
-  //size(640, 720, P2D);
-  size(1920, 2160, P2D);
+  //fullScreen(P3D, SPAN);
+  //size(640, 720, P3D);
+  size(1920, 2160, P3D);
   colorMode(RGB, 255);
 
   noCursor();
@@ -70,7 +70,7 @@ void setup() {
 }
 
 void setupScreens() {
-  //float startPos = (width/3/12); 
+  //float startPosX = (width/3/12); 
   //float dWidth = width/3/12*10; 
   float startPosX = 506 - 270;
   float dWidth = 270*2; 
@@ -102,6 +102,7 @@ void setupScreens() {
 
 void draw() {
   //filter(blur);
+  println(frameRate);
 
 
   if (isRealScreenMode) {

@@ -91,11 +91,13 @@ class ColorFall extends BasicBitsScreen {
 
     if (state == 4) {
       //filter(blur);
-      if (scene == 0) dropLine64(topHubBitsHeight);
-      if (scene == 1) dropLine32(topHubBitsHeight);
-      if (scene == 2) dropLine8(topHubBitsHeight, color8FallingSpeed);
-      if (scene == 3) dropMultiColorLines(topHubBitsHeight);
+      //if (scene == 0) dropLine64(topHubBitsHeight);
+      //if (scene == 1) dropLine32(topHubBitsHeight);
+      //if (scene == 2) dropLine8(topHubBitsHeight, color8FallingSpeed);
+      //if (scene == 3) dropMultiColorLines(topHubBitsHeight);
+      //if (scene == 4) dropLine1(topHubBitsHeight);
 
+      if (frameCount % 5 == 0) dropLine1(topHubBitsHeight);
       //dropMultiYLines();
       //dropOneLine();
       //dropTwoLines();
@@ -116,7 +118,7 @@ class ColorFall extends BasicBitsScreen {
       for (int i=lines.size()-1; i>=0; i--) {
         lines.remove(i);
       }
-      moveDownHubBits(bitsBarColor);
+      //moveDownHubBits(bitsBarColor);
       filter(blur);
       if ((millis() - stateTime) > 3000) {
         state = 0;
@@ -241,8 +243,29 @@ class ColorFall extends BasicBitsScreen {
       if (line.isOut) lines.remove(i);
       line.drop();
       line.show();
-      
-      if (line.rail == 1) line.setSRatio(1.4);
+
+      //if (line.rail == 1) line.setSRatio(1.4);
+    }
+  }
+
+  void dropLine1(float y) {
+    lineY = y;
+
+    for (int i=0; i<hubNetwork.bits.length; i++) {
+      BWLine newLine = new BWLine(sX+dWidth/8*i, lineY, dWidth/8, hubNetwork.bits[i]);
+      newLine.initDropSpeed(sMultiple*5);
+      //newLine.setSRatio(sMultiple);
+      //newLine.setBitHeight();
+      lines.add(newLine);
+    }
+
+    for (int i=lines.size()-1; i>=0; i--) {
+      YLine line = lines.get(i);
+      if (line.isOut) lines.remove(i);
+      line.drop();
+      line.show();
+
+      //if (line.rail == 1) line.setSRatio(1.4);
     }
   }
 

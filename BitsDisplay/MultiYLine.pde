@@ -62,6 +62,38 @@ class MultiYLine extends YLine {
 }
 
 
+class BWLine extends YLine {
+  float bitW, bitH;
+  int[] bits;
+  BWLine(float sX, float sY, float w, int[] aBits) {
+    super(sX, sY, w, color(255));
+    bitW = w/8;
+    bitH = w/8;
+    bits = aBits;
+  }
+
+  void show() {
+    for (int i=0; i<bits.length; i++) {
+      if (bits[i] == 1) {
+        fill(255);
+      } else {
+        fill(0);
+      }
+      rect(x+bitW*i, y, bitW, bitH);
+    }
+
+    //bitH = bitH + dropSpeed;
+    bitH = dropSpeed;
+  }
+
+  void drop() {
+    //dropSpeed = dropSpeed + sRatio;
+    y = y + dropSpeed;
+    //sWeight = sWeight * sRatio;
+    if (y > height) isOut = true;
+  }
+}
+
 class YLine {
   float x, y, lineWidth, sWeight;
   color c;
@@ -89,11 +121,11 @@ class YLine {
   void setStrokeWeight(float value) {
     sWeight = value;
   }
-  
+
   void setRail(int n) {
     rail = n;
   }
-  
+
   void setSRatio(float r) {
     sRatio = r;
   }
