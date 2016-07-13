@@ -5,8 +5,8 @@ class NodeToHub extends BasicBitsScreen {
   NodeToHub(float w, float h) {
     super(w, h);
     //bitBarWidth = dWidth / 64;
-    //colNum = 17;
-    colNum = 64;
+    colNum = 17;
+    //colNum = 64; // XXX
   }
 
   //void show() {

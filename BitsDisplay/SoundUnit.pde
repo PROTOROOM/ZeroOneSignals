@@ -45,7 +45,7 @@ class SoundUnit {
 
   void createSample() {
     AudioFormat format = new AudioFormat( waveSampleRate, // sample rate
-      16, // sample size in bits
+      8, // sample size in bits
       2, // channels
       true, // signed
       true   // bigEndian
@@ -64,7 +64,7 @@ class SoundUnit {
       for (int j=0; j<64; j++) {
         for (int i=0; i<2; i++) {
           sample1[index] = hubNetwork.hubData[i]*0.001;
-          sample2[index] = hubNetwork.hubData[4+i]*0.001;
+          sample2[index] = hubNetwork.hubData[i]*0.004;
           index = index + 1;
         }
       }

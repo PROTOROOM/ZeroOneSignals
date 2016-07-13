@@ -52,7 +52,7 @@ class ColorFall extends BasicBitsScreen {
       if (scene > 0) {
         scene = scene - 1;
       } else {
-        scene = 1;
+        scene = 4;
       }
       println("scene : " + str(scene));
       state++;
@@ -102,19 +102,33 @@ class ColorFall extends BasicBitsScreen {
     if (state == 4) {
       //scene = 2;
       //filter(blur);
-      //if (scene == 0) { 
-      //  //filter(blur); 
-      //  dropLine64(topHubBitsHeight);
-      //}
-      //if (scene == 1) dropLine32s(topHubBitsHeight);
-      if (scene == 0) {
-        dropLine8s(topHubBitsHeight, color8FallingSpeed);
-      }
-      //if (scene == 3) dropMultiColorLines(topHubBitsHeight);
       
-      if (scene == 1) {
+      /* Color drop */
+      if (scene == 0) { 
+        //filter(blur); 
+        dropLine64(topHubBitsHeight);
+      }
+      if (scene == 1) dropLine32(topHubBitsHeight);
+      if (scene == 2) {
+        dropLine8(topHubBitsHeight, color8FallingSpeed);
+      }
+      if (scene == 3) dropMultiColorLines(topHubBitsHeight);
+
+      if (scene == 4) {
         if (frameCount % 8 == 0) dropLine1(topHubBitsHeight);
       }
+
+
+      /* Black & White drop */
+      //if (scene == 0) {
+      //  dropLine8s(topHubBitsHeight, color8FallingSpeed);
+      //}
+      ////if (scene == 3) dropMultiColorLines(topHubBitsHeight);
+
+      //if (scene == 1) {
+      //  if (frameCount % 8 == 0) dropLine1(topHubBitsHeight);
+      //}
+
 
       //if (frameCount % 5 == 0) dropLine1(topHubBitsHeight);
       //dropMultiYLines();
