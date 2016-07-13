@@ -16,7 +16,12 @@ class HubNetwork {
   //int m0, m1, m2;
   int[] blank8Bits = {0, 0, 0, 0, 0, 0, 0, 0};
   int[] hubData = {0, 0, 0, 0, 0, 0, 0, 0};
-
+  int[] hubDataOld = {0, 0, 0, 0, 0, 0, 0, 0};
+  
+  //get max - min hubData
+  int[] hubDataMax = {0, 0, 0, 0, 0, 0, 0, 0};
+  int[] hubDataMin = {0, 0, 0, 0, 0, 0, 0, 0};
+  
   UDP udp;
   WebsocketServer ws;
   String[] hubs;
@@ -53,7 +58,10 @@ class HubNetwork {
       } else {
         bits[data[0]-1] = toBits(data[1]);
         //hubData[data[0]-1] = data[1];
+        hubDataOld[data[0]-1] = hubData[data[0]-1];
         hubData[data[0]-1] = toNum(bits[data[0]-1]);
+        hubDataMax[data[0]-1] = max(hubDataMax[data[0]-1], hubData[data[0]-1]);
+        hubDataMin[data[0]-1] = min(hubDataMin[data[0]-1], hubData[data[0]-1]);
       }
     }
   }

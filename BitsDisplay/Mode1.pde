@@ -15,6 +15,7 @@ class ColorFall extends BasicBitsScreen {
   float[] color8FallingSpeed = new float[8];
 
   float dW, dWgap;// XXX
+  float testY = 0; //XXX
 
   ColorFall(float w, float h) {
     super(w, h);
@@ -52,7 +53,7 @@ class ColorFall extends BasicBitsScreen {
       if (scene > 0) {
         scene = scene - 1;
       } else {
-        scene = 4;
+        scene = 4; // 1 for bw, 4 for color
       }
       println("scene : " + str(scene));
       state++;
@@ -363,6 +364,22 @@ class ColorFall extends BasicBitsScreen {
       newLine1.setRail(i);
       lines.add(newLine1);
     }
+    
+    //XXX compare real & simulation
+    //print("simul   ");print(hubNetwork.hubDataMin[0]);print("---");println(hubNetwork.hubDataMax[0]);
+    //print("real   ");print(hubNetwork.hubDataMin[4]);print("---");println(hubNetwork.hubDataMax[4]);
+    //print(hubNetwork.hubData[0]);print("-----");println(hubNetwork.hubData[4]);
+    //strokeWeight(2);
+    ////stroke(255, 0, 0);
+    ////point(800+hubNetwork.hubData[2], testY);
+    //stroke(255);
+    //point(800+hubNetwork.hubData[4], testY);
+    //stroke(255, 255, 0);
+    //point(800+hubNetwork.hubData[5], testY);
+
+    //testY = testY + 0.5;
+    //if (testY > 500) testY = 0;
+
 
     dW = dW - dWgap;
     //if (dW < 0 || dW > dWidth/8 ) dWgap = dWgap * -1;
@@ -384,7 +401,7 @@ class ColorFall extends BasicBitsScreen {
 
     for (int i=0; i<hubNetwork.bits.length; i++) {
       BWLine newLine = new BWLine(sX+dWidth/8*i, lineY, dWidth/8, hubNetwork.bits[i]);
-      newLine.initDropSpeed(sMultiple*5);
+      newLine.initDropSpeed(sMultiple*2);
       //newLine.setSRatio(sMultiple);
       //newLine.setBitHeight();
       lines.add(newLine);
