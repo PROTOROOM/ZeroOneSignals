@@ -46,6 +46,12 @@ class ModeScreen {
 
   void up() {
   }
+  
+  void fillBackground() {
+    fill(255);
+    noStroke();
+    rect(sX, 0, dWidth, sHeight);
+  }
 }
 
 

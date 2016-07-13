@@ -65,20 +65,31 @@ class MultiYLine extends YLine {
 class BWLine extends YLine {
   float bitW, bitH;
   int[] bits;
+  int opacity;
+  
   BWLine(float sX, float sY, float w, int[] aBits) {
     super(sX, sY, w, color(255));
     bitW = w/8;
     bitH = w/8;
     bits = aBits;
+    opacity = 255;
+  }
+
+  BWLine(float sX, float sY, float w, int[] aBits, int op) {
+    super(sX, sY, w, color(255));
+    bitW = w/8;
+    bitH = w/8;
+    bits = aBits;
+    opacity = op;
   }
 
   void show() {  
     bitH = dropSpeed;
     for (int i=0; i<bits.length; i++) {
       if (bits[i] == 1) {
-        fill(255);
+        fill(255, opacity);
       } else {
-        fill(0);
+        fill(0, opacity);
       }
       rect(x+bitW*i, y, bitW, bitH);
     }

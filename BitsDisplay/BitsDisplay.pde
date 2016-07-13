@@ -43,6 +43,7 @@ int screenMode = M0;
 int oldScreenMode;
 boolean isRealScreenMode = true;
 
+float startPosX, dWidth;
 
 PShader blur;
 
@@ -53,7 +54,7 @@ void setup() {
   colorMode(RGB, 255);
 
   noCursor();
-  bgColor = color(255);
+  bgColor = color(0);
   background(bgColor);
 
   // network setup, HubNetwork handles UDP, Websocket.
@@ -67,11 +68,12 @@ void setup() {
 
   setupScreens();
   blur = loadShader("blur.glsl");
+  noSmooth();
 }
 
 void setupScreens() {
-  float startPosX = (width/3/12); 
-  float dWidth = width/3/12*10; 
+  startPosX = (width/3/12); 
+  dWidth = width/3/12*10; 
   //float startPosX = 506 - 270;
   //float dWidth = 270*2; 
 
@@ -102,7 +104,7 @@ void setupScreens() {
 
 void draw() {
   //filter(blur);
-  println(frameRate);
+  //println(frameRate);
 
 
   if (isRealScreenMode) {
@@ -118,7 +120,7 @@ void draw() {
 
   if (screenMode == M0) {
     modeReady.show();
-    println(char(hubNetwork.hubData[2] + hubNetwork.hubData[5]));
+    //println(char(hubNetwork.hubData[2] + hubNetwork.hubData[5]));
     //basicBitsScreen.show();
     //fullBitsScreen.show();
     //fullBitsScreen.up();

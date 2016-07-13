@@ -5,7 +5,8 @@ class NodeToHub extends BasicBitsScreen {
   NodeToHub(float w, float h) {
     super(w, h);
     //bitBarWidth = dWidth / 64;
-    colNum = 17;
+    //colNum = 17;
+    colNum = 64;
   }
 
   //void show() {
@@ -17,6 +18,7 @@ class NodeToHub extends BasicBitsScreen {
   //}
 
   void show() {
+    fillBackground();
 
     for (int i=0; i<hubNetwork.bits.length; i++) {
       
@@ -31,6 +33,7 @@ class NodeToHub extends BasicBitsScreen {
         } else {
           fill(255);
         }
+        noStroke();
         rect(x, y, cellW, cellW);
       }
     }
@@ -38,9 +41,8 @@ class NodeToHub extends BasicBitsScreen {
 
     cellW = dWidth / colNum;
     rowNum = int(sHeight / cellW);
-    println(rowNum);
-    strokeWeight(sMultiple/2);
-    stroke(250);
+    strokeWeight(1);
+    stroke(230);
     for (int i=1; i<colNum; i++) {
       float x = sX+cellW*i;
       line(x, 0, x, sHeight);

@@ -56,7 +56,7 @@ void draw() {
   //if (frameCount % 300 == 0) {
   //  sound.trigger();
   //}
-  sound.addBitsAndTrigger();
+  //sound.addBitsAndTrigger();
 }
 
 /**
