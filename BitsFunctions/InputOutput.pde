@@ -1,7 +1,12 @@
 class InputOutput {
   float x, y;
   float cX, cY;
+  int pX, pY;
+
   float head;
+  int direction; // 0(right) - 7 clockwise  
+
+
   boolean isPenDown;
   float penSize;
   color penColor;
@@ -15,7 +20,7 @@ class InputOutput {
   // HubNetwork & index
   HubNetwork h;
   int hi;
-  
+
   Display display;
   PGraphics c;
 
@@ -23,9 +28,13 @@ class InputOutput {
   Oscil wave;
 
 
-  InputOutput(String aName, float posX, float posY) {
-    x = posX;
-    y = posY;
+  //InputOutput(String aName, float posX, float posY) { // XXX change to grid postion system.
+  InputOutput(Display d, String aName, int posX, int posY) {
+    setDisplay(d);
+    x = posX*display.canvasStepWidth;
+    y = posY*display.canvasStepHeight;
+    //pX = posX;
+    //pY = posY;
     head = 0;
     isPenDown = false;
     penSize = 2;
@@ -36,11 +45,28 @@ class InputOutput {
     commandIndex = 0;
     //hubIndex = id-1;
   }
-  
+
+  float getXfromCanvasPosX(int p) {
+    return display.startX + display.canvasStepWidth * p;
+  }
+  float getYfromCanvasPosY(int p) {
+    return display.startY + display.canvasStepHeight * p;
+  }
+  //float getCX(int p) {
+  //  return display.canvasStepWidth * p;
+  //}
+  //float getCY(int p) {
+  //  return display.canvasStepHeight * p;
+  //}
+
   void show(int in) {
     if (isTrue(in)) {
       cX = display.startX + x;
       cY = display.startY + y;
+      //float px = getXfromCanvasPosX(pX);
+      //float py = getYfromCanvasPosY(pY);
+
+
       noStroke();
       fill(penColor);
       ellipse(cX, cY, penSize*4, penSize*4);
@@ -56,8 +82,8 @@ class InputOutput {
     display = d;
     c = display.canvas;
   }
-  
-  
+
+
   String getCodeString() {
     String codeString = name;
 
@@ -100,7 +126,7 @@ class InputOutput {
     penColor = c;
     return this;
   }
-  
+
   InputOutput red(int in) {
     if (isTrue(in)) {
       penColor = color(#ff3333);
@@ -109,6 +135,13 @@ class InputOutput {
     return this;
   }
 
+  InputOutput black(int in) {
+    if (isTrue(in)) {
+      penColor = color(#000000);
+    } 
+
+    return this;
+  }
 
   InputOutput blue(int in) {
     if (isTrue(in)) {
@@ -144,14 +177,14 @@ class InputOutput {
     }
     return this;
   }
-  
+
   InputOutput bigPen(int in) {
     if (isTrue(in)) {
       penSize = 6;
     } else {
       penSize = 2;
     }
-    
+
     return this;
   }
 
@@ -159,10 +192,44 @@ class InputOutput {
   // ###################### Movement ######################
   InputOutput go(int in) {
     if (isTrue(in)) {
-      float pX = x;
-      float pY = y;
-      x = x + stepSize * cos(radians(head));
-      y = y + stepSize * sin(radians(head));
+      float prevX = x;
+      float prevY = y;
+
+
+
+      float stepX = display.canvasStepWidth;
+      float stepY = display.canvasStepHeight;
+      //x = x + stepSize * cos(radians(head));
+      //y = y + stepSize * sin(radians(head));
+      if (direction == 0) {
+        x = x + stepX;
+      }
+      if (direction == 1) {
+        x = x + stepX;
+        y = y + stepY;
+      }
+      if (direction == 2) {
+        y = y + stepY;
+      }
+
+      if (direction == 3) {
+        x = x - stepX;
+        y = y + stepY;
+      }
+      if (direction == 4) {
+        x = x - stepX;
+      }
+      if (direction == 5) {
+        x = x - stepX;
+        y = y - stepY;
+      }
+      if (direction == 6) {
+        y = y - stepY;
+      }
+      if (direction == 7) {
+        x = x + stepX;
+        y = y - stepY;
+      }
 
       if (isPenDown) {
         c.strokeWeight(penSize + 4);
@@ -172,7 +239,7 @@ class InputOutput {
         //stroke(r, g, b, 50);
         //stroke(10, 50);
         //line(pX, pY, x, y);
-         
+
         //beginShape();
         //vertex(pX, pY);
         //vertex(x, y);
@@ -182,9 +249,9 @@ class InputOutput {
         c.stroke(penColor);
         c.strokeJoin(ROUND);    
         c.strokeCap(ROUND);
-        c.line(pX, pY, x, y);
+        c.line(prevX, prevY, x, y);
 
-        
+
         //beginShape();
         //vertex(pX, pY);
         //vertex(x, y);
@@ -194,26 +261,49 @@ class InputOutput {
     return this;
   }
 
+  //InputOutput go(int pxMove, int pyMove) { XXX
+  //  float prevX = getCX(pX);
+  //  float prevY = getCX(pY);
 
-  InputOutput turnRight(int in) {
-    if (isTrue(in)) {
-      head = head + 90;
-    }
+  //  pX = pX + pxMove;
+  //  pY = pY + pyMove;
 
-    return this;
-  }
+  //  float newX = getCX(pX);
+  //  float newY = getCY(pY);
 
-  InputOutput turnLeft(int in) {
-    if (isTrue(in)) {
-      head = head - 90;
-    }
+  //  if (isPenDown) {
+  //    c.strokeWeight(penSize + 4);
+  //    c.strokeWeight(penSize);
+  //    c.stroke(penColor);
+  //    c.strokeJoin(ROUND);    
+  //    c.strokeCap(ROUND);
+  //    c.line(prevX, prevY, newX, newY);
+  //  }
 
-    return this;
-  }
+  //  return this;
+  //}
+
+
+  //InputOutput turnRight(int in) {
+  //  if (isTrue(in)) {
+  //    head = head + 90;
+  //  }
+
+  //  return this;
+  //}
+
+  //InputOutput turnLeft(int in) {
+  //  if (isTrue(in)) {
+  //    head = head - 90;
+  //  }
+
+  //  return this;
+  //}
 
   InputOutput right(int in) {
     if (isTrue(in)) {
-      head = 0;
+      //head = 0;
+      direction = 0;
       go(1);
     }
 
@@ -223,7 +313,8 @@ class InputOutput {
 
   InputOutput left(int in) {
     if (isTrue(in)) {
-      head = 180;
+      //head = PI;
+      direction = 4;
       go(1);
     }
 
@@ -233,7 +324,8 @@ class InputOutput {
 
   InputOutput up(int in) {
     if (isTrue(in)) {
-      head = 270;
+      //head = PI/2*3;
+      direction = 6;
       go(1);
     }
     addCommand("上");
@@ -242,7 +334,45 @@ class InputOutput {
 
   InputOutput down(int in) {
     if (isTrue(in)) {
-      head = 90;
+      //head = PI/2;
+      direction = 2;
+      go(1);
+    }
+
+    addCommand("下");
+    return this;
+  }
+
+  InputOutput upRight(int in) {
+    if (isTrue(in)) {
+      direction = 7;
+      go(1);
+    }
+
+    addCommand("下");
+    return this;
+  }
+  InputOutput upLeft(int in) {
+    if (isTrue(in)) {
+      direction = 5;
+      go(1);
+    }
+
+    addCommand("下");
+    return this;
+  }
+  InputOutput downRight(int in) {
+    if (isTrue(in)) {
+      direction = 1;
+      go(1);
+    }
+
+    addCommand("下");
+    return this;
+  }
+  InputOutput downLeft(int in) {
+    if (isTrue(in)) {
+      direction = 3;
       go(1);
     }
 

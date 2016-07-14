@@ -1,6 +1,6 @@
 class Display {
   HubNetwork h;
-  InputOutput red, green;
+  InputOutput red, green, black;
 
   float startX, startY;
   int dWidth, dHeight;
@@ -31,19 +31,20 @@ class Display {
     canvasWidth = dWidth;
     canvasHeight = int(dHeight / 3 * 2);
     canvas = createGraphics(canvasWidth, canvasHeight, P2D);
-    canvasCol = 20;
-    canvasRow = 30;
+    canvasCol = 60;
+    canvasRow = 60;
     canvasStepWidth = canvasWidth / canvasCol;
     canvasStepHeight = canvasHeight / canvasRow;
 
 
-    red = new InputOutput("赤", canvasWidth/2, canvasHeight/2).blue(1);
-    //green = new InputOutput("緑", dWidth/2, dHeight/2).green(1);
-    green = new InputOutput("緑", canvasWidth/2, canvasHeight/2).setColor(#333333);
-    red.setHubConf(hub, 1);
-    green.setHubConf(hub, 2);
-    red.setDisplay(this);
-    green.setDisplay(this);
+    red = new InputOutput(this, "赤", 30, 30).red(1);
+    black = new InputOutput(this, "緑", 35, 35).black(1);
+    //green = new InputOutput("緑", canvasWidth/2, canvasHeight/2).setColor(#333333);
+    red.setHubConf(hub, 5);
+    black.setHubConf(hub, 6);
+    //green.setHubConf(hub, 6);
+    //red.setDisplay(this);
+    //green.setDisplay(this);
   }
 
   void setHubConf(HubNetwork hub) {
@@ -58,31 +59,43 @@ class Display {
       needToClearBackground = false;
     }
 
-    //canvas.smooth();
+    canvas.smooth();
     canvas.beginDraw();
-    drawCanvasGrid();
+
 
     if (needToClearCanvas) {
       canvas.background(255);
+      drawCanvasGrid();
       needToClearCanvas = false;
     }
-    if (h.dataChanged(0)) {
-      //red.penDown(h.bits[0][0]).go(h.bits[0][1]).turnRight(h.bits[0][2]).turnRight(h.bits[0][3]);
-      red.penDown(h.bits[0][0]).up(h.bits[0][1]).red(h.bits[0][2]).left(h.bits[0][3]).bigPen(h.bits[0][4]).down(h.bits[0][5]).blue(h.bits[0][6]).right(h.bits[0][7]);
+
+    int i = 0;
+    if (h.dataChanged(i)) {
+      //red.penDown(h.bits[0][0]).goReal(h.bits[0][1]).turnRight(h.bits[0][2]).turnRight(h.bits[0][3]);
+      red.penDown(h.bits[i][0]).bigPen(h.bits[i][1]).upRight(h.bits[i][2]).downLeft(h.bits[i][3]).downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).downRight(h.bits[i][6]).upRight(h.bits[i][7]);
     }
-    if (h.dataChanged(1)) {
-      green.penDown(h.bits[1][0]).turnRight(h.bits[1][1]).go(h.bits[1][2]).turnLeft(h.bits[1][3]).play(h.bits[1][3]);
+    i = 1;
+    if (h.dataChanged(i)) {
+      //red.penDown(h.bits[0][0]).goReal(h.bits[0][1]).turnRight(h.bits[0][2]).turnRight(h.bits[0][3]);
+      black.penDown(h.bits[i][0]).upRight(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3]).downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).downRight(h.bits[i][6]).bigPen(h.bits[i][7]);
     }
+
+
+
+
+
+
 
     canvas.endDraw();
     image(canvas, startX, startY);
 
     red.show(1);
-    green.show(1);
+    black.show(1);
+    //green.show(1);
   }
 
   void drawCanvasGrid() {
-    canvas.stroke(180);
+    canvas.stroke(220);
     canvas.strokeWeight(1);
     for (int i=0; i<canvasCol; i++) {
       canvas.line(i*canvasStepWidth, startY, i*canvasStepWidth, canvasHeight);
