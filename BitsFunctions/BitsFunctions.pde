@@ -56,21 +56,23 @@ void setup() {
   // setup font.
   font = createFont("chifont.ttf", 20);
   textFont(font);
-  
+
   // setup InputOutput Display
-  
+
 
   // setup sound.
   minim = new Minim(this);
   //out = minim.getLineOut();
   OUT = minim.getLineOut();
-  
+
   // setup InputOutput Display  
   display = new Display(width, height, h);
-
 }
 
 void draw() {
+
+  clearCanvasEdge();
+
   display.show();
 
 
@@ -89,6 +91,14 @@ void draw() {
   //textSize(20);
   //fill(255);
   //text(codeRed, 10, 100);
+}
+
+void clearCanvasEdge() {
+  noStroke();
+  fill(0);
+  float border = display.startX/4;
+  rect(display.startX-border, 0, border+1, display.canvasHeight+border);
+  rect(display.startX+display.dWidth-1, 0, border, display.canvasHeight+border);
 }
 
 void showText(String text) {

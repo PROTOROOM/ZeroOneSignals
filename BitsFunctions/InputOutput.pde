@@ -181,9 +181,9 @@ class InputOutput {
 
   InputOutput bigPen(int in) {
     if (isTrue(in)) {
-      penSize = 20;
+      penSize = 8;
     } else {
-      penSize = 10;
+      penSize = 2;
     }
 
     return this;

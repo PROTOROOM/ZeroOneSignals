@@ -70,7 +70,7 @@ class Display {
       needToClearCanvas = false;
     }
 
-    int i = 5;
+    int i = 2;
     if (h.dataChanged(i)) {
       //red.penDown(h.bits[0][0]).goReal(h.bits[0][1]).turnRight(h.bits[0][2]).turnRight(h.bits[0][3]);
       red.penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).up(h.bits[i][3]).right(h.bits[i][4]).red(h.bits[i][5]).left(h.bits[i][6]).blue(h.bits[i][7]);
@@ -105,4 +105,6 @@ class Display {
       canvas.line(0, i*canvasStepHeight, canvasWidth, i*canvasStepHeight);
     }
   }
+  
+
 } // Display end
