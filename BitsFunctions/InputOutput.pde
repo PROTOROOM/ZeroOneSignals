@@ -39,7 +39,7 @@ class InputOutput {
     isPenDown = false;
     penSize = 2;
     penColor = color(0);
-    stepSize = 10;
+    stepSize = 10; // XXX now use canvasStep Width/Height
 
     name = aName;
     commandIndex = 0;
