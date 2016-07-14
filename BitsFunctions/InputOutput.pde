@@ -67,8 +67,8 @@ class InputOutput {
       //float py = getYfromCanvasPosY(pY);
 
 
-      stroke(255);
-      strokeWeight(1);
+      stroke(220);
+      strokeWeight(2);
       fill(penColor);
       ellipse(cX, cY, penSize*4, penSize*4);
     }
