@@ -310,11 +310,11 @@ class InputOutput {
     addCommand("下");
     return this;
   }
-  
-  
-  
-  
-    InputOutput go(int in) {
+
+
+
+
+  InputOutput go(int in) {
     if (isTrue(in)) {
       float prevX = x;
       float prevY = y;
@@ -357,7 +357,87 @@ class InputOutput {
           y = y - stepY;
         }
       } else {
-       
+        if (edgeType == 4) {
+          prevX = display.canvasCol*display.canvasStepWidth;
+          x = prevX - stepX;
+          if (direction == 3) {
+            y = y + stepY;
+          }
+          if (direction == 4) {
+          }
+          if (direction == 5) {
+            y = y - stepY;
+          }
+        }
+
+        if (edgeType == 0) {
+          prevX = 0;
+          x = prevX + stepX;
+          if (direction == 1) {
+            y = y + stepY;
+          }
+          if (direction == 7) {
+            y = y - stepY;
+          }
+        }
+
+        if (edgeType == 2) {
+          prevY = 0;
+          y = prevY + stepY;
+          if (direction == 1) {
+            x = x + stepX;
+          }
+          if (direction == 3) {
+            x = x - stepX;
+          }
+        }
+
+        if (edgeType == 6) {
+          prevY = display.canvasRow*display.canvasStepHeight;
+          y = prevY - stepY;
+          if (direction == 5) {
+            x = x - stepX;
+          }
+          if (direction == 7) {
+            x = x + stepX;
+          }
+        }
+
+        // I think they are rare case;
+        if (edgeType == 1) {
+          y = y - stepY;
+          //if (direction == 0) { // ?? 
+          //  prevX = 0;
+          //  x = prevX + stepX;
+          //}
+          //if (direction == 1) {
+          //  prevX = 0;
+          //  x = prevX + stepX;
+          //  y = 0 + stepY;
+          //}
+          //if (direction == 2) { // ??
+          //  y = 0 + stepY;
+          //}
+          //if (direction == 3) {
+          //  x = x - stepX;
+          //  y = 0 - stepY;
+          //}
+          //if (direction == 7) {
+          //  prevX = 0;
+          //  x = prevX + stepX;
+          //  y = y - stepY;
+          //}
+        }
+
+        if (edgeType == 3) {
+          y = y - stepY;
+        }
+        if (edgeType == 5) {
+          y = y + stepY;
+        }
+        if (edgeType == 7) {
+          y = y + stepY;
+        }
       }
 
 
@@ -392,8 +472,25 @@ class InputOutput {
     } 
     return this;
   }
-  
+
   int checkEdge(float x, float y) {
+    int posX = int(x / display.canvasStepWidth);
+    int posY = int(y / display.canvasStepHeight);
+    //print(posX);print("-");println(posY);
+
+    if (1 <= posY || posY <= display.canvasRow-1) {
+      if (posX >= display.canvasCol) return 0;
+      if (posX <= 0) return 4;
+    }
+    if (1 <= posX || posX <= display.canvasCol-1) {
+      if (posY >= display.canvasRow) return 2;
+      if (posY <= 0) return 6;
+    }
+    if (display.canvasCol <= posX && display.canvasRow <= posY) return 1;
+    if (posX <= 0 && display.canvasRow <= posY) return 3;
+    if (posX <= 0  && posY <= 0) return 5;
+    if (display.canvasCol <= posX  && posY <= 0) return 7;
+
     return -1;
   }
 }
