@@ -190,76 +190,7 @@ class InputOutput {
 
 
   // ###################### Movement ######################
-  InputOutput go(int in) {
-    if (isTrue(in)) {
-      float prevX = x;
-      float prevY = y;
 
-
-
-      float stepX = display.canvasStepWidth;
-      float stepY = display.canvasStepHeight;
-      //x = x + stepSize * cos(radians(head));
-      //y = y + stepSize * sin(radians(head));
-      if (direction == 0) {
-        x = x + stepX;
-      }
-      if (direction == 1) {
-        x = x + stepX;
-        y = y + stepY;
-      }
-      if (direction == 2) {
-        y = y + stepY;
-      }
-
-      if (direction == 3) {
-        x = x - stepX;
-        y = y + stepY;
-      }
-      if (direction == 4) {
-        x = x - stepX;
-      }
-      if (direction == 5) {
-        x = x - stepX;
-        y = y - stepY;
-      }
-      if (direction == 6) {
-        y = y - stepY;
-      }
-      if (direction == 7) {
-        x = x + stepX;
-        y = y - stepY;
-      }
-
-      if (isPenDown) {
-        c.strokeWeight(penSize + 4);
-        //float r = red(penColor) - 100;
-        //float g = green(penColor) - 100;
-        //float b = blue(penColor) - 100;
-        //stroke(r, g, b, 50);
-        //stroke(10, 50);
-        //line(pX, pY, x, y);
-
-        //beginShape();
-        //vertex(pX, pY);
-        //vertex(x, y);
-        //endShape();
-
-        c.strokeWeight(penSize);
-        c.stroke(penColor);
-        c.strokeJoin(ROUND);    
-        c.strokeCap(ROUND);
-        c.line(prevX, prevY, x, y);
-
-
-        //beginShape();
-        //vertex(pX, pY);
-        //vertex(x, y);
-        //endShape();
-      }
-    } 
-    return this;
-  }
 
   //InputOutput go(int pxMove, int pyMove) { XXX
   //  float prevX = getCX(pX);
@@ -378,5 +309,91 @@ class InputOutput {
 
     addCommand("下");
     return this;
+  }
+  
+  
+  
+  
+    InputOutput go(int in) {
+    if (isTrue(in)) {
+      float prevX = x;
+      float prevY = y;
+
+
+
+      float stepX = display.canvasStepWidth;
+      float stepY = display.canvasStepHeight;
+      //x = x + stepSize * cos(radians(head));
+      //y = y + stepSize * sin(radians(head));
+
+      int edgeType = checkEdge(x, y);
+      if (edgeType < 0) {
+        if (direction == 0) {
+          x = x + stepX;
+        }
+        if (direction == 1) {
+          x = x + stepX;
+          y = y + stepY;
+        }
+        if (direction == 2) {
+          y = y + stepY;
+        }
+        if (direction == 3) {
+          x = x - stepX;
+          y = y + stepY;
+        }
+        if (direction == 4) {
+          x = x - stepX;
+        }
+        if (direction == 5) {
+          x = x - stepX;
+          y = y - stepY;
+        }
+        if (direction == 6) {
+          y = y - stepY;
+        }
+        if (direction == 7) {
+          x = x + stepX;
+          y = y - stepY;
+        }
+      } else {
+       
+      }
+
+
+
+      if (isPenDown) {
+        c.strokeWeight(penSize + 4);
+        //float r = red(penColor) - 100;
+        //float g = green(penColor) - 100;
+        //float b = blue(penColor) - 100;
+        //stroke(r, g, b, 50);
+        //stroke(10, 50);
+        //line(pX, pY, x, y);
+
+        //beginShape();
+        //vertex(pX, pY);
+        //vertex(x, y);
+        //endShape();
+
+        c.strokeWeight(penSize);
+        c.stroke(penColor);
+        c.strokeJoin(ROUND);    
+        c.strokeCap(ROUND);
+        //c.strokeCap(PROJECT);
+        c.line(prevX, prevY, x, y);
+
+
+        //c.beginShape();
+        //c.vertex(prevX, prevY);
+        //c.vertex(x, y);
+        //c.endShape();
+      }
+    } 
+    return this;
+  }
+  
+  int checkEdge(float x, float y) {
+    return -1;
   }
 }

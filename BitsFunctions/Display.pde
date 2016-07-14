@@ -37,8 +37,8 @@ class Display {
     canvasStepHeight = canvasHeight / canvasRow;
 
 
-    red = new InputOutput(this, "赤", 30, 30).red(1);
-    black = new InputOutput(this, "緑", 35, 35).black(1);
+    red = new InputOutput(this, "赤", 5, 50).red(1);
+    black = new InputOutput(this, "緑", 30, 25).black(1);
     //green = new InputOutput("緑", canvasWidth/2, canvasHeight/2).setColor(#333333);
     red.setHubConf(hub, 5);
     black.setHubConf(hub, 6);
