@@ -103,15 +103,16 @@ class InputOutput {
   
   InputOutput red(int in) {
     if (isTrue(in)) {
-      penColor = color(255, 0, 0);
+      penColor = color(#ff3333);
     } 
 
     return this;
   }
 
+
   InputOutput blue(int in) {
     if (isTrue(in)) {
-      penColor = color(0, 0, 255);
+      penColor = color(#66CCFF);
     } 
 
     return this;
@@ -171,7 +172,7 @@ class InputOutput {
         //stroke(r, g, b, 50);
         //stroke(10, 50);
         //line(pX, pY, x, y);
-        c.strokeJoin(ROUND);     
+         
         //beginShape();
         //vertex(pX, pY);
         //vertex(x, y);
@@ -179,6 +180,8 @@ class InputOutput {
 
         c.strokeWeight(penSize);
         c.stroke(penColor);
+        c.strokeJoin(ROUND);    
+        c.strokeCap(ROUND);
         c.line(pX, pY, x, y);
 
         

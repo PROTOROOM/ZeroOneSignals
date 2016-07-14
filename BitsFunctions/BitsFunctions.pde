@@ -68,17 +68,6 @@ void setup() {
   // setup InputOutput Display  
   display = new Display(width, height, h);
 
-  // setup InputOutput Object.
-  //red = new InputOutput("赤", width/2, height/2).red(1);
-  //green = new InputOutput("緑", width/2, height/2).green(1);
-  //blue = new InputOutput("青", width/2, height/2).blue(1);
-
-  //red.setHubConf(h, 1);
-  //green.setHubConf(h, 2);
-  //blue.setHubConf(h, 3);
-
-  //red.setDisplay(display);
-  //red.setSound(out);
 }
 
 void draw() {
