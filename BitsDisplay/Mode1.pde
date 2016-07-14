@@ -16,6 +16,7 @@ class ColorFall extends BasicBitsScreen {
 
   float dW, dWgap;// XXX
   float testY = 0; //XXX
+  float oX, oY; //XXX
 
   ColorFall(float w, float h) {
     super(w, h);
@@ -53,7 +54,7 @@ class ColorFall extends BasicBitsScreen {
       if (scene > 0) {
         scene = scene - 1;
       } else {
-        scene = 4; // 1 for bw, 4 for color
+        scene = 1; // 1 for bw, 4 for color
       }
       println("scene : " + str(scene));
       state++;
@@ -105,30 +106,30 @@ class ColorFall extends BasicBitsScreen {
       //filter(blur);
       
       /* Color drop */
-      if (scene == 0) { 
-        //filter(blur); 
-        dropLine64(topHubBitsHeight);
-      }
-      if (scene == 1) dropLine32(topHubBitsHeight);
-      if (scene == 2) {
-        dropLine8(topHubBitsHeight, color8FallingSpeed);
-      }
-      if (scene == 3) dropMultiColorLines(topHubBitsHeight);
+      //if (scene == 0) { 
+      //  //filter(blur); 
+      //  dropLine64(topHubBitsHeight);
+      //}
+      //if (scene == 1) dropLine32(topHubBitsHeight);
+      //if (scene == 2) {
+      //  dropLine8(topHubBitsHeight, color8FallingSpeed);
+      //}
+      //if (scene == 3) dropMultiColorLines(topHubBitsHeight);
 
-      if (scene == 4) {
-        if (frameCount % 8 == 0) dropLine1(topHubBitsHeight);
-      }
+      //if (scene == 4) {
+      //  if (frameCount % 8 == 0) dropLine1(topHubBitsHeight);
+      //}
 
 
       /* Black & White drop */
-      //if (scene == 0) {
-      //  dropLine8s(topHubBitsHeight, color8FallingSpeed);
-      //}
-      ////if (scene == 3) dropMultiColorLines(topHubBitsHeight);
+      if (scene == 0) {
+        dropLine8s(topHubBitsHeight, color8FallingSpeed);
+      }
+      //if (scene == 3) dropMultiColorLines(topHubBitsHeight);
 
-      //if (scene == 1) {
-      //  if (frameCount % 8 == 0) dropLine1(topHubBitsHeight);
-      //}
+      if (scene == 1) {
+        if (frameCount % 8 == 0) dropLine1(topHubBitsHeight);
+      }
 
 
       //if (frameCount % 5 == 0) dropLine1(topHubBitsHeight);
@@ -139,7 +140,7 @@ class ColorFall extends BasicBitsScreen {
       drawTopHubBits(topHubBitsHeight);
 
 
-      if ((millis() - stateTime) > 15000) {
+      if ((millis() - stateTime) > 30000) {
         bitsBarColor = color(hubNetwork.hubData[0], hubNetwork.hubData[1], hubNetwork.hubData[2], 10);
         //bitsBarColor = color(0, hubNetwork.hubData[0], 0, 60);
         state++;
@@ -320,7 +321,7 @@ class ColorFall extends BasicBitsScreen {
     float[] fSpeed = new float[num];
 
     for (int i=0; i<num; i++) {
-      fSpeed[i] = random(sMultiple, 1.5*sMultiple);
+      fSpeed[i] = random(sMultiple/2, 1*sMultiple);
     }
 
     return fSpeed;
@@ -369,19 +370,31 @@ class ColorFall extends BasicBitsScreen {
     //print("simul   ");print(hubNetwork.hubDataMin[0]);print("---");println(hubNetwork.hubDataMax[0]);
     //print("real   ");print(hubNetwork.hubDataMin[4]);print("---");println(hubNetwork.hubDataMax[4]);
     //print(hubNetwork.hubData[0]);print("-----");println(hubNetwork.hubData[4]);
-    //strokeWeight(2);
-    ////stroke(255, 0, 0);
-    ////point(800+hubNetwork.hubData[2], testY);
+    strokeWeight(2);
+    //stroke(255, 0, 0);
+    //point(800+hubNetwork.hubData[2], testY);
     //stroke(255);
     //point(800+hubNetwork.hubData[4], testY);
     //stroke(255, 255, 0);
     //point(800+hubNetwork.hubData[5], testY);
 
-    //testY = testY + 0.5;
-    //if (testY > 500) testY = 0;
+    stroke(0, hubNetwork.hubData[4]);
+    line(oX, oY, 800+hubNetwork.hubData[4], testY);
+    oX = 800+hubNetwork.hubData[4];
+    oY = testY;
+    testY = testY + 3;
+    
+    if (testY > sHeight) testY = 0;
 
-
-    dW = dW - dWgap;
+    if (hubNetwork.hubDataOld[4] != hubNetwork.hubData[4]) {
+      
+      println("diff");//XXX 
+      dW = dW - dWgap*0.2;
+    } else {
+      println("same");//XXX
+      
+      dW = dW - dWgap;
+    }
     //if (dW < 0 || dW > dWidth/8 ) dWgap = dWgap * -1;
     if (dW < 0) dW = dWidth / 8;
 

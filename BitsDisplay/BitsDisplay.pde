@@ -54,7 +54,7 @@ void setup() {
   colorMode(RGB, 255);
 
   noCursor();
-  bgColor = color(0);
+  bgColor = color(255);
   background(bgColor);
 
   // network setup, HubNetwork handles UDP, Websocket.
