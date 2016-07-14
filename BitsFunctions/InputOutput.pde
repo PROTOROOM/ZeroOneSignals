@@ -1,9 +1,6 @@
-
-
-
-
 class InputOutput {
   float x, y;
+  float cX, cY;
   float head;
   boolean isPenDown;
   float penSize;
@@ -18,6 +15,9 @@ class InputOutput {
   // HubNetwork & index
   HubNetwork h;
   int hi;
+  
+  Display display;
+  PGraphics c;
 
   //AudioOutput out;
   Oscil wave;
@@ -36,12 +36,28 @@ class InputOutput {
     commandIndex = 0;
     //hubIndex = id-1;
   }
+  
+  void show(int in) {
+    if (isTrue(in)) {
+      cX = display.startX + x;
+      cY = display.startY + y;
+      noStroke();
+      fill(penColor);
+      ellipse(cX, cY, penSize*4, penSize*4);
+    }
+  }
 
   void setHubConf(HubNetwork hub, int id) {
     h = hub;
     hi = id - 1;
   }
 
+  void setDisplay(Display d) {
+    display = d;
+    c = display.canvas;
+  }
+  
+  
   String getCodeString() {
     String codeString = name;
 
@@ -80,6 +96,11 @@ class InputOutput {
   }
 
   // ###################### Color ######################
+  InputOutput setColor(color c) {
+    penColor = c;
+    return this;
+  }
+  
   InputOutput red(int in) {
     if (isTrue(in)) {
       penColor = color(255, 0, 0);
@@ -122,6 +143,16 @@ class InputOutput {
     }
     return this;
   }
+  
+  InputOutput bigPen(int in) {
+    if (isTrue(in)) {
+      penSize = 6;
+    } else {
+      penSize = 2;
+    }
+    
+    return this;
+  }
 
 
   // ###################### Movement ######################
@@ -133,22 +164,22 @@ class InputOutput {
       y = y + stepSize * sin(radians(head));
 
       if (isPenDown) {
-        strokeWeight(penSize + 4);
+        c.strokeWeight(penSize + 4);
         //float r = red(penColor) - 100;
         //float g = green(penColor) - 100;
         //float b = blue(penColor) - 100;
         //stroke(r, g, b, 50);
         //stroke(10, 50);
         //line(pX, pY, x, y);
-        strokeJoin(ROUND);     
+        c.strokeJoin(ROUND);     
         //beginShape();
         //vertex(pX, pY);
         //vertex(x, y);
         //endShape();
 
-        strokeWeight(penSize);
-        stroke(penColor);
-        line(pX, pY, x, y);
+        c.strokeWeight(penSize);
+        c.stroke(penColor);
+        c.line(pX, pY, x, y);
 
         
         //beginShape();
