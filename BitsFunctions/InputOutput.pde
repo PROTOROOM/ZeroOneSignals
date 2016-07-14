@@ -67,7 +67,8 @@ class InputOutput {
       //float py = getYfromCanvasPosY(pY);
 
 
-      noStroke();
+      stroke(255);
+      strokeWeight(1);
       fill(penColor);
       ellipse(cX, cY, penSize*4, penSize*4);
     }
@@ -180,9 +181,9 @@ class InputOutput {
 
   InputOutput bigPen(int in) {
     if (isTrue(in)) {
-      penSize = 6;
+      penSize = 20;
     } else {
-      penSize = 2;
+      penSize = 10;
     }
 
     return this;
