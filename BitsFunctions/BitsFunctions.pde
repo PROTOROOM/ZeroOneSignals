@@ -77,13 +77,6 @@ void draw() {
 
 
 
-  //if (h.dataChanged(1))
-  //  green.penDown(h.bits[1][0]).turnRight(h.bits[1][1]).go(h.bits[1][2]).turnLeft(h.bits[1][3]).play(h.bits[1][3]);
-
-  //if (h.dataChanged(2))
-  //  blue.penDown(h.bits[2][0]).turnRight(h.bits[2][1]).go(h.bits[2][2]).turnLeft(h.bits[2][3]);
-
-
   //noStroke();
   //fill(0);
   //rect(0, 0, width, 200);

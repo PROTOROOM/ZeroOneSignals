@@ -10,6 +10,9 @@ class Display {
   int canvasWidth, canvasHeight;
   int canvasRow, canvasCol;
   float canvasStepWidth, canvasStepHeight;
+  
+  PImage codeTop;
+  int padding = 10;
 
 
   Display(int screenWidth, int screenHeight, HubNetwork hub) {
@@ -43,9 +46,9 @@ class Display {
     //green = new InputOutput("緑", canvasWidth/2, canvasHeight/2).setColor(#333333);
     red.setHubConf(hub, 5);
     black.setHubConf(hub, 6);
-    //green.setHubConf(hub, 6);
-    //red.setDisplay(this);
-    //green.setDisplay(this);
+
+    codeTop = loadImage("folder_top.png");
+    codeTop.resize(dWidth - padding*2, 95);
   }
 
   void setHubConf(HubNetwork hub) {
@@ -55,7 +58,7 @@ class Display {
   void show() {
     if (needToClearBackground) {
       noStroke();
-      fill(200);
+      fill(255);
       rect(startX, startY, dWidth, dHeight);
       needToClearBackground = false;
     }
@@ -70,16 +73,16 @@ class Display {
       needToClearCanvas = false;
     }
 
-    int i = 2;
+    int i = 0;
     if (h.dataChanged(i)) {
       //red.penDown(h.bits[0][0]).goReal(h.bits[0][1]).turnRight(h.bits[0][2]).turnRight(h.bits[0][3]);
       red.penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).up(h.bits[i][3]).right(h.bits[i][4]).red(h.bits[i][5]).left(h.bits[i][6]).blue(h.bits[i][7]);
     }
-    //i = 1;
-    //if (h.dataChanged(i)) {
-    //  //red.penDown(h.bits[0][0]).goReal(h.bits[0][1]).turnRight(h.bits[0][2]).turnRight(h.bits[0][3]);
-    //  black.penDown(h.bits[i][0]).upRight(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3]).downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).downRight(h.bits[i][6]).bigPen(h.bits[i][7]);
-    //}
+    i = 1;
+    if (h.dataChanged(i)) {
+      //red.penDown(h.bits[0][0]).goReal(h.bits[0][1]).turnRight(h.bits[0][2]).turnRight(h.bits[0][3]);
+      black.penDown(h.bits[i][0]).upRight(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3]).downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).downRight(h.bits[i][6]).bigPen(h.bits[i][7]);
+    }
 
 
 
@@ -91,8 +94,11 @@ class Display {
     image(canvas, startX, startY);
 
     red.show(1);
-    //black.show(1);
+    black.show(1);
     //green.show(1);
+    
+    image(codeTop, startX+padding, canvasHeight-padding*4);
+    
   }
 
   void drawCanvasGrid() {
