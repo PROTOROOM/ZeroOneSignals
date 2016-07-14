@@ -10,20 +10,24 @@ import ddf.minim.ugens.*;
 // ########## Configurations ########## 
 int port = 6000;
 int hubPort = 8888;
+int wsPort = 8080;
+String hubBaseIP = "192.168.1.";
 String[] hubs = {
-  "192.168.0.171", 
-  "192.168.0.172", 
-  "192.168.0.173", 
-  "192.168.0.174", 
-  "192.168.0.175", 
-  "192.168.0.176", 
-  "192.168.0.177", 
-  "192.168.0.178", 
+  hubBaseIP+"171", 
+  hubBaseIP+"172", 
+  hubBaseIP+"173", 
+  hubBaseIP+"174", 
+  hubBaseIP+"175", 
+  hubBaseIP+"176", 
+  hubBaseIP+"177", 
+  hubBaseIP+"178", 
 };
 
 // external libraries
 HubNetwork hubNet, h;
 UDP udp;
+WebsocketServer ws;
+
 PFont font;
 Minim minim;
 AudioOutput OUT;
@@ -52,13 +56,11 @@ void setup() {
   h = hubNet;
   hubNet.setHubs(hubs);
   hubNet.setPort(hubPort);
+  hubNet.setModeHubServer(ws);
 
   // setup font.
   font = createFont("chifont.ttf", 20);
   textFont(font);
-
-  // setup InputOutput Display
-
 
   // setup sound.
   minim = new Minim(this);
@@ -69,13 +71,10 @@ void setup() {
   display = new Display(width, height, h);
 }
 
+
 void draw() {
-
   clearCanvasEdge();
-
   display.show();
-
-
 
   //noStroke();
   //fill(0);
@@ -86,6 +85,7 @@ void draw() {
   //text(codeRed, 10, 100);
 }
 
+
 void clearCanvasEdge() {
   noStroke();
   fill(0);
@@ -94,8 +94,8 @@ void clearCanvasEdge() {
   rect(display.startX+display.dWidth-1, 0, border, display.canvasHeight+border);
 }
 
-void showText(String text) {
 
+void showText(String text) {
   textSize(20);
   fill(255);
   text(c, 10, 150);

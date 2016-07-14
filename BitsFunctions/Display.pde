@@ -72,6 +72,7 @@ class Display {
       needToClearBackground = false;
     }
 
+    // ------------------- in Canvas
     canvas.smooth();
     canvas.beginDraw();
 
@@ -85,15 +86,19 @@ class Display {
 
     for (int i=0; i<tables.length; i++) {
       if (h.dataChanged(i)) {
-        //red.penDown(h.bits[0][0]).goReal(h.bits[0][1]).turnRight(h.bits[0][2]).turnRight(h.bits[0][3]);
-        tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).up(h.bits[i][3]).right(h.bits[i][4]).down(h.bits[i][5]).left(h.bits[i][6]).upLeft(h.bits[i][7]);
+
+        //tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).up(h.bits[i][3]).right(h.bits[i][4]).down(h.bits[i][5]).left(h.bits[i][6]).upLeft(h.bits[i][7]);
+
+        //tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).up(h.bits[i][3]).right(h.bits[i][4]).down(h.bits[i][5]).left(h.bits[i][6]);//.upLeft(h.bits[i][7]);
+
+        //tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
+        //  .down(h.bits[i][4]).left(h.bits[i][5]);
+
+        tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
+          .downLeft(h.bits[i][4]);
+        
       }
     }
-    //i = 1;
-    //if (h.dataChanged(i)) {
-    //  //red.penDown(h.bits[0][0]).goReal(h.bits[0][1]).turnRight(h.bits[0][2]).turnRight(h.bits[0][3]);
-    //  tables[i].penDown(h.bits[i][0]).upRight(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3]).downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).downRight(h.bits[i][6]).bigPen(h.bits[i][7]);
-    //}
 
 
 
@@ -103,12 +108,11 @@ class Display {
 
     canvas.endDraw();
     image(canvas, startX, startY);
+    // ------------------- in Canvas END
 
     for (int i=0; i<tables.length; i++) {
       if (h.dataChanged(i)) tables[i].show(1);
     }
-    //tables[1].show(1);
-    //green.show(1);
 
     image(codeTop, startX+padding, canvasHeight-padding*4);
   }
