@@ -11,6 +11,8 @@ class Display {
   int canvasWidth, canvasHeight;
   int canvasRow, canvasCol;
   float canvasStepWidth, canvasStepHeight;
+  color gridBackground, gridColor;
+  boolean showGrid;
 
   PImage codeTop;
   int padding = 10;
@@ -46,6 +48,9 @@ class Display {
     canvasStepWidth = canvasWidth / canvasCol;
     canvasStepHeight = canvasHeight / canvasRow;
 
+    gridBackground = color(255);
+    gridColor = color(220);
+    showGrid = true;
 
     //red = new InputOutput(this, "赤", 30, 25).red(1);
     //black = new InputOutput(this, "緑", 30, 25).blue(1);
@@ -61,14 +66,17 @@ class Display {
     h = hub;
   }
 
-  // ################################################### SETUP for new Scene
   void setupCanvas(int col, int row) {
     canvasRow = row;
     canvasCol = col;
     canvasStepWidth = canvasWidth / canvasCol;
     canvasStepHeight = canvasHeight / canvasRow;
+    gridBackground = color(255);
+    gridColor = color(220);
+    showGrid = true;
   }
 
+  // ################################################### SETUP1 for new Scene
   void setupInputOutputs(int scene) {
     // init all InputOutput Objects
     tables = new InputOutput[8];
@@ -78,7 +86,7 @@ class Display {
       tables[i] = t;
     }    
 
-    if (scene == 0) {
+    if (scene == 1) {
       setupCanvas(20, 120);
 
 
@@ -89,21 +97,9 @@ class Display {
       }
     }
 
-    if (scene == 1) {
-      setupCanvas(20, 100);
-
-      for (int i=0; i<tables.length; i++) {
-        tables[i].setStartPosition(canvasCol/2, canvasRow/2);
-        tables[i].setBigPen(5);
-        tables[i].setDefaultPen(1);
-      }
-
-      tables[3].setBigPen(40);
-      tables[3].setDefaultPen(10);
-    }
-
     if (scene == 2) {
       setupCanvas(20, 100);
+      gridBackground = color(#666666);
 
       for (int i=0; i<tables.length; i++) {
         tables[i].setStartPosition(canvasCol/2, canvasRow/2);
@@ -116,6 +112,20 @@ class Display {
     }
 
     if (scene == 3) {
+      setupCanvas(20, 100);
+      showGrid = false;
+
+      for (int i=0; i<tables.length; i++) {
+        tables[i].setStartPosition(canvasCol/2, canvasRow/2);
+        tables[i].setBigPen(5);
+        tables[i].setDefaultPen(1);
+      }
+
+      tables[3].setBigPen(40);
+      tables[3].setDefaultPen(10);
+    }
+
+    if (scene == 4) {
       setupCanvas(10, 30);
 
       for (int i=0; i<tables.length; i++) {
@@ -155,13 +165,13 @@ class Display {
 
 
     if (needToClearCanvas) {
-      canvas.background(255);
+      canvas.background(gridBackground);
       drawCanvasGrid(canvasRow, canvasCol);
       needToClearCanvas = false;
     }
 
-
-    if (scene == 0) {
+    // SETUP2 for Scene
+    if (scene == 1) {
       for (int i=0; i<tables.length; i++) {
         if (h.dataChanged(i)) {
           if (i == 2) {
@@ -178,7 +188,7 @@ class Display {
       }
     }
 
-    if (scene == 1) {
+    if (scene == 2) {
       for (int i=0; i<tables.length; i++) {
         if (h.dataChanged(i)) {
           if (i == 2) {
@@ -195,7 +205,7 @@ class Display {
       }
     }
 
-    if (scene == 2) {
+    if (scene == 3) {
       for (int i=0; i<tables.length; i++) {
         if (h.dataChanged(i)) {
           if (i == 2) {
@@ -212,7 +222,7 @@ class Display {
       }
     }
 
-    if (scene == 3) {
+    if (scene == 4) {
       for (int i=0; i<tables.length; i++) {
         if (h.dataChanged(i)) {
           if (i == 2) {
@@ -248,17 +258,19 @@ class Display {
 
 
   void drawCanvasGrid(int row, int col) {
-    canvas.stroke(220);
+    canvas.stroke(gridColor);
     canvas.strokeWeight(1);
 
-    canvasStepWidth = canvasWidth / col;
-    canvasStepHeight = canvasHeight / row;
+    //canvasStepWidth = canvasWidth / col;
+    //canvasStepHeight = canvasHeight / row;
 
-    for (int i=0; i<col; i++) {
-      canvas.line(i*canvasStepWidth, startY, i*canvasStepWidth, canvasHeight);
-    }
-    for (int i=0; i<row; i++) {
-      canvas.line(0, i*canvasStepHeight, canvasWidth, i*canvasStepHeight);
+    if (showGrid) {
+      for (int i=0; i<col; i++) {
+        canvas.line(i*canvasStepWidth, startY, i*canvasStepWidth, canvasHeight);
+      }
+      for (int i=0; i<row; i++) {
+        canvas.line(0, i*canvasStepHeight, canvasWidth, i*canvasStepHeight);
+      }
     }
   }
 
@@ -285,12 +297,11 @@ class Display {
     fill(0);
     for (int i=0; i<tables.length; i++) {
       int commandNumber = tables[i].commands.size();
-      
-      if (commandNumber > 0) {
-        rect(codeX-12 , codeY+i*55-13, 4, 37);
-        int hi = tables[i].hi;
-        text(tables[i].name, codeX, codeY+i*55);
+      rect(codeX-12, codeY+i*55-13, 4, 37);
+      int hi = tables[i].hi;
+      text(tables[i].name, codeX, codeY+i*55);
 
+      if (commandNumber > 0) {
         String commandString = "";
 
         for (int j=0; j<tables[i].commands.size(); j++) {
@@ -300,6 +311,7 @@ class Display {
         commandString = commandString + ";";
         text(commandString, codeX, codeY+i*55+20);
       }
+      
     }
   }
 

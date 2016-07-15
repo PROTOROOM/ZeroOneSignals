@@ -69,14 +69,14 @@ class InputOutput {
   //}
 
   void show(int in) {
-    if (isTrue(in)) {
+    if (isTrue(in) && commandEnd) {
       cX = display.startX + x;
       cY = display.startY + y;
       //float px = getXfromCanvasPosX(pX);
       //float py = getYfromCanvasPosY(pY);
 
 
-      stroke(220);
+      stroke(250);
       strokeWeight(2);
       fill(penColor);
       ellipse(cX, cY, penSize*4, penSize*4);

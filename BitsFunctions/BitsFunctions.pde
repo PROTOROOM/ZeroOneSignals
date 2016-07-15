@@ -10,6 +10,13 @@ import processing.pdf.*;
 
 
 // ########## Table Configurations ########## 
+// to setup Scene, first change totalSceneNumber
+int totalSceneNumber = 3;
+int scene = 1;
+// and find SETUP1, SETUP2 in Display Class
+// TODO : make scene configuration file
+
+
 color[] tableColors = {color(255, 0), color(255, 0), #333333, #666666, #999999, #aaaaaa, #cccccc, #efefef};
 String t = "TABLE_";
 String[] tableNames = {t+"01", t+"02", t+"03", t+"04", t+"05", t+"06", t+"07", t+"08"};
@@ -56,7 +63,7 @@ int displayMode = 0; // 0:begin, 1:drawing, 2:sound
 boolean isRealDisplayMode = true;
 
 int state, stateTime;
-int scene;
+
 
 
 // ########## Setup ########## 
@@ -95,7 +102,7 @@ void setup() {
   //
   state = 0;
   stateTime = millis();
-  scene = 0;
+
 }
 
 
@@ -130,11 +137,11 @@ void draw() {
     if (state == 1) {
       display.show(scene);
 
-      if (timePassed(30)) {
+      if (timePassed(10)) {
         scene++;
 
-        if (scene > 3) {
-          scene = 0;
+        if (scene > totalSceneNumber+1) {
+          scene = 1;
         }
 
         state++;
@@ -161,8 +168,8 @@ void draw() {
       if (timePassed(60)) {
         scene++;
 
-        if (scene > 2) {
-          scene = 0;
+        if (scene > totalSceneNumber+1) {
+          scene = 1;
         }
 
         state++;
@@ -182,9 +189,18 @@ void draw() {
 }
 
 void saveCanvas() {
-  String image_name;
-  image_name = "./img/"+str(year())+str(month())+str(day())+"_"+str(hour())+str(minute())+str(second())+".png";
-  save(image_name);
+  String imageName;
+  String hourString;
+  
+  int hour = hour();
+  if (hour < 10) {
+    hourString = '0' + str(hour);
+  } else {
+    hourString = str(hour);
+  }
+   
+  imageName = "./img/"+str(year())+str(month())+str(day())+"_"+hourString+str(minute())+str(second())+".png";
+  save(imageName);
 }
 
 void clearCanvasEdge() {
@@ -202,7 +218,7 @@ void clearDisplayOnceWhenModeSwitched() {
     resetDisplays();
 
     state = 0;
-    scene = 0;
+    scene = 1;
   }
 }
 
