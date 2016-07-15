@@ -64,6 +64,7 @@ void setup() {
 
   // setup Hub Network.
   udp = new UDP(this, port);
+  ws = new WebsocketServer(this, wsPort, "/modehub");
   hubNet = new HubNetwork(udp);
   h = hubNet;
   hubNet.setHubs(hubs);
@@ -88,6 +89,11 @@ void setup() {
 
 void draw() {
   clearCanvasEdge();
+
+  if (isRealDisplayMode) {
+    displayMode = hubNet.getCurrentMode();
+  }
+
   if (displayMode == -1) {
     testDisplay.show();
   }
@@ -97,8 +103,14 @@ void draw() {
   }
 
   if (displayMode == 1) {
-    display.show();
+    display.show(displayMode);
   }
+
+  if (displayMode == 2) {
+    display.show(displayMode);
+  }
+
+  showModeStatus();
 
   //noStroke();
   //fill(0);
@@ -120,15 +132,18 @@ void clearCanvasEdge() {
 
 void clearDisplayOnceWhenModeSwitched() {
   if (displayMode != oldDisplayMode) {
-    background(bgColor);
+
     oldDisplayMode = displayMode;
     resetDisplays();
+
+    background(bgColor);
   }
 }
 
 
 void resetDisplays() {
   //if (oldDisplayMode != 1) modeColorFall.reset(); XXX
+  //if (oldDisplayMode > 0) display.needToClearBackground = true;
 }
 
 
@@ -139,6 +154,14 @@ void showText(String text) {
 }
 
 
+void showModeStatus() {
+  if (!isRealDisplayMode) {
+    fill(100);
+    text("Switching Mode by Hand "+displayMode, width/2, 100);
+  }
+}
+
+
 void keyReleased() {
   // toggle simulation or real mode for hubs 1 ~ 8 : [FIXME] not work well
   //if (int('1') <= key && key <= int('9')) {
@@ -146,10 +169,13 @@ void keyReleased() {
   //  hubNet.toggleSimulation(hubID);
   //}
 
-  if (key == 'q') displayMode = 0;
-  if (key == 'w') displayMode = 1;
-  if (key == 'e') displayMode = 2;
-  if (key == 't') displayMode = -1;
+  if (!isRealDisplayMode) {
+    if (key == 'q') displayMode = 0;
+    if (key == 'w') displayMode = 1;
+    if (key == 'e') displayMode = 2;
+    if (key == 't') displayMode = -1;
+  }
+
   if (key == 'r') {
     background(bgColor);
     toggleRealDisplayMode();
@@ -158,11 +184,13 @@ void keyReleased() {
 
 
 void toggleRealDisplayMode() {
+
   if (isRealDisplayMode) {
     isRealDisplayMode = false;
   } else {
     isRealDisplayMode = true;
   }
+  background(bgColor);
 }
 
 

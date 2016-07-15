@@ -63,7 +63,7 @@ class Display {
     h = hub;
   }
 
-  void show() {
+  void show(int mode) {
     if (needToClearBackground) {
       noStroke();
       fill(255);
@@ -93,8 +93,8 @@ class Display {
         //tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
         //  .down(h.bits[i][4]).left(h.bits[i][5]);
 
-        tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
-          .downLeft(h.bits[i][4]);
+        tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+          .downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).up(h.bits[i][6]);
         
       }
     }

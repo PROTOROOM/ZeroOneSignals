@@ -4,13 +4,15 @@ var bgColor;
 var d, alpha;
 var isSimulation;
 var isDebug;
+var colorCount=0;
+var changeColor = true;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	isSimulation = false;
 	isDebug = false;
 	
-	bgColor = color(150, 220, 10);
+	bgColor = color(255);
 	background(bgColor);
 	modebit = 0;
 
@@ -20,6 +22,8 @@ function setup() {
 	
 	d = 200;
 	alpha = 200;
+	
+	rectMode(CENTER);
 }
 
 
@@ -30,23 +34,33 @@ function draw() {
 // 	var mode = checkCurrentMode(modebit);	
 	
 	if (modebit == 1) {
-		bgColor = color(150, 220, 10);
-		fill(color(0, 200, 0));	
-		d = min(200, d + 20);
+		fill(color(0));	
+		d = 200;
 		alpha = 255;
+		
+		rect(width/2, height/2, d, d);
+		
 	} else if (modebit == 2) {
-		bgColor = color(10, 150, 220);
-		fill(color(0, 0, 200));
-		d = min(200, d + 20);
-		alpha = 255;		
+
+// 		if (colorCount > 300) {
+// 			fill(color(random(150, 255), random(150, 255), random(150, 255)));
+// 			colorCount = 0;
+// 		}
+		if (changeColor) {
+			circleColor = color(random(150, 255), random(150, 255), random(150, 255));
+			changeColor = false;
+		}
+		d = 200;	
+		fill(circleColor);	
+		ellipse(width/2, height/2, d, d);
+// 		colorCount++;
+		
 	} else {
-		bgColor = color(220, 10);
-		alpha = alpha - 5;
-		fill(color(200, 220, 200, max(0, alpha)));
-		d = max(50, d - 10);
+		d = 150;
+		changeColor = true;
 	}
 	
-	ellipse(width/2, height/2, d, d);
+
 	
 	
 	if (isSimulation) simulateBits(60);

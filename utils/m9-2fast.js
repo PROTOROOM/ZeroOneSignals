@@ -28,7 +28,7 @@ setInterval(function() {
     //             randBit(t, 32), randBit(t, 32), randBit(t, 16), randBit(t, 4)];
     // bits = [b1.p(t, 21), b2.p(t, 12), b3.p(t, 3), b4.p(t, 24),
             // b5.p(t, 8), b6.p(t, 36), b7.p(t, 2), b8.p(t, 4)];
-    bits = [0, 0, 0, 0, 0, 0, b7.p(t, 20), 0];
+    bits = [0, 0, 0, 0, 0, 0, b7.p(t, 2), 0];
 
     var b = new Uint8Array(2);
     b[0] = 9;
