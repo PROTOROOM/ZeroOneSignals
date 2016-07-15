@@ -1,8 +1,7 @@
 class Display {
   HubNetwork h;
   InputOutput[] tables = new InputOutput[8];
-  color[] tableColors = {#ff3333, #66CCFF, #333333, #666666, #999999, #aaaaaa, #cccccc, #efefef};
-  String[] tableNames = {"赤", "緑", "33", "44", "55", "66", "77", "88"};
+
 
   float startX, startY;
   int dWidth, dHeight;

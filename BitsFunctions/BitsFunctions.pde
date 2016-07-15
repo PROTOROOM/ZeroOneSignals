@@ -7,6 +7,10 @@ import websockets.*;
 import ddf.minim.*;
 import ddf.minim.ugens.*;
 
+// ########## Table Configurations ########## 
+color[] tableColors = {#ff3333, #66CCFF, #333333, #666666, #999999, #aaaaaa, #cccccc, #efefef};
+String[] tableNames = {"赤", "緑", "33", "44", "55", "66", "77", "88"};
+
 // ########## Configurations ########## 
 int port = 6000;
 int hubPort = 8888;
@@ -32,11 +36,11 @@ PFont font;
 Minim minim;
 AudioOutput OUT;
 
-// InputOutput
+// InputOutput Displays
 Display display;
 TestDisplay testDisplay;
 HubBitsDisplay hubBitsDisplay;
-//InputOutput red, green, blue;
+
 
 
 // ####################### Variables 

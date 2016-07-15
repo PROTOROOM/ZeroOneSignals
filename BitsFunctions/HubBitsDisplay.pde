@@ -36,7 +36,7 @@ class HubBitsDisplay {
         float y = cellW*24 + j*cellW*3;
 
         if (h.bits[j][i] == 1) {
-          fill(0);
+          fill(tableColors[j]); // be carefull i & j !! TODO 
         } else {
           fill(255);
         }
