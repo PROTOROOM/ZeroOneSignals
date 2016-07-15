@@ -10,9 +10,9 @@ import processing.pdf.*;
 
 
 // ########## Table Configurations ########## 
-color[] tableColors = {#ff3333, #66CCFF, #333333, #666666, #999999, #aaaaaa, #cccccc, #efefef};
-String t = "TOP";
-String[] tableNames = {t+"1", t+"2", t+"3", t+"4", t+"5", t+"6", t+"7", t+"8"};
+color[] tableColors = {color(255, 0), color(255, 0), #333333, #666666, #999999, #aaaaaa, #cccccc, #efefef};
+String t = "TABLE_";
+String[] tableNames = {t+"01", t+"02", t+"03", t+"04", t+"05", t+"06", t+"07", t+"08"};
 
 // ########## Configurations ########## 
 int port = 6000;
@@ -130,10 +130,10 @@ void draw() {
     if (state == 1) {
       display.show(scene);
 
-      if (timePassed(10)) {
+      if (timePassed(30)) {
         scene++;
 
-        if (scene > 1) {
+        if (scene > 3) {
           scene = 0;
         }
 
@@ -150,14 +150,35 @@ void draw() {
 
   // #############################################
   if (displayMode == 2) {
-    display.show(displayMode);
+    if (state == 0) {
+      display.clean();
+      display.setupInputOutputs(scene);
+      if (timePassed(2)) state++;
+    }
+    if (state == 1) {
+      display.show(scene);
+
+      if (timePassed(60)) {
+        scene++;
+
+        if (scene > 2) {
+          scene = 0;
+        }
+
+        state++;
+      }
+    }
+    if (state == 2) {
+      //display.saveCanvas(); // slow??
+      saveCanvas();
+
+      state = 0;
+    }
   }
 
 
 
   showModeStatus();
-
-
 }
 
 void saveCanvas() {
@@ -170,8 +191,8 @@ void clearCanvasEdge() {
   noStroke();
   fill(bgColor);
   float border = display.startX/4;
-  rect(display.startX-border, 0, border, display.canvasHeight+border);
-  rect(display.startX+display.dWidth, 0, border, display.canvasHeight+border);
+  rect(display.startX-2*border, 0, border*2, display.canvasHeight+border);
+  rect(display.startX+display.dWidth, 0, border*2, display.canvasHeight+border);
 }
 
 void clearDisplayOnceWhenModeSwitched() {

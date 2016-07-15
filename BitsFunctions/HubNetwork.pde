@@ -69,7 +69,7 @@ class HubNetwork {
 
   void sendDataToModeDisplay(int data) {
     if (oldModeBitData != data) {
-      println("ws :" + str(data));
+      //println("ws :" + str(data));
 
       if (oldModeBitData < data) {
         bitOnTime = millis();

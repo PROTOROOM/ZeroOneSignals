@@ -8,13 +8,14 @@ class InputOutput {
 
 
   boolean isPenDown;
-  float penSize;
+  float penSize, bigPenSize, defaultPenSize;
   color penColor;
   float stepSize;
 
   String name;
   int commandIndex;
-  ArrayList<String> commands = new ArrayList<String>();
+  boolean commandEnd;
+  ArrayList<String> commands;
 
 
   // HubNetwork & index
@@ -29,21 +30,29 @@ class InputOutput {
 
 
   //InputOutput(String aName, float posX, float posY) { // XXX change to grid postion system.
-  InputOutput(Display d, String aName, int posX, int posY) {
+  InputOutput(Display d, String aName) {
     setDisplay(d);
-    x = posX*display.canvasStepWidth;
-    y = posY*display.canvasStepHeight;
+
     //pX = posX;
     //pY = posY;
     head = 0;
     isPenDown = false;
     penSize = 2;
+    defaultPenSize = 2;
+    bigPenSize = 5;
     penColor = color(0);
     stepSize = 10; // XXX now use canvasStep Width/Height
 
     name = aName;
     commandIndex = 0;
+    commandEnd = false;
+    commands = new ArrayList<String>();
     //hubIndex = id-1;
+  }
+
+  void setStartPosition(int posX, int posY) {
+    x = posX*display.canvasStepWidth;
+    y = posY*display.canvasStepHeight;
   }
 
   float getXfromCanvasPosX(int p) {
@@ -98,7 +107,13 @@ class InputOutput {
   }
 
   void addCommand(String command) {
-    commands.add(command);
+    if (!commandEnd) {
+      commands.add(command);
+    }
+  }
+  
+  void end() {
+    commandEnd = true;
   }
 
   boolean isTrue(int in) {
@@ -133,6 +148,7 @@ class InputOutput {
       penColor = color(#ff3333);
     } 
 
+    addCommand("赤");
     return this;
   }
 
@@ -141,6 +157,7 @@ class InputOutput {
       penColor = color(#000000);
     } 
 
+    addCommand("黒");
     return this;
   }
 
@@ -149,6 +166,7 @@ class InputOutput {
       penColor = color(#66CCFF);
     } 
 
+    addCommand("青");
     return this;
   }
 
@@ -157,6 +175,7 @@ class InputOutput {
       penColor = color(#66cc99);
     } 
 
+    addCommand("緑");
     return this;
   }
 
@@ -165,6 +184,7 @@ class InputOutput {
       penColor = color(#ffcc00);
     } 
 
+    addCommand("黄");
     return this;
   }
 
@@ -175,7 +195,7 @@ class InputOutput {
       isPenDown = false;
     }
 
-    addCommand("penDown");
+    addCommand("pDN");
     return this;
   }
 
@@ -185,17 +205,28 @@ class InputOutput {
     } else {
       isPenDown = true;
     }
+    
+    addCommand("pUP");
     return this;
   }
 
   InputOutput bigPen(int in) {
     if (isTrue(in)) {
-      penSize = 8;
+      penSize = bigPenSize;
     } else {
-      penSize = 2;
+      penSize = defaultPenSize;
     }
 
+    addCommand("BIG");
     return this;
+  }
+
+  void setBigPen(int aSize) {
+    bigPenSize = aSize;
+  }
+
+  void setDefaultPen(int aSize) {
+    defaultPenSize = aSize;
   }
 
 
@@ -290,7 +321,7 @@ class InputOutput {
       go(1);
     }
 
-    addCommand("下");
+    addCommand("右上");
     return this;
   }
   InputOutput upLeft(int in) {
@@ -299,7 +330,7 @@ class InputOutput {
       go(1);
     }
 
-    addCommand("下");
+    addCommand("左上");
     return this;
   }
   InputOutput downRight(int in) {
@@ -308,7 +339,7 @@ class InputOutput {
       go(1);
     }
 
-    addCommand("下");
+    addCommand("右下");
     return this;
   }
   InputOutput downLeft(int in) {
@@ -317,7 +348,7 @@ class InputOutput {
       go(1);
     }
 
-    addCommand("下");
+    addCommand("左下");
     return this;
   }
 

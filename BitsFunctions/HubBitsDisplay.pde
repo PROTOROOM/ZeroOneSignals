@@ -6,6 +6,8 @@ class HubBitsDisplay {
   float cellW;
   int colNum, rowNum;
 
+  PImage codeTop;
+
   HubBitsDisplay(int screenWidth, int screenHeight, HubNetwork hub) {
     setHubConf(hub);
 
@@ -17,6 +19,9 @@ class HubBitsDisplay {
       dWidth = int(screenWidth/3/12*10);
     }
     colNum = 17;
+
+    codeTop = loadImage("folder_top.png");
+    codeTop.resize(dWidth, 93);
   }
 
   void setHubConf(HubNetwork hub) {
@@ -34,7 +39,8 @@ class HubBitsDisplay {
         float y = cellW*24 + j*cellW*3;
 
         if (h.bits[j][i] == 1) {
-          fill(tableColors[j]); // be carefull i & j !! TODO
+          //fill(tableColors[j]); // be carefull i & j !! TODO
+          fill(0);
         } else {
           fill(255);
         }
@@ -44,6 +50,7 @@ class HubBitsDisplay {
     }
 
     showGrid();
+    drawCodeFolder();
   }
 
   void showGrid() {
@@ -72,7 +79,6 @@ class HubBitsDisplay {
     for (int i=1; i<colNum; i++) {
       float x = startX+cellW*i;
       line(x, 0, x, height);
-      
     }
     for (int i=1; i<rowNum; i++) {
       float y = startY + cellW*i;
@@ -84,5 +90,15 @@ class HubBitsDisplay {
     fill(255);
     noStroke();
     rect(startX, 0, dWidth, height);
+  }
+
+  void drawCodeFolder() {
+    float folderX = startX;
+    float folderY = int(height / 4 * 3)-40;
+    
+    fill(255);
+    rect(startX, folderY+40, dWidth, height-folderY);
+    image(codeTop, folderX, folderY);
+    
   }
 }

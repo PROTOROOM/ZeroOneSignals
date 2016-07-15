@@ -53,8 +53,8 @@ class Display {
     //red.setHubConf(hub, 5);
     //black.setHubConf(hub, 6);
 
-    codeTop = loadImage("folder.png");
-    codeTop.resize(dWidth - padding*2, 503);
+    codeTop = loadImage("folder_top.png");
+    codeTop.resize(dWidth, 93);
   }
 
   void setHubConf(HubNetwork hub) {
@@ -62,37 +62,70 @@ class Display {
   }
 
   // ################################################### SETUP for new Scene
+  void setupCanvas(int col, int row) {
+    canvasRow = row;
+    canvasCol = col;
+    canvasStepWidth = canvasWidth / canvasCol;
+    canvasStepHeight = canvasHeight / canvasRow;
+  }
+
   void setupInputOutputs(int scene) {
     // init all InputOutput Objects
-    if (scene == 0) {
-      canvasRow = 120;
-      canvasCol = 20;
-      canvasStepWidth = canvasWidth / canvasCol;
-      canvasStepHeight = canvasHeight / canvasRow;
+    tables = new InputOutput[8];
+    for (int i=0; i<tables.length; i++) {
+      InputOutput t =  new InputOutput(this, tableNames[i]).setColor(tableColors[i]);
+      t.setHubConf(h, i+1);
+      tables[i] = t;
+    }    
 
-      tables = new InputOutput[8];
+    if (scene == 0) {
+      setupCanvas(20, 120);
+
+
       for (int i=0; i<tables.length; i++) {
-        InputOutput t =  new InputOutput(this, tableNames[i], canvasCol/2, canvasRow/2).setColor(tableColors[i]);
-        t.setHubConf(h, i+1);
-        tables[i] = t;
+        tables[i].setStartPosition(canvasCol/2, canvasRow/2);
+        tables[i].setBigPen(5);
+        tables[i].setDefaultPen(1);
       }
     }
 
     if (scene == 1) {
-      canvasRow = 30;
-      canvasCol = 10;
-      canvasStepWidth = canvasWidth / canvasCol;
-      canvasStepHeight = canvasHeight / canvasRow;
+      setupCanvas(20, 100);
 
-      tables = new InputOutput[2];
-      InputOutput t1 = new InputOutput(this, tableNames[0], canvasCol/2, canvasRow/2).setColor(tableColors[0]);
-      InputOutput t2 = new InputOutput(this, tableNames[1], canvasCol/2, canvasRow/2).setColor(tableColors[1]);
+      for (int i=0; i<tables.length; i++) {
+        tables[i].setStartPosition(canvasCol/2, canvasRow/2);
+        tables[i].setBigPen(5);
+        tables[i].setDefaultPen(1);
+      }
 
-      t1.setHubConf(h, 1);
-      t2.setHubConf(h, 1);
+      tables[3].setBigPen(40);
+      tables[3].setDefaultPen(10);
+    }
 
-      tables[0] = t1;
-      tables[1] = t2;
+    if (scene == 2) {
+      setupCanvas(20, 100);
+
+      for (int i=0; i<tables.length; i++) {
+        tables[i].setStartPosition(canvasCol/2, canvasRow/2);
+        tables[i].setBigPen(5);
+        tables[i].setDefaultPen(1);
+      }
+
+      tables[3].setBigPen(40);
+      tables[3].setDefaultPen(10);
+    }
+
+    if (scene == 3) {
+      setupCanvas(10, 30);
+
+      for (int i=0; i<tables.length; i++) {
+        tables[i].setStartPosition(canvasCol/2, canvasRow/2);
+        tables[i].setBigPen(4);
+        tables[i].setDefaultPen(2);
+      }
+
+      tables[3].setBigPen(40);
+      tables[3].setDefaultPen(20);
     }
   }
 
@@ -128,34 +161,73 @@ class Display {
     }
 
 
-    for (int i=0; i<tables.length; i++) {
-      if (h.dataChanged(i)) {
-
-        //tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).up(h.bits[i][3]).right(h.bits[i][4]).down(h.bits[i][5]).left(h.bits[i][6]).upLeft(h.bits[i][7]);
-
-        //tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).up(h.bits[i][3]).right(h.bits[i][4]).down(h.bits[i][5]).left(h.bits[i][6]);//.upLeft(h.bits[i][7]);
-
-        //tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
-        //  .down(h.bits[i][4]).left(h.bits[i][5]);
-
-        if (i == 2) {
-          tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
-            .red(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).green(h.bits[i][6]);
-        } else if (i == 3) {
-          tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-            .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][6]);
-        } else {
-
-          tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-            .downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).up(h.bits[i][6]).down(h.bits[i][6]);
+    if (scene == 0) {
+      for (int i=0; i<tables.length; i++) {
+        if (h.dataChanged(i)) {
+          if (i == 2) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
+              .red(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).green(h.bits[i][6]).end();
+          } else if (i == 3) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][6]).end();
+          } else {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).up(h.bits[i][6]).down(h.bits[i][6]).end();
+          }
         }
       }
     }
 
+    if (scene == 1) {
+      for (int i=0; i<tables.length; i++) {
+        if (h.dataChanged(i)) {
+          if (i == 2) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
+              .red(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).green(h.bits[i][6]).end();
+          } else if (i == 3) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).yellow(h.bits[i][6]).end();
+          } else {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).up(h.bits[i][6]).down(h.bits[i][6]).end();
+          }
+        }
+      }
+    }
 
+    if (scene == 2) {
+      for (int i=0; i<tables.length; i++) {
+        if (h.dataChanged(i)) {
+          if (i == 2) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
+              .green(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).blue(h.bits[i][6]).end();
+          } else if (i == 3) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).blue(h.bits[i][5]).upRight(h.bits[i][6]).yellow(h.bits[i][6]).end();
+          } else {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).up(h.bits[i][6]).down(h.bits[i][6]).end();
+          }
+        }
+      }
+    }
 
-
-
+    if (scene == 3) {
+      for (int i=0; i<tables.length; i++) {
+        if (h.dataChanged(i)) {
+          if (i == 2) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
+              .yellow(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).black(h.bits[i][6]).end();
+          } else if (i == 3) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).red(h.bits[i][5]).upRight(h.bits[i][6]).yellow(h.bits[i][6]).end();
+          } else {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).down(h.bits[i][2]).right(h.bits[i][3])
+              .left(h.bits[i][4]).up(h.bits[i][5]).blue(h.bits[i][6]).down(h.bits[i][6]).end();
+          }
+        }
+      }
+    }
 
 
     canvas.endDraw();
@@ -191,7 +263,7 @@ class Display {
   }
 
   void drawCodeFolder() {
-    float folderX = startX + padding;
+    float folderX = startX;
     float folderY = canvasHeight-padding*4;
     image(codeTop, folderX, folderY);
 
@@ -201,27 +273,32 @@ class Display {
     noStroke();
     //stroke(0);
     fill(255);
-    rect(codeX+padding, folderY+10*padding, dWidth-8*padding, dHeight-codeY);
+    //rect(codeX+padding, folderY+10*padding, dWidth-8*padding, dHeight-codeY);
+    rect(startX, codeY-padding*2, dWidth, dHeight - folderY);
 
 
     String codeName;
     String codeRed;
-    //String codeName = "上上4";
-    //String codeRed = ".上("+str(h.bits[3][0])+").上("+str(h.bits[3][1])+").右("+str(h.bits[3][2])+").左("+str(h.bits[0][3])+").上("+str(h.bits[3][4])+").右("+str(h.bits[3][5])+").左("+str(h.bits[0][6])+").下("+str(h.bits[0][7])+");";
-    ////String codeRed2 = "      .上("+str(h.bits[3][4])+").右("+str(h.bits[3][5])+").左("+str(h.bits[0][6])+").下("+str(h.bits[0][7])+");";
-    //textSize(20);
-    //fill(0);
-    //text(codeName, codeX, codeY);
-    //text(codeRed, codeX, codeY+30);
 
-    for (int i=0; i<8; i++) {
-      codeName = "上上5";
-      codeRed = ".上("+str(h.bits[3][0])+").上("+str(h.bits[3][1])+").右("+str(h.bits[3][2])+").左("+str(h.bits[0][3])+").上("+str(h.bits[3][4])+").右("+str(h.bits[3][5])+").左("+str(h.bits[0][6])+").下("+str(h.bits[0][7])+");";
-      //String codeRed2 = "      .上("+str(h.bits[3][4])+").右("+str(h.bits[3][5])+").左("+str(h.bits[0][6])+").下("+str(h.bits[0][7])+");";
-      textSize(18);
-      fill(0);
-      text(codeName, codeX, codeY+50*i);
-      text(codeRed, codeX, codeY+50*i+25);
+    // print code string
+    textSize(18);
+    fill(0);
+    for (int i=0; i<tables.length; i++) {
+      int commandNumber = tables[i].commands.size();
+
+      if (commandNumber > 0) {
+        int hi = tables[i].hi;
+        text(tables[i].name, codeX, codeY+i*55);
+
+        String commandString = "";
+
+        for (int j=0; j<tables[i].commands.size(); j++) {
+          String c = tables[i].commands.get(j);
+          commandString = commandString + "." + c + "(" + str(h.bits[hi][j]) + ")";
+        }
+        commandString = commandString + ";";
+        text(commandString, codeX, codeY+i*55+20);
+      }
     }
   }
 
