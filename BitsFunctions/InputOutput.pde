@@ -154,11 +154,20 @@ class InputOutput {
 
   InputOutput green(int in) {
     if (isTrue(in)) {
-      penColor = color(0, 255, 0);
+      penColor = color(#66cc99);
     } 
 
     return this;
   }
+
+  InputOutput yellow(int in) {
+    if (isTrue(in)) {
+      penColor = color(#ffcc00);
+    } 
+
+    return this;
+  }
+
   InputOutput penDown(int in) {
     if (isTrue(in)) {
       isPenDown = true;
