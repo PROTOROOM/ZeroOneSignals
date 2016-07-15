@@ -6,6 +6,8 @@ import hypermedia.net.*;
 import websockets.*;
 import ddf.minim.*;
 import ddf.minim.ugens.*;
+import processing.pdf.*;
+
 
 // ########## Table Configurations ########## 
 color[] tableColors = {#ff3333, #66CCFF, #333333, #666666, #999999, #aaaaaa, #cccccc, #efefef};
@@ -129,13 +131,19 @@ void draw() {
 
       if (timePassed(10)) {
         scene++;
-        
+
         if (scene > 1) {
           scene = 0;
         }
-        
-        state = 0;
+
+        state++;
       }
+    }
+    if (state == 2) {
+      //display.saveCanvas(); // slow??
+      saveCanvas();
+
+      state = 0;
     }
   }
 
@@ -157,6 +165,11 @@ void draw() {
   //text(codeRed, 10, 100);
 }
 
+void saveCanvas() {
+  String image_name;
+  image_name = "./img/"+str(year())+str(month())+str(day())+"_"+str(hour())+str(minute())+str(second())+".png";
+  save(image_name);
+}
 
 void clearCanvasEdge() {
   noStroke();

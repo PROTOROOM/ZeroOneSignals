@@ -14,6 +14,8 @@ class Display {
 
   PImage codeTop;
   int padding = 10;
+  
+  boolean saveFrame;
 
 
   Display(int screenWidth, int screenHeight, HubNetwork hub) {
@@ -98,6 +100,11 @@ class Display {
 
 
   void show(int scene) {
+    if (saveFrame == true) {
+      PGraphicsPDF pdf = (PGraphicsPDF)beginRaw(PDF, "test.pdf");
+      pdf.rect(startX, startY, dWidth, dHeight);
+    }
+    
     if (needToClearBackground) {
       noStroke();
       fill(255);
@@ -156,6 +163,11 @@ class Display {
     }
 
     drawCodeFolder();
+    
+    if (saveFrame == true) {
+      endRaw();
+      saveFrame = false;
+    }
   }
 
 
@@ -176,5 +188,9 @@ class Display {
 
   void drawCodeFolder() {
     image(codeTop, startX+padding, canvasHeight-padding*4);
+  }
+  
+  void saveCanvas() {
+    saveFrame = true;
   }
 } // Display end
