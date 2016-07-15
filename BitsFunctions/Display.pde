@@ -285,8 +285,9 @@ class Display {
     fill(0);
     for (int i=0; i<tables.length; i++) {
       int commandNumber = tables[i].commands.size();
-
+      
       if (commandNumber > 0) {
+        rect(codeX-12 , codeY+i*55-13, 4, 37);
         int hi = tables[i].hi;
         text(tables[i].name, codeX, codeY+i*55);
 
