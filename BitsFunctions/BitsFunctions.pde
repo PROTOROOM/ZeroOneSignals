@@ -53,6 +53,7 @@ int displayMode = 0; // 0:begin, 1:drawing, 2:sound
 boolean isRealDisplayMode = true;
 
 int state, stateTime;
+int scene;
 
 
 // ########## Setup ########## 
@@ -89,12 +90,18 @@ void setup() {
 
   //
   state = 0;
-  stateTime = 0;
+  stateTime = millis();
+  scene = 0;
 }
 
 
 void draw() {
   clearCanvasEdge();
+  clearDisplayOnceWhenModeSwitched();
+  //print("Mode:"); // XXX
+  //print(displayMode);
+  //print(" State:");
+  //println(state);
 
   if (isRealDisplayMode) {
     displayMode = hubNet.getCurrentMode();
@@ -105,21 +112,19 @@ void draw() {
   }
 
   if (displayMode == 0) {
-    if (state == 0) {
-      if (timePassed(5)) {
-        state++;
-      }
-    }
-
-    if (state == 1) {
-      if (timePassed(1)) {
-        hubBitsDisplay.show();
-      }
-    }
+    hubBitsDisplay.show();
   }
 
   if (displayMode == 1) {
-    display.show(displayMode);
+    if (state == 0) {
+      display.clean();
+      display.needToClearBackground = true;
+      display.needToClearCanvas = true;
+      if (timePassed(3)) state++;
+    }
+    if (state == 1) {
+      display.show(scene);
+    }
   }
 
   if (displayMode == 2) {
@@ -152,9 +157,7 @@ void clearDisplayOnceWhenModeSwitched() {
     oldDisplayMode = displayMode;
     resetDisplays();
 
-    background(bgColor);
     state = 0;
-    stateTime = millis();
   }
 }
 
@@ -166,6 +169,7 @@ void resetDisplays() {
 
 boolean timePassed(int s) {
   if (millis() - stateTime >= s*1000) {
+    stateTime = millis();
     return true;
   } else {
     return false;

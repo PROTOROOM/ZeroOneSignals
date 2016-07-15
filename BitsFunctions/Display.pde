@@ -42,13 +42,6 @@ class Display {
     canvasStepHeight = canvasHeight / canvasRow;
 
 
-    // init all InputOutput Objects
-    for (int i=0; i<tables.length; i++) {
-      InputOutput t =  new InputOutput(this, tableNames[i], canvasCol/2, canvasRow/2).setColor(tableColors[i]);
-      t.setHubConf(hub, i+1);
-      tables[i] = t;
-    }
-
     //red = new InputOutput(this, "赤", 30, 25).red(1);
     //black = new InputOutput(this, "緑", 30, 25).blue(1);
     //green = new InputOutput("緑", canvasWidth/2, canvasHeight/2).setColor(#333333);
@@ -63,7 +56,24 @@ class Display {
     h = hub;
   }
 
-  void show(int mode) {
+  void setupInputOutputs() {
+    // init all InputOutput Objects
+    for (int i=0; i<tables.length; i++) {
+      InputOutput t =  new InputOutput(this, tableNames[i], canvasCol/2, canvasRow/2).setColor(tableColors[i]);
+      t.setHubConf(h, i+1);
+      tables[i] = t;
+    }
+  }
+
+
+  void clean() {
+    needToClearBackground = true;
+    needToClearCanvas = true;
+    setupInputOutputs();
+  }
+
+
+  void show(int scene) {
     if (needToClearBackground) {
       noStroke();
       fill(255);
@@ -78,8 +88,9 @@ class Display {
 
     if (needToClearCanvas) {
       canvas.background(255);
-      drawCanvasGrid();
+      drawCanvasGrid(canvasRow, canvasCol);
       needToClearCanvas = false;
+      println("canvas cleared");
     }
 
 
@@ -121,17 +132,27 @@ class Display {
       tables[i].show(1);
     }
 
-    image(codeTop, startX+padding, canvasHeight-padding*4);
+    drawCodeFolder();
+    
   }
 
-  void drawCanvasGrid() {
+
+  void drawCanvasGrid(int row, int col) {
     canvas.stroke(220);
     canvas.strokeWeight(1);
-    for (int i=0; i<canvasCol; i++) {
+
+    canvasStepWidth = canvasWidth / col;
+    canvasStepHeight = canvasHeight / row;
+
+    for (int i=0; i<col; i++) {
       canvas.line(i*canvasStepWidth, startY, i*canvasStepWidth, canvasHeight);
     }
-    for (int i=0; i<canvasRow; i++) {
+    for (int i=0; i<row; i++) {
       canvas.line(0, i*canvasStepHeight, canvasWidth, i*canvasStepHeight);
     }
+  }
+  
+  void drawCodeFolder() {
+    image(codeTop, startX+padding, canvasHeight-padding*4);
   }
 } // Display end

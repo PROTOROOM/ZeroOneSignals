@@ -34,7 +34,7 @@ class HubBitsDisplay {
         float y = cellW*24 + j*cellW*3;
 
         if (h.bits[j][i] == 1) {
-          fill(tableColors[j]); // be carefull i & j !! TODO 
+          fill(tableColors[j]); // be carefull i & j !! TODO
         } else {
           fill(255);
         }
@@ -43,6 +43,10 @@ class HubBitsDisplay {
       }
     }
 
+    showGrid();
+  }
+
+  void showGrid() {
 
     cellW = dWidth / colNum;
     rowNum = int(height / cellW);
@@ -53,6 +57,23 @@ class HubBitsDisplay {
       line(x, 0, x, height);
     }
 
+    for (int i=1; i<rowNum; i++) {
+      float y = startY + cellW*i;
+      line(startX, y, startX+dWidth, y);
+    }
+  }
+
+  void showGridSlowly() {
+    fillBackground();
+    cellW = dWidth / colNum;
+    rowNum = int(height / cellW);
+    strokeWeight(1);
+    stroke(230);
+    for (int i=1; i<colNum; i++) {
+      float x = startX+cellW*i;
+      line(x, 0, x, height);
+      
+    }
     for (int i=1; i<rowNum; i++) {
       float y = startY + cellW*i;
       line(startX, y, startX+dWidth, y);
