@@ -28,8 +28,6 @@ class HubBitsDisplay {
     fillBackground();
 
     for (int i=0; i<h.bits.length; i++) {
-
-
       for (int j=0; j<h.bits[i].length; j++) {
 
         float x = startX + cellW + i*cellW*2;

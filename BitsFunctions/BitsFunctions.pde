@@ -52,6 +52,8 @@ int oldDisplayMode = 0;
 int displayMode = 0; // 0:begin, 1:drawing, 2:sound
 boolean isRealDisplayMode = true;
 
+int state, stateTime;
+
 
 // ########## Setup ########## 
 void setup() {
@@ -84,6 +86,10 @@ void setup() {
   testDisplay = new TestDisplay();
   hubBitsDisplay = new HubBitsDisplay(width, height, h);
   display = new Display(width, height, h);
+
+  //
+  state = 0;
+  stateTime = 0;
 }
 
 
@@ -99,7 +105,17 @@ void draw() {
   }
 
   if (displayMode == 0) {
-    hubBitsDisplay.show();
+    if (state == 0) {
+      if (timePassed(5)) {
+        state++;
+      }
+    }
+
+    if (state == 1) {
+      if (timePassed(1)) {
+        hubBitsDisplay.show();
+      }
+    }
   }
 
   if (displayMode == 1) {
@@ -137,6 +153,8 @@ void clearDisplayOnceWhenModeSwitched() {
     resetDisplays();
 
     background(bgColor);
+    state = 0;
+    stateTime = millis();
   }
 }
 
@@ -146,6 +164,13 @@ void resetDisplays() {
   //if (oldDisplayMode > 0) display.needToClearBackground = true;
 }
 
+boolean timePassed(int s) {
+  if (millis() - stateTime >= s*1000) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 void showText(String text) {
   textSize(20);
