@@ -1,6 +1,6 @@
 class Display {
   HubNetwork h;
-  InputOutput[] tables = new InputOutput[8];
+  InputOutput[] tables; // = new InputOutput[8];
 
 
   float startX, startY;
@@ -36,8 +36,11 @@ class Display {
     canvasHeight = int(dHeight / 4 * 3);
     canvas = createGraphics(canvasWidth, canvasHeight, P2D);
     // (60, 12), 
-    canvasCol = 20;
+
+    // default canvas row and col : change new in setupInputOutputs
     canvasRow = 120;
+    canvasCol = 20;
+
     canvasStepWidth = canvasWidth / canvasCol;
     canvasStepHeight = canvasHeight / canvasRow;
 
@@ -56,12 +59,34 @@ class Display {
     h = hub;
   }
 
-  void setupInputOutputs() {
+  // ################################################### SETUP for new Scene
+  void setupInputOutputs(int scene) {
     // init all InputOutput Objects
-    for (int i=0; i<tables.length; i++) {
-      InputOutput t =  new InputOutput(this, tableNames[i], canvasCol/2, canvasRow/2).setColor(tableColors[i]);
-      t.setHubConf(h, i+1);
-      tables[i] = t;
+    if (scene == 0) {
+      canvasRow = 120;
+      canvasCol = 20;
+
+      tables = new InputOutput[8];
+      for (int i=0; i<tables.length; i++) {
+        InputOutput t =  new InputOutput(this, tableNames[i], canvasCol/2, canvasRow/2).setColor(tableColors[i]);
+        t.setHubConf(h, i+1);
+        tables[i] = t;
+      }
+    }
+
+    if (scene == 1) {
+      canvasRow = 30;
+      canvasCol = 10;
+
+      tables = new InputOutput[2];
+      InputOutput t1 = new InputOutput(this, tableNames[0], canvasCol/2, canvasRow/2).setColor(tableColors[0]);
+      InputOutput t2 = new InputOutput(this, tableNames[1], canvasCol/2, canvasRow/2).setColor(tableColors[1]);
+
+      t1.setHubConf(h, 1);
+      t2.setHubConf(h, 1);
+
+      tables[0] = t1;
+      tables[1] = t2;
     }
   }
 
@@ -69,7 +94,6 @@ class Display {
   void clean() {
     needToClearBackground = true;
     needToClearCanvas = true;
-    setupInputOutputs();
   }
 
 
@@ -90,7 +114,6 @@ class Display {
       canvas.background(255);
       drawCanvasGrid(canvasRow, canvasCol);
       needToClearCanvas = false;
-      println("canvas cleared");
     }
 
 
@@ -133,7 +156,6 @@ class Display {
     }
 
     drawCodeFolder();
-    
   }
 
 
@@ -151,7 +173,7 @@ class Display {
       canvas.line(0, i*canvasStepHeight, canvasWidth, i*canvasStepHeight);
     }
   }
-  
+
   void drawCodeFolder() {
     image(codeTop, startX+padding, canvasHeight-padding*4);
   }

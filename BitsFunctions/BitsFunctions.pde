@@ -9,7 +9,8 @@ import ddf.minim.ugens.*;
 
 // ########## Table Configurations ########## 
 color[] tableColors = {#ff3333, #66CCFF, #333333, #666666, #999999, #aaaaaa, #cccccc, #efefef};
-String[] tableNames = {"赤", "緑", "33", "44", "55", "66", "77", "88"};
+String t = "TOP";
+String[] tableNames = {t+"1", t+"2", t+"3", t+"4", t+"5", t+"6", t+"7", t+"8"};
 
 // ########## Configurations ########## 
 int port = 6000;
@@ -111,25 +112,39 @@ void draw() {
     testDisplay.show();
   }
 
+  // ############################################
   if (displayMode == 0) {
     hubBitsDisplay.show();
   }
 
+  // #############################################
   if (displayMode == 1) {
     if (state == 0) {
       display.clean();
-      display.needToClearBackground = true;
-      display.needToClearCanvas = true;
-      if (timePassed(3)) state++;
+      display.setupInputOutputs(scene);
+      if (timePassed(2)) state++;
     }
     if (state == 1) {
       display.show(scene);
+
+      if (timePassed(10)) {
+        scene++;
+        
+        if (scene > 1) {
+          scene = 0;
+        }
+        
+        state = 0;
+      }
     }
   }
 
+  // #############################################
   if (displayMode == 2) {
     display.show(displayMode);
   }
+
+
 
   showModeStatus();
 
@@ -158,6 +173,7 @@ void clearDisplayOnceWhenModeSwitched() {
     resetDisplays();
 
     state = 0;
+    scene = 0;
   }
 }
 
