@@ -36,8 +36,8 @@ class Display {
     canvasHeight = int(dHeight / 4 * 3);
     canvas = createGraphics(canvasWidth, canvasHeight, P2D);
     // (60, 12), 
-    canvasCol = 60;
-    canvasRow = 90;
+    canvasCol = 20;
+    canvasRow = 120;
     canvasStepWidth = canvasWidth / canvasCol;
     canvasStepHeight = canvasHeight / canvasRow;
 
@@ -93,10 +93,10 @@ class Display {
         //tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
         //  .down(h.bits[i][4]).left(h.bits[i][5]);
 
-        if (i == 0) {
+        if (i == 2) {
           tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
             .red(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).green(h.bits[i][6]);
-        } else if (i == 1) {
+        } else if (i == 3) {
           tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
             .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][6]);
         } else {
@@ -118,7 +118,7 @@ class Display {
     // ------------------- in Canvas END
 
     for (int i=0; i<tables.length; i++) {
-      if (h.dataChanged(i)) tables[i].show(1);
+      tables[i].show(1);
     }
 
     image(codeTop, startX+padding, canvasHeight-padding*4);
