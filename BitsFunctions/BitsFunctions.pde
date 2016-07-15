@@ -157,13 +157,7 @@ void draw() {
 
   showModeStatus();
 
-  noStroke();
-  fill(0);
-  rect(0, 0, width, 200);
-  String codeRed = "赤.penDown("+str(h.bits[0][0])+").上("+str(h.bits[0][1])+").右("+str(h.bits[0][2])+").左("+str(h.bits[0][3])+").下("+str(h.bits[0][4])+")";
-  textSize(20);
-  fill(255);
-  text(codeRed, 10, 100);
+
 }
 
 void saveCanvas() {

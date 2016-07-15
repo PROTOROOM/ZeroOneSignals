@@ -14,7 +14,7 @@ class Display {
 
   PImage codeTop;
   int padding = 10;
-  
+
   boolean saveFrame;
 
 
@@ -53,8 +53,8 @@ class Display {
     //red.setHubConf(hub, 5);
     //black.setHubConf(hub, 6);
 
-    codeTop = loadImage("folder_top.png");
-    codeTop.resize(dWidth - padding*2, 95);
+    codeTop = loadImage("folder.png");
+    codeTop.resize(dWidth - padding*2, 503);
   }
 
   void setHubConf(HubNetwork hub) {
@@ -67,6 +67,8 @@ class Display {
     if (scene == 0) {
       canvasRow = 120;
       canvasCol = 20;
+      canvasStepWidth = canvasWidth / canvasCol;
+      canvasStepHeight = canvasHeight / canvasRow;
 
       tables = new InputOutput[8];
       for (int i=0; i<tables.length; i++) {
@@ -79,6 +81,8 @@ class Display {
     if (scene == 1) {
       canvasRow = 30;
       canvasCol = 10;
+      canvasStepWidth = canvasWidth / canvasCol;
+      canvasStepHeight = canvasHeight / canvasRow;
 
       tables = new InputOutput[2];
       InputOutput t1 = new InputOutput(this, tableNames[0], canvasCol/2, canvasRow/2).setColor(tableColors[0]);
@@ -104,7 +108,7 @@ class Display {
       PGraphicsPDF pdf = (PGraphicsPDF)beginRaw(PDF, "test.pdf");
       pdf.rect(startX, startY, dWidth, dHeight);
     }
-    
+
     if (needToClearBackground) {
       noStroke();
       fill(255);
@@ -163,7 +167,7 @@ class Display {
     }
 
     drawCodeFolder();
-    
+
     if (saveFrame == true) {
       endRaw();
       saveFrame = false;
@@ -187,9 +191,40 @@ class Display {
   }
 
   void drawCodeFolder() {
-    image(codeTop, startX+padding, canvasHeight-padding*4);
+    float folderX = startX + padding;
+    float folderY = canvasHeight-padding*4;
+    image(codeTop, folderX, folderY);
+
+
+    float codeX = folderX + 2*padding;
+    float codeY = folderY + padding*13;
+    noStroke();
+    //stroke(0);
+    fill(255);
+    rect(codeX+padding, folderY+10*padding, dWidth-8*padding, dHeight-codeY);
+
+
+    String codeName;
+    String codeRed;
+    //String codeName = "上上4";
+    //String codeRed = ".上("+str(h.bits[3][0])+").上("+str(h.bits[3][1])+").右("+str(h.bits[3][2])+").左("+str(h.bits[0][3])+").上("+str(h.bits[3][4])+").右("+str(h.bits[3][5])+").左("+str(h.bits[0][6])+").下("+str(h.bits[0][7])+");";
+    ////String codeRed2 = "      .上("+str(h.bits[3][4])+").右("+str(h.bits[3][5])+").左("+str(h.bits[0][6])+").下("+str(h.bits[0][7])+");";
+    //textSize(20);
+    //fill(0);
+    //text(codeName, codeX, codeY);
+    //text(codeRed, codeX, codeY+30);
+
+    for (int i=0; i<8; i++) {
+      codeName = "上上5";
+      codeRed = ".上("+str(h.bits[3][0])+").上("+str(h.bits[3][1])+").右("+str(h.bits[3][2])+").左("+str(h.bits[0][3])+").上("+str(h.bits[3][4])+").右("+str(h.bits[3][5])+").左("+str(h.bits[0][6])+").下("+str(h.bits[0][7])+");";
+      //String codeRed2 = "      .上("+str(h.bits[3][4])+").右("+str(h.bits[3][5])+").左("+str(h.bits[0][6])+").下("+str(h.bits[0][7])+");";
+      textSize(18);
+      fill(0);
+      text(codeName, codeX, codeY+50*i);
+      text(codeRed, codeX, codeY+50*i+25);
+    }
   }
-  
+
   void saveCanvas() {
     saveFrame = true;
   }
