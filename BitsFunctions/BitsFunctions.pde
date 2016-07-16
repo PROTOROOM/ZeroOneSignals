@@ -16,6 +16,8 @@ int scene = 1;
 // and find SETUP1, SETUP2 in Display Class
 // TODO : make scene configuration file
 
+int MODE01TIME = 30;
+int MODE02TIME = 60;
 
 color[] tableColors = {color(255, 0), color(255, 0), #333333, #666666, #999999, #aaaaaa, #cccccc, #efefef};
 String t = "TABLE_";
@@ -137,7 +139,7 @@ void draw() {
     if (state == 1) {
       display.show(scene);
 
-      if (timePassed(10)) {
+      if (timePassed(MODE01TIME)) {
         scene++;
 
         if (scene > totalSceneNumber+1) {
@@ -165,7 +167,7 @@ void draw() {
     if (state == 1) {
       display.show(scene);
 
-      if (timePassed(60)) {
+      if (timePassed(MODE02TIME)) {
         scene++;
 
         if (scene > totalSceneNumber+1) {
@@ -206,9 +208,10 @@ void saveCanvas() {
 void clearCanvasEdge() {
   noStroke();
   fill(bgColor);
+  //fill(200);
   float border = display.startX/4;
-  rect(display.startX-2*border, 0, border*2, display.canvasHeight+border);
-  rect(display.startX+display.dWidth, 0, border*2, display.canvasHeight+border);
+  rect(display.startX-4*border, 0, border*4, display.canvasHeight+border*3);
+  rect(display.startX+display.dWidth, 0, border*4, display.canvasHeight+border*3);
 }
 
 void clearDisplayOnceWhenModeSwitched() {

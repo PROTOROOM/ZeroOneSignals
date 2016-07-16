@@ -265,10 +265,10 @@ class Display {
     //canvasStepHeight = canvasHeight / row;
 
     if (showGrid) {
-      for (int i=0; i<col; i++) {
+      for (int i=0; i<col+1; i++) {
         canvas.line(i*canvasStepWidth, startY, i*canvasStepWidth, canvasHeight);
       }
-      for (int i=0; i<row; i++) {
+      for (int i=0; i<row+2; i++) {
         canvas.line(0, i*canvasStepHeight, canvasWidth, i*canvasStepHeight);
       }
     }
@@ -286,7 +286,7 @@ class Display {
     //stroke(0);
     fill(255);
     //rect(codeX+padding, folderY+10*padding, dWidth-8*padding, dHeight-codeY);
-    rect(startX, codeY-padding*2, dWidth, dHeight - folderY);
+    rect(startX, codeY-padding*4, dWidth, dHeight - folderY);
 
 
     String codeName;

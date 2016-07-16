@@ -195,7 +195,7 @@ class InputOutput {
       isPenDown = false;
     }
 
-    addCommand("pDN");
+    addCommand("筆降");
     return this;
   }
 
@@ -206,7 +206,7 @@ class InputOutput {
       isPenDown = true;
     }
     
-    addCommand("pUP");
+    addCommand("筆昇");
     return this;
   }
 
@@ -217,7 +217,7 @@ class InputOutput {
       penSize = defaultPenSize;
     }
 
-    addCommand("BIG");
+    addCommand("大筆");
     return this;
   }
 
