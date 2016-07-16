@@ -75,8 +75,8 @@ function checkCurrentMode(bit) {
 
 
 function setupWebsocketClient() {
-// 	ws = new WebSocket("ws://192.168.0.14:8080/modehub");
-	ws = new WebSocket("ws://localhost:8080/modehub");
+	ws = new WebSocket("ws://192.168.1.100:8080/modehub");
+// 	ws = new WebSocket("ws://localhost:8080/modehub");
 	ws.onopen = function() {
 		if (isDebug) { console.log("connected"); }
 	};
