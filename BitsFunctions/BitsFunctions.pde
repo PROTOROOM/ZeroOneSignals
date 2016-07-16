@@ -74,6 +74,7 @@ void setup() {
   //size(640, 720, P2D);
   size(1920, 2160, P2D);
   noSmooth();
+  noCursor();
   bgColor = color(0);
   background(bgColor);
 
