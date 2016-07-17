@@ -195,7 +195,7 @@ class InputOutput {
       isPenDown = false;
     }
 
-    addCommand("ペ下");
+    addCommand("筆下");
     return this;
   }
 
