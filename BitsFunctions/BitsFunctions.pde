@@ -106,7 +106,6 @@ void setup() {
   //
   state = 0;
   stateTime = millis();
-
 }
 
 
@@ -195,14 +194,14 @@ void draw() {
 void saveCanvas() {
   String imageName;
   String hourString;
-  
+
   int hour = hour();
   if (hour < 10) {
     hourString = '0' + str(hour);
   } else {
     hourString = str(hour);
   }
-   
+
   imageName = "./img/"+str(year())+str(month())+str(day())+"_"+hourString+str(minute())+str(second())+".png";
   save(imageName);
 }
@@ -213,7 +212,7 @@ void clearCanvasEdge() {
   //fill(200);
   float border = display.startX/4;
   rect(display.startX-4*border, 0, border*4, display.canvasHeight+border*3);
-  rect(display.startX+display.dWidth, 0, border*4, display.canvasHeight+border*3);
+  rect(display.startX+display.dWidth, 0, border*4, height);
 }
 
 void clearDisplayOnceWhenModeSwitched() {
@@ -250,9 +249,14 @@ void showText(String text) {
 
 
 void showModeStatus() {
+  fill(bgColor);
+  noStroke();
+  rect(width/2-10, 0, 100, 100);
   if (!isRealDisplayMode) {
+    textSize(10);
+    textFont(codeFont);
     fill(100);
-    text("Switching Mode by Hand "+displayMode, width/2, 100);
+    text("Mode "+displayMode, width/2, 30);
   }
 }
 
