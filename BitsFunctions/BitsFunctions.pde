@@ -72,9 +72,9 @@ int state, stateTime;
 
 // ########## Setup ########## 
 void setup() {
-  //fullScreen(P2D, SPAN);
+  fullScreen(P2D, SPAN);
   //size(640, 720, P2D);
-  size(1920, 2160, P2D);
+  //size(1920, 2160, P2D);
   noSmooth();
   noCursor();
   bgColor = color(0);
