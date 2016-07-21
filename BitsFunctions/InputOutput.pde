@@ -81,15 +81,27 @@ class InputOutput {
       strokeWeight(2);
       fill(penColor);
       ellipse(cX, cY, penSize*4, penSize*4);
-      
+
       textFont(titleFont);
       textAlign(CENTER, CENTER);
       textSize(penSize*3);
-      
-      color textColor = lerpColor(penColor, color(255), 0.8);
+
+      color textColor = getTextColor(penColor);
       fill(textColor);
       text(showName, cX, cY-penSize/2);
     }
+  }
+
+  color getTextColor(color c) {
+    color result;
+    //if (brightness(c) > 250) {
+    //  result = lerpColor(c, color(0), 0.1);
+    //} else {
+    //  result = lerpColor(c, color(255), 0.7);
+    //}
+
+    result = lerpColor(c, color(255), 0.7);
+    return result;
   }
 
   void setHubConf(HubNetwork hub, int id) {
@@ -120,7 +132,7 @@ class InputOutput {
       commands.add(command);
     }
   }
-  
+
   void end() {
     commandEnd = true;
   }
@@ -214,7 +226,7 @@ class InputOutput {
     } else {
       isPenDown = true;
     }
-    
+
     addCommand("筆昇");
     return this;
   }

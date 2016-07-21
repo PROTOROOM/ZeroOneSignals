@@ -11,12 +11,12 @@ import processing.pdf.*;
 
 // ########## Table Configurations ########## 
 // to setup Scene, first change totalSceneNumber
-int totalSceneNumber = 3;
+int totalSceneNumber = 4;
 int scene = 1;
 // and find SETUP1, SETUP2 in Display Class
 // TODO : make scene configuration file
 
-int MODE01TIME = 30;
+int MODE01TIME = 10;
 int MODE02TIME = 60;
 
 color[] tableColors = {color(10, 30), color(30, 30), #333333, #666666, #999999, #aaaaaa, #cccccc, #efefef};
@@ -144,7 +144,7 @@ void draw() {
       if (timePassed(MODE01TIME)) {
         scene++;
 
-        if (scene > totalSceneNumber+1) {
+        if (scene > totalSceneNumber) {
           scene = 1;
         }
 
@@ -172,7 +172,7 @@ void draw() {
       if (timePassed(MODE02TIME)) {
         scene++;
 
-        if (scene > totalSceneNumber+1) {
+        if (scene > totalSceneNumber) {
           scene = 1;
         }
 
