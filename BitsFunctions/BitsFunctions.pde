@@ -1,5 +1,6 @@
 /* Bits Functions
- by SeungBum Kim, PROTOROOM
+ Developed by SeungBum Kim, PROTOROOM
+ Color touched by Hoonida Kim, PROTOROOM
  */
 
 import hypermedia.net.*;
