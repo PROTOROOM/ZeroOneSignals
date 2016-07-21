@@ -1,0 +1,13 @@
+# screenshot images
+BitsFunctions/img/**
+
+# Packages
+*.zip
+*.dmg
+*.tar
+*.tgz
+*.7z
+
+# OS generated files
+.DS_Store*
+Thumbs.db
