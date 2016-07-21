@@ -280,26 +280,31 @@ class Display {
     image(codeTop, folderX, folderY);
 
 
-    float codeX = folderX + 2*padding;
-    float codeY = folderY + padding*13;
+    float codeX = folderX + 2*padding-9;
+    float codeY = folderY + padding*10;
     noStroke();
     //stroke(0);
     fill(255);
     //rect(codeX+padding, folderY+10*padding, dWidth-8*padding, dHeight-codeY);
-    rect(startX, codeY-padding*4, dWidth, dHeight - folderY);
+    rect(startX, codeY-padding*3, dWidth, dHeight - folderY);
 
 
     String codeName;
     String codeRed;
 
     // print code string
+    textFont(codeFont);
+    textAlign(LEFT, BOTTOM);
     textSize(18);
     fill(0);
     for (int i=0; i<tables.length; i++) {
       int commandNumber = tables[i].commands.size();
-      rect(codeX-12, codeY+i*55-13, 4, 37);
+      rect(codeX-6, codeY+i*55-16, 4, 35);
       int hi = tables[i].hi;
       text(tables[i].name, codeX, codeY+i*55);
+      
+      //stroke(255, 0, 0);
+      //point(codeX, codeY+i*55);
 
       if (commandNumber > 0) {
         String commandString = "";

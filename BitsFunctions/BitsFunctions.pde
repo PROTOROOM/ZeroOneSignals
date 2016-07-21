@@ -19,9 +19,9 @@ int scene = 1;
 int MODE01TIME = 30;
 int MODE02TIME = 60;
 
-color[] tableColors = {color(255, 0), color(255, 0), #333333, #666666, #999999, #aaaaaa, #cccccc, #efefef};
+color[] tableColors = {color(10, 30), color(30, 30), #333333, #666666, #999999, #aaaaaa, #cccccc, #efefef};
 String t = "TABLE_";
-String[] tableNames = {t+"01", t+"02", t+"03", t+"04", t+"05", t+"06", t+"07", t+"08"};
+String[] tableNames = {t+"A", t+"B", t+"C", t+"D", t+"E", t+"F", t+"G", t+"H"};
 
 // ########## Configurations ########## 
 int port = 6000;
@@ -44,7 +44,7 @@ HubNetwork hubNet, h;
 UDP udp;
 WebsocketServer ws;
 
-PFont font;
+PFont codeFont, titleFont;
 Minim minim;
 AudioOutput OUT;
 
@@ -89,8 +89,9 @@ void setup() {
 
   // setup font.
   //font = createFont("chifont.ttf", 20);
-  font = createFont("PixelMplus12-Regular.ttf", 20);
-  textFont(font);
+  codeFont = createFont("PixelMplus12-Regular.ttf", 20);
+  titleFont = createFont("VarelaRound-Regular", 20);
+  //textFont(codeFont);
 
   // setup sound.
   minim = new Minim(this);
