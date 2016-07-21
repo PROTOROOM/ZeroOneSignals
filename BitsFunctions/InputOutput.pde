@@ -7,9 +7,9 @@ class InputOutput {
   int direction; // 0(right) - 7 clockwise  
 
 
-  boolean isPenDown;
+  boolean isPenDown, defaultColorOn;
   float penSize, bigPenSize, defaultPenSize;
-  color penColor;
+  color penColor, defaultPenColor;
   float stepSize;
 
   String name, showName;
@@ -41,6 +41,8 @@ class InputOutput {
     defaultPenSize = 2;
     bigPenSize = 5;
     penColor = color(0);
+    defaultPenColor = color(0);
+    defaultColorOn = false;
     stepSize = 10; // XXX now use canvasStep Width/Height
 
     name = aName;
@@ -161,13 +163,16 @@ class InputOutput {
   // ###################### Color ######################
   InputOutput setColor(color c) {
     penColor = c;
+    defaultPenColor = c;
     return this;
   }
 
   InputOutput red(int in) {
     if (isTrue(in)) {
       penColor = color(#ff3333);
-    } 
+    } else if (defaultColorOn) {
+      penColor = defaultPenColor;
+    }
 
     addCommand("赤");
     return this;
@@ -176,6 +181,8 @@ class InputOutput {
   InputOutput black(int in) {
     if (isTrue(in)) {
       penColor = color(#000000);
+    } else if (defaultColorOn) {
+      penColor = defaultPenColor;
     } 
 
     addCommand("黒");
@@ -185,6 +192,8 @@ class InputOutput {
   InputOutput blue(int in) {
     if (isTrue(in)) {
       penColor = color(#66CCFF);
+    } else if (defaultColorOn) {
+      penColor = defaultPenColor;
     } 
 
     addCommand("青");
@@ -194,6 +203,8 @@ class InputOutput {
   InputOutput green(int in) {
     if (isTrue(in)) {
       penColor = color(#66cc99);
+    } else if (defaultColorOn) {
+      penColor = defaultPenColor;
     } 
 
     addCommand("緑");
@@ -203,6 +214,8 @@ class InputOutput {
   InputOutput yellow(int in) {
     if (isTrue(in)) {
       penColor = color(#ffcc00);
+    } else if (defaultColorOn) {
+      penColor = defaultPenColor;
     } 
 
     addCommand("黄");

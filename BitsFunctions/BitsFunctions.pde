@@ -19,7 +19,8 @@ int scene = 1;
 int MODE01TIME = 30;
 int MODE02TIME = 60;
 
-color[] tableColors = {color(10, 30), color(30, 30), #333333, #666666, #999999, #aaaaaa, #cccccc, #efefef};
+color[] tableColors = {color(30, 30), color(30, 30), color(30, 30), color(30, 30), 
+                      color(30, 30), color(30, 30), color(30, 30), color(30, 30)};
 String t = "TABLE_";
 String[] tableNames = {t+"A", t+"B", t+"C", t+"D", t+"E", t+"F", t+"G", t+"H"};
 
@@ -283,10 +284,16 @@ void keyReleased() {
   if (key == 'a') {
     state = 0;
     scene--;
+    if (scene < 1) {
+      scene = totalSceneNumber;
+    }
   }
   if (key == 's') {
     state = 0;
     scene++;
+    if (scene > totalSceneNumber) {
+      scene = 1;
+    }
   }
 }
 

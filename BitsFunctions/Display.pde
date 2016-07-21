@@ -172,6 +172,9 @@ class Display {
     // ---------------------------------------------- SCENE 5
     if (scene == 5) {
       setupCanvas(30, 90);
+      //setupCanvas(30, 20);
+      gridBackground = color(50);
+      gridColor = color(70);
 
       for (int i=0; i<tables.length; i++) {
         tables[i].setStartPosition(canvasCol/2, canvasRow/2);
