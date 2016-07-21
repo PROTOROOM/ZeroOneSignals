@@ -269,9 +269,9 @@ void keyReleased() {
   //}
 
   if (!isRealDisplayMode) {
-    if (key == 'q') displayMode = 0;
-    if (key == 'w') displayMode = 1;
-    if (key == 'e') displayMode = 2;
+    if (key == 'q' || key == '0') displayMode = 0;
+    if (key == 'w' || key == '1') displayMode = 1;
+    if (key == 'e' || key == '2') displayMode = 2;
     if (key == 't') displayMode = -1;
   }
 
