@@ -12,7 +12,7 @@ class InputOutput {
   color penColor;
   float stepSize;
 
-  String name;
+  String name, showName;
   int commandIndex;
   boolean commandEnd;
   ArrayList<String> commands;
@@ -44,6 +44,7 @@ class InputOutput {
     stepSize = 10; // XXX now use canvasStep Width/Height
 
     name = aName;
+    showName = str(name.charAt(name.length()-1));
     commandIndex = 0;
     commandEnd = false;
     commands = new ArrayList<String>();
@@ -80,6 +81,14 @@ class InputOutput {
       strokeWeight(2);
       fill(penColor);
       ellipse(cX, cY, penSize*4, penSize*4);
+      
+      textFont(titleFont);
+      textAlign(CENTER, CENTER);
+      textSize(penSize*3);
+      
+      color textColor = lerpColor(penColor, color(255), 0.8);
+      fill(textColor);
+      text(showName, cX, cY-penSize/2);
     }
   }
 

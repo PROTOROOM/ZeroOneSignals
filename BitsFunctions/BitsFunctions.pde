@@ -90,7 +90,7 @@ void setup() {
   // setup font.
   //font = createFont("chifont.ttf", 20);
   codeFont = createFont("PixelMplus12-Regular.ttf", 20);
-  titleFont = createFont("VarelaRound-Regular", 20);
+  titleFont = createFont("VarelaRound-Regular", 100);
   //textFont(codeFont);
 
   // setup sound.
