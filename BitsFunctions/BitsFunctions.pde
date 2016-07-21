@@ -11,12 +11,12 @@ import processing.pdf.*;
 
 // ########## Table Configurations ########## 
 // to setup Scene, first change totalSceneNumber
-int totalSceneNumber = 4;
+int totalSceneNumber = 5;
 int scene = 1;
 // and find SETUP1, SETUP2 in Display Class
 // TODO : make scene configuration file
 
-int MODE01TIME = 10;
+int MODE01TIME = 30;
 int MODE02TIME = 60;
 
 color[] tableColors = {color(10, 30), color(30, 30), #333333, #666666, #999999, #aaaaaa, #cccccc, #efefef};
@@ -251,12 +251,12 @@ void showText(String text) {
 void showModeStatus() {
   fill(bgColor);
   noStroke();
-  rect(width/2-10, 0, 100, 100);
+  rect(width/2-10, 0, 200, 100);
   if (!isRealDisplayMode) {
-    textSize(10);
+    textSize(6);
     textFont(codeFont);
     fill(100);
-    text("Mode "+displayMode, width/2, 30);
+    text("Mode: "+displayMode+", Scene: "+scene, width/2, 30);
   }
 }
 
@@ -278,6 +278,15 @@ void keyReleased() {
   if (key == 'r') {
     background(bgColor);
     toggleRealDisplayMode();
+  }
+  
+  if (key == 'a') {
+    state = 0;
+    scene--;
+  }
+  if (key == 's') {
+    state = 0;
+    scene++;
   }
 }
 

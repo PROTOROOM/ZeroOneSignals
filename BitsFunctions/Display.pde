@@ -167,6 +167,26 @@ class Display {
       //tables[4].setDefaultPen(10);
       //tables[5].setBigPen(40);
       //tables[5].setDefaultPen(10);
+    }    
+
+    // ---------------------------------------------- SCENE 5
+    if (scene == 5) {
+      setupCanvas(30, 90);
+
+      for (int i=0; i<tables.length; i++) {
+        tables[i].setStartPosition(canvasCol/2, canvasRow/2);
+        tables[i].setBigPen(9);
+        tables[i].setDefaultPen(3);
+      }
+
+      //tables[2].setBigPen(40);
+      //tables[2].setDefaultPen(10);
+      //tables[3].setBigPen(40);
+      //tables[3].setDefaultPen(10);
+      //tables[4].setBigPen(40);
+      //tables[4].setDefaultPen(10);
+      //tables[5].setBigPen(40);
+      //tables[5].setDefaultPen(10);
     }
   }
 
@@ -208,19 +228,19 @@ class Display {
         if (h.dataChanged(i)) {
           if (i == 2) {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
-              .red(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).green(h.bits[i][6]).end();
+              .red(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).green(h.bits[i][7]).end();
           } else if (i == 3) {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-              .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][6]).end();
+              .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][7]).end();
             //} else if (i == 4) {
             //  tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][6]).end();
+            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][7]).end();
             //} else if (i == 5) {
             //  tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][6]).end();
+            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][7]).end();
           } else {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-              .downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).up(h.bits[i][6]).down(h.bits[i][6]).end();
+              .downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).up(h.bits[i][6]).down(h.bits[i][7]).end();
           }
         }
       }
@@ -231,19 +251,19 @@ class Display {
         if (h.dataChanged(i)) {
           if (i == 2) {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
-              .red(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).green(h.bits[i][6]).end();
+              .red(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).green(h.bits[i][7]).end();
           } else if (i == 3) {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-              .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).yellow(h.bits[i][6]).end();
+              .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).yellow(h.bits[i][7]).end();
             //} else if (i == 4) {
             //  tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][6]).end();
+            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][7]).end();
             //} else if (i == 5) {
             //  tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][6]).end();
+            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][7]).end();
           } else {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-              .downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).up(h.bits[i][6]).down(h.bits[i][6]).end();
+              .downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).up(h.bits[i][6]).down(h.bits[i][7]).end();
           }
         }
       }
@@ -255,19 +275,19 @@ class Display {
         if (h.dataChanged(i)) {
           if (i == 2) {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
-              .green(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).blue(h.bits[i][6]).end();
+              .green(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).blue(h.bits[i][7]).end();
           } else if (i == 3) {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-              .up(h.bits[i][4]).blue(h.bits[i][5]).upRight(h.bits[i][6]).yellow(h.bits[i][6]).end();
+              .up(h.bits[i][4]).blue(h.bits[i][5]).upRight(h.bits[i][6]).yellow(h.bits[i][7]).end();
             //} else if (i == 4) {
             //  tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][6]).end();
+            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][7]).end();
             //} else if (i == 5) {
             //  tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][6]).end();
+            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][7]).end();
           } else {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-              .downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).up(h.bits[i][6]).down(h.bits[i][6]).end();
+              .downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).up(h.bits[i][6]).down(h.bits[i][7]).end();
           }
         }
       }
@@ -279,19 +299,34 @@ class Display {
         if (h.dataChanged(i)) {
           if (i == 2) {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
-              .yellow(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).black(h.bits[i][6]).end();
+              .yellow(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).black(h.bits[i][7]).end();
           } else if (i == 3) {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-              .up(h.bits[i][4]).red(h.bits[i][5]).upRight(h.bits[i][6]).yellow(h.bits[i][6]).end();
+              .up(h.bits[i][4]).red(h.bits[i][5]).upRight(h.bits[i][6]).yellow(h.bits[i][7]).end();
             //} else if (i == 4) {
             //  tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][6]).end();
+            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][7]).end();
             //} else if (i == 5) {
             //  tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][6]).end();
+            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][7]).end();
           } else {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).down(h.bits[i][2]).right(h.bits[i][3])
-              .left(h.bits[i][4]).up(h.bits[i][5]).blue(h.bits[i][6]).down(h.bits[i][6]).end();
+              .left(h.bits[i][4]).up(h.bits[i][5]).blue(h.bits[i][6]).down(h.bits[i][7]).end();
+          }
+        }
+      }
+    }
+
+    // ---------------------------------------------- SCENE 5
+    if (scene == 5) {
+      for (int i=0; i<tables.length; i++) {
+        if (h.dataChanged(i)) {
+          if (i == 2) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).down(h.bits[i][2]).right(h.bits[i][3])
+              .left(h.bits[i][4]).up(h.bits[i][5]).yellow(h.bits[i][6]).green(h.bits[i][7]).end();
+          } else {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).down(h.bits[i][2]).right(h.bits[i][3])
+              .left(h.bits[i][4]).up(h.bits[i][5]).blue(h.bits[i][6]).red(h.bits[i][7]).end();
           }
         }
       }
