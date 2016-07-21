@@ -202,7 +202,7 @@ class InputOutput {
 
   InputOutput green(int in) {
     if (isTrue(in)) {
-      penColor = color(#66cc99);
+      penColor = color(#66ff66); //#66cc99
     } else if (defaultColorOn) {
       penColor = defaultPenColor;
     } 
