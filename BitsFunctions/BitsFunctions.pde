@@ -12,7 +12,7 @@ import processing.pdf.*;
 
 // ########## Table Configurations ########## 
 // to setup Scene, first change totalSceneNumber
-int totalSceneNumber = 5;
+int totalSceneNumber = 6;
 int scene = 1;
 // and find SETUP1, SETUP2 in Display Class
 // TODO : make scene configuration file

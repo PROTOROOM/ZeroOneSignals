@@ -88,7 +88,7 @@ class Display {
 
     // ---------------------------------------------- SCENE 1
     if (scene == 1) {
-      setupCanvas(20, 120);
+      setupCanvas(10, 60);
 
 
       for (int i=0; i<tables.length; i++) {
@@ -97,31 +97,37 @@ class Display {
         tables[i].setDefaultPen(1);
       }
 
-      //tables[2].setBigPen(40);
-      //tables[2].setDefaultPen(10);
-      tables[3].setBigPen(10);
+      tables[0].setBigPen(25);
+      tables[0].setDefaultPen(10);
+      tables[2].setBigPen(35);
+      tables[2].setDefaultPen(20);
+
+      tables[3].setBigPen(20);
       tables[3].setDefaultPen(10);
-      tables[4].setBigPen(30);
-      tables[4].setDefaultPen(10);
-      //tables[5].setBigPen(40);
-      //tables[5].setDefaultPen(10);
+      tables[4].setBigPen(10);
+      tables[4].setDefaultPen(8);
+      tables[5].setBigPen(20);
+      tables[5].setDefaultPen(13);
+      tables[7].setBigPen(20);
+      tables[7].setDefaultPen(15);
     }
 
     // ---------------------------------------------- SCENE 2
     if (scene == 2) {
       setupCanvas(20, 100);
-      gridBackground = color(#666666);
+      gridBackground = color(#ffff33);
+      gridColor = color(#ff0000);
 
       for (int i=0; i<tables.length; i++) {
         tables[i].setStartPosition(canvasCol/2, canvasRow/2);
-        tables[i].setBigPen(5);
-        tables[i].setDefaultPen(1);
+        tables[i].setBigPen(int(random(4, 15)));
+        tables[i].setDefaultPen(int(random(1, 3)));
       }
 
       //tables[2].setBigPen(40);
       //tables[2].setDefaultPen(10);
-      tables[3].setBigPen(10);
-      tables[3].setDefaultPen(10);
+      tables[5].setBigPen(30);
+      tables[5].setDefaultPen(15);
       //tables[4].setBigPen(40);
       //tables[4].setDefaultPen(10);
       //tables[5].setBigPen(40);
@@ -130,7 +136,30 @@ class Display {
 
     // ---------------------------------------------- SCENE 3
     if (scene == 3) {
-      setupCanvas(20, 100);
+      setupCanvas(30, 90);
+      //setupCanvas(30, 20);
+      gridBackground = color(30);
+      gridColor = color(60);
+
+      for (int i=0; i<tables.length; i++) {
+        tables[i].setStartPosition(canvasCol/2, canvasRow/2);
+        tables[i].setBigPen(9);
+        tables[i].setDefaultPen(3);
+      }
+
+      //tables[2].setBigPen(40);
+      //tables[2].setDefaultPen(10);
+      //tables[3].setBigPen(40);
+      //tables[3].setDefaultPen(10);
+      //tables[4].setBigPen(40);
+      //tables[4].setDefaultPen(10);
+      //tables[5].setBigPen(40);
+      //tables[5].setDefaultPen(10);
+    }
+
+    // ---------------------------------------------- SCENE 4
+    if (scene == 4) {
+      setupCanvas(10, 50);
       showGrid = false;
 
       for (int i=0; i<tables.length; i++) {
@@ -149,8 +178,8 @@ class Display {
       //tables[5].setDefaultPen(10);
     }
 
-    // ---------------------------------------------- SCENE 4
-    if (scene == 4) {
+    // ---------------------------------------------- SCENE 5
+    if (scene == 5) {
       setupCanvas(10, 30);
 
       for (int i=0; i<tables.length; i++) {
@@ -159,18 +188,18 @@ class Display {
         tables[i].setDefaultPen(2);
       }
 
-      //tables[2].setBigPen(40);
-      //tables[2].setDefaultPen(10);
-      tables[3].setBigPen(10);
-      tables[3].setDefaultPen(3);
-      tables[4].setBigPen(30);
-      tables[4].setDefaultPen(10);
+      tables[2].setBigPen(25);
+      tables[2].setDefaultPen(15);
+      tables[3].setBigPen(50);
+      tables[3].setDefaultPen(23);
+      tables[7].setBigPen(15);
+      tables[7].setDefaultPen(7);
       //tables[5].setBigPen(40);
       //tables[5].setDefaultPen(10);
     }    
 
-    // ---------------------------------------------- SCENE 5
-    if (scene == 5) {
+    // ---------------------------------------------- SCENE 6
+    if (scene == 6) {
       setupCanvas(30, 90);
       //setupCanvas(30, 20);
       gridBackground = color(50);
@@ -229,18 +258,30 @@ class Display {
     if (scene == 1) {
       for (int i=0; i<tables.length; i++) {
         if (h.dataChanged(i)) {
-          if (i == 2) {
+          if (i == 0) {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
-              .red(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).green(h.bits[i][7]).end();
-            //} else if (i == 3) {
-            //tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-            //.up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][7]).end();
+              .up(h.bits[i][4]).down(h.bits[i][5]).yellow1(h.bits[i][6]).red2(h.bits[i][7]).end();
+          } else if (i == 1) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).blue2(h.bits[i][6]).blue1(h.bits[i][7]).end();
+          } else if (i == 2) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).yellow4(h.bits[i][6]).red1(h.bits[i][7]).end();
+          } else if (i == 3) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).yellow4(h.bits[i][6]).gray2(h.bits[i][7]).end();
           } else if (i == 4) {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-              .up(h.bits[i][4]).upRight(h.bits[i][5]).green(h.bits[i][6]).black(h.bits[i][7]).end();
-            //} else if (i == 5) {
-            //  tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][7]).end();
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).blue4(h.bits[i][6]).gray1(h.bits[i][7]).end();
+          } else if (i == 5) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).green2(h.bits[i][6]).red1(h.bits[i][7]).end();
+          } else if (i == 6) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).gray3(h.bits[i][5]).blue2(h.bits[i][6]).red1(h.bits[i][7]).end();
+          } else if (i == 7) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).green1(h.bits[i][6]).yellow2(h.bits[i][7]).end();
           } else {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
               .downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).up(h.bits[i][6]).down(h.bits[i][7]).end();
@@ -252,21 +293,15 @@ class Display {
     if (scene == 2) {
       for (int i=0; i<tables.length; i++) {
         if (h.dataChanged(i)) {
-          if (i == 2) {
+          if (i == 5) {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
-              .red(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).green(h.bits[i][7]).end();
-          } else if (i == 3) {
-            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-              .up(h.bits[i][4]).upRight(h.bits[i][5]).green(h.bits[i][6]).yellow(h.bits[i][7]).end();
-          } else if (i == 4) {
-            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-              .up(h.bits[i][4]).upRight(h.bits[i][5]).green(h.bits[i][6]).black(h.bits[i][7]).end();
+              .up(h.bits[i][4]).down(h.bits[i][5]).red1(h.bits[i][6]).green2(h.bits[i][7]).end();
             //} else if (i == 5) {
             //  tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][7]).end();
+            //    .up(h.bits[i][4]).upRight(h.bits[i][5]).green(h.bits[i][6]).black(h.bits[i][7]).end();
           } else {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-              .downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).up(h.bits[i][6]).down(h.bits[i][7]).end();
+              .left(h.bits[i][4]).gray1(h.bits[i][5]).gray2(h.bits[i][6]).gray3(h.bits[i][7]).end();
           }
         }
       }
@@ -276,60 +311,205 @@ class Display {
     if (scene == 3) {
       for (int i=0; i<tables.length; i++) {
         if (h.dataChanged(i)) {
-          if (i == 2) {
-            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
-              .green(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).blue(h.bits[i][7]).end();
+          if (i == 0) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).down(h.bits[i][5]).yellow1(h.bits[i][6]).red2(h.bits[i][7]).end();
+          } else if (i == 1) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).down(h.bits[i][5]).blue2(h.bits[i][6]).blue1(h.bits[i][7]).end();
+          } else if (i == 2) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).down(h.bits[i][5]).yellow4(h.bits[i][6]).red1(h.bits[i][7]).end();
           } else if (i == 3) {
-            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-              .up(h.bits[i][4]).upRight(h.bits[i][5]).blue(h.bits[i][6]).yellow(h.bits[i][7]).end();
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).down(h.bits[i][5]).yellow4(h.bits[i][6]).gray2(h.bits[i][7]).end();
           } else if (i == 4) {
-            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-              .up(h.bits[i][4]).upRight(h.bits[i][5]).green(h.bits[i][6]).black(h.bits[i][7]).end();
-            //} else if (i == 5) {
-            //  tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][7]).end();
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).down(h.bits[i][5]).blue4(h.bits[i][6]).gray1(h.bits[i][7]).end();
+          } else if (i == 5) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).down(h.bits[i][5]).green2(h.bits[i][6]).red1(h.bits[i][7]).end();
+          } else if (i == 6) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).gray3(h.bits[i][5]).blue2(h.bits[i][6]).red1(h.bits[i][7]).end();
+          } else if (i == 7) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).down(h.bits[i][5]).green1(h.bits[i][6]).yellow2(h.bits[i][7]).end();
           } else {
-            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-              .up(h.bits[i][4]).left(h.bits[i][5]).up(h.bits[i][6]).blue(h.bits[i][7]).end();
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).up(h.bits[i][6]).down(h.bits[i][7]).end();
           }
         }
       }
     }
 
+
     // ---------------------------------------------- SCENE 4
+    //if (scene == 4) {
+    //  for (int i=0; i<tables.length; i++) {
+    //    if (h.dataChanged(i)) {
+    //      if (i == 2) {
+    //        tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
+    //          .green(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).blue(h.bits[i][7]).end();
+    //      } else if (i == 3) {
+    //        tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+    //          .up(h.bits[i][4]).upRight(h.bits[i][5]).blue(h.bits[i][6]).yellow(h.bits[i][7]).end();
+    //      } else if (i == 4) {
+    //        tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+    //          .up(h.bits[i][4]).upRight(h.bits[i][5]).green(h.bits[i][6]).black(h.bits[i][7]).end();
+    //        //} else if (i == 5) {
+    //        //  tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+    //        //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][7]).end();
+    //      } else {
+    //        tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+    //          .up(h.bits[i][4]).left(h.bits[i][5]).up(h.bits[i][6]).blue(h.bits[i][7]).end();
+    //      }
+    //    }
+    //  }
+    //}
     if (scene == 4) {
       for (int i=0; i<tables.length; i++) {
         if (h.dataChanged(i)) {
-          if (i == 2) {
+          if (i == 0) {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
-              .yellow(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).black(h.bits[i][7]).end();
+              .up(h.bits[i][4]).down(h.bits[i][5]).yellow1(h.bits[i][6]).red2(h.bits[i][7]).end();
+          } else if (i == 1) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).blue2(h.bits[i][6]).blue1(h.bits[i][7]).end();
+          } else if (i == 2) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).yellow4(h.bits[i][6]).red1(h.bits[i][7]).end();
           } else if (i == 3) {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-              .up(h.bits[i][4]).upRight(h.bits[i][5]).red(h.bits[i][6]).yellow(h.bits[i][7]).end();
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).yellow4(h.bits[i][6]).gray2(h.bits[i][7]).end();
           } else if (i == 4) {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-              .up(h.bits[i][4]).right(h.bits[i][5]).red(h.bits[i][6]).black(h.bits[i][7]).end();
-            //} else if (i == 5) {
-            //  tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
-            //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][7]).end();
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).blue4(h.bits[i][6]).gray1(h.bits[i][7]).end();
+          } else if (i == 5) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).green2(h.bits[i][6]).red1(h.bits[i][7]).end();
+          } else if (i == 6) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).gray3(h.bits[i][5]).blue2(h.bits[i][6]).red1(h.bits[i][7]).end();
+          } else if (i == 7) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).green1(h.bits[i][6]).yellow2(h.bits[i][7]).end();
           } else {
-            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).down(h.bits[i][2]).right(h.bits[i][3])
-              .left(h.bits[i][4]).up(h.bits[i][5]).blue(h.bits[i][6]).down(h.bits[i][7]).end();
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).up(h.bits[i][6]).down(h.bits[i][7]).end();
           }
         }
       }
     }
 
+
+
+
     // ---------------------------------------------- SCENE 5
+    //if (scene == 5) {
+    //  for (int i=0; i<tables.length; i++) {
+    //    if (h.dataChanged(i)) {
+    //      if (i == 2) {
+    //        tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
+    //          .yellow(h.bits[i][4]).down(h.bits[i][5]).red(h.bits[i][6]).black(h.bits[i][7]).end();
+    //      } else if (i == 3) {
+    //        tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+    //          .up(h.bits[i][4]).upRight(h.bits[i][5]).red(h.bits[i][6]).yellow(h.bits[i][7]).end();
+    //      } else if (i == 4) {
+    //        tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+    //          .up(h.bits[i][4]).right(h.bits[i][5]).red(h.bits[i][6]).black(h.bits[i][7]).end();
+    //        //} else if (i == 5) {
+    //        //  tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+    //        //    .up(h.bits[i][4]).green(h.bits[i][5]).upRight(h.bits[i][6]).black(h.bits[i][7]).end();
+    //      } else {
+    //        tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).down(h.bits[i][2]).right(h.bits[i][3])
+    //          .left(h.bits[i][4]).up(h.bits[i][5]).blue(h.bits[i][6]).down(h.bits[i][7]).end();
+    //      }
+    //    }
+    //  }
+    //}
     if (scene == 5) {
       for (int i=0; i<tables.length; i++) {
         if (h.dataChanged(i)) {
-          if (i == 2) {
-            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).down(h.bits[i][2]).right(h.bits[i][3])
-              .left(h.bits[i][4]).up(h.bits[i][5]).yellow(h.bits[i][6]).green(h.bits[i][7]).end();
+          if (i == 0) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
+              .up(h.bits[i][4]).down(h.bits[i][5]).yellow1(h.bits[i][6]).red2(h.bits[i][7]).end();
+          } else if (i == 1) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).blue2(h.bits[i][6]).blue1(h.bits[i][7]).end();
+          } else if (i == 2) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).yellow4(h.bits[i][6]).red1(h.bits[i][7]).end();
+          } else if (i == 3) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).yellow4(h.bits[i][6]).gray2(h.bits[i][7]).end();
+          } else if (i == 4) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).blue4(h.bits[i][6]).gray1(h.bits[i][7]).end();
+          } else if (i == 5) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).green2(h.bits[i][6]).red1(h.bits[i][7]).end();
+          } else if (i == 6) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).gray3(h.bits[i][5]).blue2(h.bits[i][6]).red1(h.bits[i][7]).end();
+          } else if (i == 7) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).green1(h.bits[i][6]).yellow2(h.bits[i][7]).end();
           } else {
-            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).down(h.bits[i][2]).right(h.bits[i][3])
-              .left(h.bits[i][4]).up(h.bits[i][5]).blue(h.bits[i][6]).red(h.bits[i][7]).end();
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
+              .downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).up(h.bits[i][6]).down(h.bits[i][7]).end();
+          }
+        }
+      }
+    }
+
+
+
+
+    // ---------------------------------------------- SCENE 6
+    //if (scene == 6) {
+    //  for (int i=0; i<tables.length; i++) {
+    //    if (h.dataChanged(i)) {
+    //      if (i == 2) {
+    //        tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).down(h.bits[i][2]).right(h.bits[i][3])
+    //          .left(h.bits[i][4]).up(h.bits[i][5]).yellow(h.bits[i][6]).green(h.bits[i][7]).end();
+    //      } else {
+    //        tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).down(h.bits[i][2]).right(h.bits[i][3])
+    //          .left(h.bits[i][4]).up(h.bits[i][5]).blue(h.bits[i][6]).red(h.bits[i][7]).end();
+    //      }
+    //    }
+    //  }
+    //}
+    if (scene == 6) {
+      for (int i=0; i<tables.length; i++) {
+        if (h.dataChanged(i)) {
+          if (i == 0) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).down(h.bits[i][5]).yellow1(h.bits[i][6]).red2(h.bits[i][7]).end();
+          } else if (i == 1) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).blue2(h.bits[i][6]).blue1(h.bits[i][7]).end();
+          } else if (i == 2) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).yellow4(h.bits[i][6]).red1(h.bits[i][7]).end();
+          } else if (i == 3) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).yellow4(h.bits[i][6]).gray2(h.bits[i][7]).end();
+          } else if (i == 4) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).blue4(h.bits[i][6]).gray1(h.bits[i][7]).end();
+          } else if (i == 5) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).green2(h.bits[i][6]).red1(h.bits[i][7]).end();
+          } else if (i == 6) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).gray3(h.bits[i][5]).blue2(h.bits[i][6]).red1(h.bits[i][7]).end();
+          } else if (i == 7) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).green1(h.bits[i][6]).yellow2(h.bits[i][7]).end();
+          } else {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .downLeft(h.bits[i][4]).upLeft(h.bits[i][5]).up(h.bits[i][6]).down(h.bits[i][7]).end();
           }
         }
       }

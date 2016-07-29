@@ -167,9 +167,20 @@ class InputOutput {
     return this;
   }
 
-  InputOutput red(int in) {
+  InputOutput red1(int in) {
     if (isTrue(in)) {
       penColor = color(#ff3333);
+    } else if (defaultColorOn) {
+      penColor = defaultPenColor;
+    }
+
+    addCommand("赤");
+    return this;
+  }
+
+  InputOutput red2(int in) {
+    if (isTrue(in)) {
+      penColor = color(#ff9999);
     } else if (defaultColorOn) {
       penColor = defaultPenColor;
     }
@@ -189,7 +200,37 @@ class InputOutput {
     return this;
   }
 
-  InputOutput blue(int in) {
+  InputOutput blue1(int in) {
+    if (isTrue(in)) {
+      penColor = color(#003399);
+    } else if (defaultColorOn) {
+      penColor = defaultPenColor;
+    } 
+
+    addCommand("青");
+    return this;
+  }
+  InputOutput blue2(int in) {
+    if (isTrue(in)) {
+      penColor = color(#336699);
+    } else if (defaultColorOn) {
+      penColor = defaultPenColor;
+    } 
+
+    addCommand("青");
+    return this;
+  }
+  InputOutput blue3(int in) {
+    if (isTrue(in)) {
+      penColor = color(#3399CC);
+    } else if (defaultColorOn) {
+      penColor = defaultPenColor;
+    } 
+
+    addCommand("青");
+    return this;
+  }
+  InputOutput blue4(int in) {
     if (isTrue(in)) {
       penColor = color(#66CCFF);
     } else if (defaultColorOn) {
@@ -200,9 +241,19 @@ class InputOutput {
     return this;
   }
 
-  InputOutput green(int in) {
+  InputOutput green1(int in) {
     if (isTrue(in)) {
-      penColor = color(#66ff66); //#66cc99
+      penColor = color(#66ff66);
+    } else if (defaultColorOn) {
+      penColor = defaultPenColor;
+    } 
+
+    addCommand("緑");
+    return this;
+  }
+  InputOutput green2(int in) {
+    if (isTrue(in)) {
+      penColor = color(#33CC66);
     } else if (defaultColorOn) {
       penColor = defaultPenColor;
     } 
@@ -211,14 +262,75 @@ class InputOutput {
     return this;
   }
 
-  InputOutput yellow(int in) {
+  InputOutput yellow1(int in) {
     if (isTrue(in)) {
-      penColor = color(#ffcc00);
+      penColor = color(#CCCC99);
     } else if (defaultColorOn) {
       penColor = defaultPenColor;
     } 
 
     addCommand("黄");
+    return this;
+  }
+  InputOutput yellow2(int in) {
+    if (isTrue(in)) {
+      penColor = color(#ffcc99);
+    } else if (defaultColorOn) {
+      penColor = defaultPenColor;
+    } 
+
+    addCommand("黄");
+    return this;
+  }  
+  InputOutput yellow3(int in) {
+    if (isTrue(in)) {
+      penColor = color(#ffcc33);
+    } else if (defaultColorOn) {
+      penColor = defaultPenColor;
+    } 
+
+    addCommand("黄");
+    return this;
+  }  
+  InputOutput yellow4(int in) {
+    if (isTrue(in)) {
+      penColor = color(#ffff33);
+    } else if (defaultColorOn) {
+      penColor = defaultPenColor;
+    } 
+
+    addCommand("黄");
+    return this;
+  }
+
+  InputOutput gray1(int in) {
+    if (isTrue(in)) {
+      penColor = color(#333333);
+    } else if (defaultColorOn) {
+      penColor = defaultPenColor;
+    } 
+
+    addCommand("黒");
+    return this;
+  }
+  InputOutput gray2(int in) {
+    if (isTrue(in)) {
+      penColor = color(#666666);
+    } else if (defaultColorOn) {
+      penColor = defaultPenColor;
+    } 
+
+    addCommand("黒");
+    return this;
+  }
+  InputOutput gray3(int in) {
+    if (isTrue(in)) {
+      penColor = color(#999999);
+    } else if (defaultColorOn) {
+      penColor = defaultPenColor;
+    } 
+
+    addCommand("黒");
     return this;
   }
 
