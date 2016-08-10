@@ -7,7 +7,10 @@ import hypermedia.net.*;
 import websockets.*;
 //import ddf.minim.*;
 //import ddf.minim.ugens.*;
+import supercollider.*;
+import oscP5.*;
 import processing.pdf.*;
+
 
 
 // ########## Table Configurations ########## 
@@ -49,6 +52,7 @@ WebsocketServer ws;
 PFont codeFont, titleFont;
 //Minim minim;
 //AudioOutput OUT;
+Synth[] synths = new Synth[8];
 
 // InputOutput Displays
 Display display;
@@ -95,10 +99,17 @@ void setup() {
   titleFont = createFont("VarelaRound-Regular", 100);
   //textFont(codeFont);
 
-  // setup sound.
+  // setup sound
   //minim = new Minim(this);
   //out = minim.getLineOut();
   //OUT = minim.getLineOut();
+  for (int i=0; i<synths.length; i++) {
+    Synth s = new Synth("sine");
+    s.set("amp", 0.0);
+    s.set("freq", 0);
+    s.create();
+    synths[i] = s;
+  }
 
   // setup Displays  
   testDisplay = new TestDisplay();
@@ -323,4 +334,12 @@ void receive(byte[] data) {
  **/
 void webSocketServerEvent(String msg) {
   println(msg);
+}
+
+
+void exit() {
+  for (int i=0; i<synths.length; i++) {
+    synths[i].free();
+  }
+  super.exit();
 }

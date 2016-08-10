@@ -27,6 +27,7 @@ class InputOutput {
 
   //AudioOutput out;
   //Oscil wave;
+  Synth synth;
 
 
   //InputOutput(String aName, float posX, float posY) { // XXX change to grid postion system.
@@ -109,6 +110,10 @@ class InputOutput {
   void setHubConf(HubNetwork hub, int id) {
     h = hub;
     hi = id - 1;
+  }
+  
+  void setSynth(Synth s) {
+    synth = s;
   }
 
   void setDisplay(Display d) {
@@ -337,8 +342,11 @@ class InputOutput {
   InputOutput penDown(int in) {
     if (isTrue(in)) {
       isPenDown = true;
+      synth.set("freq", 440+hi*50);
+      synth.set("amp", 0.1);
     } else {
       isPenDown = false;
+      synth.set("amp", 0.0);
     }
 
     addCommand("筆下");

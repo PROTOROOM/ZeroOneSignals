@@ -83,6 +83,7 @@ class Display {
     for (int i=0; i<tables.length; i++) {
       InputOutput t =  new InputOutput(this, tableNames[i]).setColor(tableColors[i]);
       t.setHubConf(h, i+1);
+      t.setSynth(synths[i]);
       tables[i] = t;
     }    
 
