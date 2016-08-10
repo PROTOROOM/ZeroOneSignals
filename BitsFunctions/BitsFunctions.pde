@@ -5,8 +5,8 @@
 
 import hypermedia.net.*;
 import websockets.*;
-import ddf.minim.*;
-import ddf.minim.ugens.*;
+//import ddf.minim.*;
+//import ddf.minim.ugens.*;
 import processing.pdf.*;
 
 
@@ -47,8 +47,8 @@ UDP udp;
 WebsocketServer ws;
 
 PFont codeFont, titleFont;
-Minim minim;
-AudioOutput OUT;
+//Minim minim;
+//AudioOutput OUT;
 
 // InputOutput Displays
 Display display;
@@ -96,9 +96,9 @@ void setup() {
   //textFont(codeFont);
 
   // setup sound.
-  minim = new Minim(this);
+  //minim = new Minim(this);
   //out = minim.getLineOut();
-  OUT = minim.getLineOut();
+  //OUT = minim.getLineOut();
 
   // setup Displays  
   testDisplay = new TestDisplay();

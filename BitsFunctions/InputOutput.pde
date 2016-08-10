@@ -26,7 +26,7 @@ class InputOutput {
   PGraphics c;
 
   //AudioOutput out;
-  Oscil wave;
+  //Oscil wave;
 
 
   //InputOutput(String aName, float posX, float posY) { // XXX change to grid postion system.
