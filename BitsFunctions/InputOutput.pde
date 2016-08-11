@@ -111,7 +111,7 @@ class InputOutput {
     h = hub;
     hi = id - 1;
   }
-  
+
   void setSynth(Synth s) {
     synth = s;
   }
@@ -342,11 +342,11 @@ class InputOutput {
   InputOutput penDown(int in) {
     if (isTrue(in)) {
       isPenDown = true;
-      synth.set("freq", 440+hi*50);
-      synth.set("amp", 0.1);
+      //synth.set("freq", 440);
+      //synth.set("amp", 0.1);
     } else {
       isPenDown = false;
-      synth.set("amp", 0.0);
+      //synth.set("amp", 0.0);
     }
 
     addCommand("筆下");
@@ -367,8 +367,11 @@ class InputOutput {
   InputOutput bigPen(int in) {
     if (isTrue(in)) {
       penSize = bigPenSize;
+      synth.set("freq", 440+hi*1);
+      synth.set("amp", 0.1);
     } else {
       penSize = defaultPenSize;
+      synth.set("amp", 0.0);
     }
 
     addCommand("大筆");
@@ -442,6 +445,9 @@ class InputOutput {
       //head = PI;
       direction = 4;
       go(1);
+      synth.set("pan", -1);
+    } else {
+      synth.set("pan", 0);
     }
 
     addCommand("左");

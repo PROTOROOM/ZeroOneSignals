@@ -24,7 +24,7 @@ int MODE01TIME = 30;
 int MODE02TIME = 60;
 
 color[] tableColors = {color(30, 30), color(30, 30), color(30, 30), color(30, 30), 
-                      color(30, 30), color(30, 30), color(30, 30), color(30, 30)};
+  color(30, 30), color(30, 30), color(30, 30), color(30, 30)};
 String t = "TABLE_";
 String[] tableNames = {t+"A", t+"B", t+"C", t+"D", t+"E", t+"F", t+"G", t+"H"};
 
@@ -76,9 +76,9 @@ int state, stateTime;
 
 // ########## Setup ########## 
 void setup() {
-  fullScreen(P2D, SPAN);
+  //fullScreen(P2D, SPAN);
   //size(640, 720, P2D);
-  //size(1920, 2160, P2D);
+  size(1920, 2160, P2D);
   noSmooth();
   noCursor();
   bgColor = color(0);
@@ -154,6 +154,7 @@ void draw() {
       display.show(scene);
 
       if (timePassed(MODE01TIME)) {
+        muteSound();
         scene++;
 
         if (scene > totalSceneNumber) {
@@ -292,7 +293,7 @@ void keyReleased() {
     background(bgColor);
     toggleRealDisplayMode();
   }
-  
+
   if (key == 'a') {
     state = 0;
     scene--;
@@ -336,6 +337,12 @@ void webSocketServerEvent(String msg) {
   println(msg);
 }
 
+
+void muteSound() {
+  for (int i=0; i<synths.length; i++) {
+    synths[i].set("amp", 0.0);
+  }
+}
 
 void exit() {
   for (int i=0; i<synths.length; i++) {
