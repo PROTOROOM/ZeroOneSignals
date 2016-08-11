@@ -6,6 +6,8 @@ class InputOutput {
   float head;
   int direction; // 0(right) - 7 clockwise  
 
+  boolean isReadyToGoUp, isReadyToGoDown, isReadyToGoLeft, isReadyToGoRight;
+  boolean isReadyToGoUpLeft, isReadyToGoUpRight, isReadyToGoDownLeft, isReadyToGoDownRight;
 
   boolean isPenDown, defaultColorOn;
   float penSize, bigPenSize, defaultPenSize;
@@ -422,7 +424,12 @@ class InputOutput {
     if (isTrue(in)) {
       //head = 0;
       direction = 0;
-      go(1);
+      if (isReadyToGoRight) {
+        go(1);
+        isReadyToGoRight = false;
+      }
+    } else {
+      isReadyToGoRight = true;
     }
 
     addCommand("右");
@@ -433,7 +440,12 @@ class InputOutput {
     if (isTrue(in)) {
       //head = PI;
       direction = 4;
-      go(1);
+      if (isReadyToGoLeft) {
+        go(1);
+        isReadyToGoLeft = false;
+      }
+    } else {
+      isReadyToGoLeft = true;
     }
 
     addCommand("左");
@@ -444,8 +456,14 @@ class InputOutput {
     if (isTrue(in)) {
       //head = PI/2*3;
       direction = 6;
-      go(1);
+      if (isReadyToGoUp) {
+        go(1);
+        isReadyToGoUp = false;
+      }
+    } else {
+      isReadyToGoUp = true;
     }
+    
     addCommand("上");
     return this;
   }
@@ -454,7 +472,12 @@ class InputOutput {
     if (isTrue(in)) {
       //head = PI/2;
       direction = 2;
-      go(1);
+      if (isReadyToGoDown) {
+        go(1);
+        isReadyToGoDown = false;
+      }
+    } else {
+      isReadyToGoDown = true;
     }
 
     addCommand("下");
@@ -464,25 +487,42 @@ class InputOutput {
   InputOutput upRight(int in) {
     if (isTrue(in)) {
       direction = 7;
-      go(1);
+      if (isReadyToGoUpRight) {
+        go(1);
+        isReadyToGoUpRight = false;
+      }
+    } else {
+      isReadyToGoUpRight = true;
     }
 
     addCommand("右上");
     return this;
   }
+  
   InputOutput upLeft(int in) {
     if (isTrue(in)) {
       direction = 5;
-      go(1);
+      if (isReadyToGoUpLeft) {
+        go(1);
+        isReadyToGoUpLeft = false;
+      }
+    } else {
+      isReadyToGoUpLeft = true;
     }
 
     addCommand("左上");
     return this;
   }
+  
   InputOutput downRight(int in) {
     if (isTrue(in)) {
       direction = 1;
-      go(1);
+      if (isReadyToGoDownRight) {
+        go(1);
+        isReadyToGoDownRight = false;
+      }
+    } else {
+      isReadyToGoDownRight = true;
     }
 
     addCommand("右下");
@@ -491,7 +531,12 @@ class InputOutput {
   InputOutput downLeft(int in) {
     if (isTrue(in)) {
       direction = 3;
-      go(1);
+      if (isReadyToGoDownLeft) {
+        go(1);
+        isReadyToGoDownLeft = false;
+      }
+    } else {
+      isReadyToGoDownLeft = true;
     }
 
     addCommand("左下");
