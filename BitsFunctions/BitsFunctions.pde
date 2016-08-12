@@ -104,9 +104,10 @@ void setup() {
   //out = minim.getLineOut();
   //OUT = minim.getLineOut();
   for (int i=0; i<synths.length; i++) {
-    Synth s = new Synth("sine");
+    Synth s = new Synth("sineFunc");
     s.set("amp", 0.0);
     s.set("freq", 0);
+    s.set("pan", 0);
     s.create();
     synths[i] = s;
   }

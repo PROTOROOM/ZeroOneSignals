@@ -342,11 +342,8 @@ class InputOutput {
   InputOutput penDown(int in) {
     if (isTrue(in)) {
       isPenDown = true;
-      //synth.set("freq", 440);
-      //synth.set("amp", 0.1);
     } else {
       isPenDown = false;
-      //synth.set("amp", 0.0);
     }
 
     addCommand("筆下");
@@ -367,11 +364,11 @@ class InputOutput {
   InputOutput bigPen(int in) {
     if (isTrue(in)) {
       penSize = bigPenSize;
-      synth.set("freq", 440+hi*1);
-      synth.set("amp", 0.1);
+      //synth.set("freq", 440);
+      //synth.set("amp", 0.1);
     } else {
       penSize = defaultPenSize;
-      synth.set("amp", 0.0);
+      //synth.set("amp", 0.0);
     }
 
     addCommand("大筆");
@@ -669,6 +666,15 @@ class InputOutput {
         //c.vertex(prevX, prevY);
         //c.vertex(x, y);
         //c.endShape();
+        //synth.set("freq", 200);
+        synth.set("amp", 0.1);
+        //synth.set("freq", h.hubData[hi]);
+        synth.set("freq", map(pY, 0, display.canvasCol, 0, 10));
+        //float pp = map(pX, 0, display.canvasCol, -1, 1);
+        //synth.set("pan", pp);
+        //synth.set("midi", 100-pY);
+      } else {
+        synth.set("amp", 0.0);
       }
     } 
     return this;
@@ -677,6 +683,8 @@ class InputOutput {
   int checkEdge(float x, float y) {
     int posX = int(x / display.canvasStepWidth);
     int posY = int(y / display.canvasStepHeight);
+    pX = posX;
+    pY = posY;
     //print(posX);print("-");println(posY);
 
     if (1 <= posY || posY <= display.canvasRow-1) {
