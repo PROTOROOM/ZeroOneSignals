@@ -88,7 +88,7 @@ class InputOutput {
       
       //stroke(250);
       stroke(getBrushStrokeColor(penColor));
-      strokeWeight(penSize/4);
+      strokeWeight(max(4, penSize/3));
       fill(penColor);
       //ellipse(cX, cY, penSize*4, penSize*4);
       ellipse(cX, cY, brushSize, brushSize);
