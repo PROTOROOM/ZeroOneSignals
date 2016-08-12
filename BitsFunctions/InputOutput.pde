@@ -78,20 +78,39 @@ class InputOutput {
       //float px = getXfromCanvasPosX(pX);
       //float py = getYfromCanvasPosY(pY);
 
-
-      stroke(250);
-      strokeWeight(2);
+      float brushSize, brushTextSize;
+      brushSize = penSize*4;
+      brushSize = min(20*4, brushSize);
+      brushSize = max(7*4, brushSize);
+      brushTextSize = penSize*3;
+      brushTextSize = min(15*3, brushTextSize);
+      brushTextSize = max(5*3, brushTextSize);
+      
+      //stroke(250);
+      stroke(getBrushStrokeColor(penColor));
+      strokeWeight(penSize/4);
       fill(penColor);
-      ellipse(cX, cY, penSize*4, penSize*4);
+      //ellipse(cX, cY, penSize*4, penSize*4);
+      ellipse(cX, cY, brushSize, brushSize);
 
       textFont(titleFont);
       textAlign(CENTER, CENTER);
-      textSize(penSize*3);
+      //textSize(penSize*3);
+      textSize(brushTextSize);
 
+      
       color textColor = getTextColor(penColor);
+      if (penColor > color(#ffcc88)) textColor = color(#ccaa66);
+      
       fill(textColor);
-      text(showName, cX, cY-penSize/2);
+      text(showName, cX, cY-brushSize/8);
     }
+  }
+  
+  color getBrushStrokeColor(color c) {
+    color result;
+    result = lerpColor(c, color(255), 0.4);
+    return result;
   }
 
   color getTextColor(color c) {
