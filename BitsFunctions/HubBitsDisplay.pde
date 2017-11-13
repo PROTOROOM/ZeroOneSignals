@@ -40,7 +40,8 @@ class HubBitsDisplay {
 
         if (h.bits[j][i] == 1) {
           //fill(tableColors[j]); // be carefull i & j !! TODO
-          fill(0);
+          if (j == 1) fill(255, 0, 0);
+          else fill(0);
         } else {
           fill(255);
         }
