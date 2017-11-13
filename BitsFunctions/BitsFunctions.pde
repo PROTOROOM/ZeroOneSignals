@@ -4,7 +4,7 @@
  */
 
 import hypermedia.net.*;
-import websockets.*;
+//import websockets.*;
 import ddf.minim.*;
 import ddf.minim.ugens.*;
 import processing.pdf.*;
@@ -44,7 +44,7 @@ String[] hubs = {
 // external libraries
 HubNetwork hubNet, h;
 UDP udp;
-WebsocketServer ws;
+//WebsocketServer ws;
 
 PFont codeFont, titleFont;
 Minim minim;
@@ -82,12 +82,12 @@ void setup() {
 
   // setup Hub Network.
   udp = new UDP(this, port);
-  ws = new WebsocketServer(this, wsPort, "/modehub");
+  //ws = new WebsocketServer(this, wsPort, "/modehub");
   hubNet = new HubNetwork(udp);
   h = hubNet;
   hubNet.setHubs(hubs);
   hubNet.setPort(hubPort);
-  hubNet.setModeHubServer(ws);
+  //hubNet.setModeHubServer(ws);
 
   // setup font.
   //font = createFont("chifont.ttf", 20);

@@ -23,7 +23,7 @@ class HubNetwork {
   int[] hubDataMin = {0, 0, 0, 0, 0, 0, 0, 0};
   
   UDP udp;
-  WebsocketServer ws;
+  //WebsocketServer ws;
   String[] hubs;
   int port;
 
@@ -44,8 +44,8 @@ class HubNetwork {
     port = aPort;
   }
 
-  void setModeHubServer(WebsocketServer aServer) {
-    ws = aServer;
+  void setModeHubServer(Object aServer) {
+    //ws = aServer;
   }
 
 
@@ -69,22 +69,22 @@ class HubNetwork {
 
 
   void sendDataToModeDisplay(int data) {
-    if (oldModeBitData != data) {
-      //println("ws :" + str(data));
+    //if (oldModeBitData != data) {
+    //  //println("ws :" + str(data));
 
-      if (oldModeBitData < data) {
-        bitOnTime = millis();
-      } else {
-        bitOffTime = millis();
-      }
-      try {
-        ws.sendMessage(str(data));
-      } 
-      catch (Exception e) {
-      }
-      oldModeBitData = data;
-    } else {
-    }
+    //  if (oldModeBitData < data) {
+    //    bitOnTime = millis();
+    //  } else {
+    //    bitOffTime = millis();
+    //  }
+    //  try {
+    //    ws.sendMessage(str(data));
+    //  } 
+    //  catch (Exception e) {
+    //  }
+    //  oldModeBitData = data;
+    //} else {
+    //}
   }
 
 
