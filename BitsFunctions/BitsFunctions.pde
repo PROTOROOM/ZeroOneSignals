@@ -20,10 +20,10 @@ int scene = 1;
 int MODE01TIME = 30;
 int MODE02TIME = 60;
 
-color[] tableColors = {color(30, 30), color(30, 30), color(30, 30), color(30, 30), 
-                      color(30, 30), color(30, 30), color(30, 30), color(30, 30)};
+color[] tableColors = {color(30, 0), color(30, 0), color(30, 0), color(30, 0)}; 
+                      //color(30, 30), color(30, 30), color(30, 30), color(30, 30)};
 String t = "TABLE_";
-String[] tableNames = {t+"A", t+"B", t+"C", t+"D", t+"E", t+"F", t+"G", t+"H"};
+String[] tableNames = {t+"A", t+"B", t+"C", t+"D"};
 
 // ########## Configurations ########## 
 int port = 6000;

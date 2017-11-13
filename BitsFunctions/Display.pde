@@ -79,7 +79,7 @@ class Display {
   // ################################################### SETUP1 for new Scene
   void setupInputOutputs(int scene) {
     // init all InputOutput Objects
-    tables = new InputOutput[8];
+    tables = new InputOutput[4];
     for (int i=0; i<tables.length; i++) {
       InputOutput t =  new InputOutput(this, tableNames[i]).setColor(tableColors[i]);
       t.setHubConf(h, i+1);
@@ -104,12 +104,12 @@ class Display {
 
       tables[3].setBigPen(20);
       tables[3].setDefaultPen(10);
-      tables[4].setBigPen(10);
-      tables[4].setDefaultPen(8);
-      tables[5].setBigPen(20);
-      tables[5].setDefaultPen(13);
-      tables[7].setBigPen(20);
-      tables[7].setDefaultPen(15);
+      //tables[4].setBigPen(10);
+      //tables[4].setDefaultPen(8);
+      //tables[5].setBigPen(20);
+      //tables[5].setDefaultPen(13);
+      //tables[7].setBigPen(20);
+      //tables[7].setDefaultPen(15);
     }
 
     // ---------------------------------------------- SCENE 2
@@ -126,8 +126,8 @@ class Display {
 
       //tables[2].setBigPen(40);
       //tables[2].setDefaultPen(10);
-      tables[5].setBigPen(30);
-      tables[5].setDefaultPen(15);
+      //tables[5].setBigPen(30);
+      //tables[5].setDefaultPen(15);
       //tables[4].setBigPen(40);
       //tables[4].setDefaultPen(10);
       //tables[5].setBigPen(40);
@@ -172,8 +172,8 @@ class Display {
       //tables[2].setDefaultPen(10);
       tables[3].setBigPen(10);
       tables[3].setDefaultPen(6);
-      tables[4].setBigPen(30);
-      tables[4].setDefaultPen(1);
+      //tables[4].setBigPen(30);
+      //tables[4].setDefaultPen(1);
       //tables[5].setBigPen(40);
       //tables[5].setDefaultPen(10);
     }
@@ -192,8 +192,8 @@ class Display {
       tables[2].setDefaultPen(15);
       tables[3].setBigPen(50);
       tables[3].setDefaultPen(23);
-      tables[7].setBigPen(15);
-      tables[7].setDefaultPen(7);
+      //tables[7].setBigPen(15);
+      //tables[7].setDefaultPen(7);
       //tables[5].setBigPen(40);
       //tables[5].setDefaultPen(10);
     }    
