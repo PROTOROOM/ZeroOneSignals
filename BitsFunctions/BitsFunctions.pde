@@ -120,7 +120,8 @@ void draw() {
   //println(state);
 
   if (isRealDisplayMode) {
-    displayMode = hubNet.getCurrentMode();
+    //displayMode = hubNet.getCurrentMode();
+    displayMode = hubNet.getCurrentModeBySwitch();
   }
 
   if (displayMode == -1) {

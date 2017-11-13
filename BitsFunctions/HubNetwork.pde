@@ -54,7 +54,8 @@ class HubNetwork {
       //bits[data[0]-1] = blank8Bits;
       if (data[0] == 9) {
         modeBitData = data[1];
-        sendDataToModeDisplay(modeBitData);
+        //println(modeBitData);
+        //sendDataToModeDisplay(modeBitData);
       } else {
         bits[data[0]-1] = toBits(data[1]);
         //hubData[data[0]-1] = data[1];
@@ -136,6 +137,11 @@ class HubNetwork {
     }
 
     return currentMode;
+  }
+  
+  int getCurrentModeBySwitch() {
+    if (modeBitData == 0) return 1;
+    else return 0;
   }
   
   boolean dataChanged(int i) {
