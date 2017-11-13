@@ -556,8 +556,8 @@ class Display {
     image(codeTop, folderX, folderY);
 
 
-    float codeX = folderX + 2*padding-9;
-    float codeY = folderY + padding*10;
+    float codeX = folderX + 2*padding;
+    float codeY = folderY + padding*12 + 10;
     noStroke();
     //stroke(0);
     fill(255);
@@ -571,26 +571,38 @@ class Display {
     // print code string
     textFont(codeFont);
     textAlign(LEFT, BOTTOM);
-    textSize(18);
+    textSize(20); // ICC:18, 
     fill(0);
+    int cg = 110; //Command Line Gap, ICC : 55 / SOMAF : 
     for (int i=0; i<tables.length; i++) {
       int commandNumber = tables[i].commands.size();
-      rect(codeX-6, codeY+i*55-16, 4, 35);
+      rect(codeX-5, codeY+i*cg-21, 4, 79);
       int hi = tables[i].hi;
-      text(tables[i].name, codeX, codeY+i*55);
+      text(tables[i].name, codeX+2, codeY+i*cg);
 
       //stroke(255, 0, 0);
       //point(codeX, codeY+i*55);
 
       if (commandNumber > 0) {
         String commandString = "";
+        String commandString1 = "";
+        String commandString2 = "";
 
         for (int j=0; j<tables[i].commands.size(); j++) {
           String c = tables[i].commands.get(j);
-          commandString = commandString + "." + c + "(" + str(h.bits[hi][j]) + ")";
+          //commandString = commandString + "." + c + "(" + str(h.bits[hi][j]) + ")";
+          if (j < 4) {
+            commandString1 = commandString1 + "." + c + "(" + str(h.bits[hi][j]) + ")";
+          } else {
+            commandString2 = commandString2 + "." + c + "(" + str(h.bits[hi][j]) + ")";
+          }
+          
         }
-        commandString = commandString + ";";
-        text(commandString, codeX, codeY+i*55+20);
+        //commandString = commandString + ";";
+        //text(commandString, codeX, codeY+i*cg+30);
+        commandString2 = commandString2 + ";";
+        text(commandString1, codeX, codeY+i*cg+30);
+        text(commandString2, codeX, codeY+i*cg+60);
       }
     }
   }

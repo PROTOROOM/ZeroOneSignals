@@ -193,7 +193,7 @@ class InputOutput {
       penColor = defaultPenColor;
     }
 
-    addCommand("RED");
+    addCommand("   beRED");
     return this;
   }
 
@@ -204,7 +204,7 @@ class InputOutput {
       penColor = defaultPenColor;
     }
 
-    addCommand("RED");
+    addCommand("   beRED");
     return this;
   }
 
@@ -215,7 +215,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("BLACK");
+    addCommand(" beBLACK");
     return this;
   }
 
@@ -226,7 +226,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("BLUE");
+    addCommand("  beBLUE");
     return this;
   }
   InputOutput blue2(int in) {
@@ -236,7 +236,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("BLUE");
+    addCommand("  beBLUE");
     return this;
   }
   InputOutput blue3(int in) {
@@ -246,7 +246,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("BLUE");
+    addCommand("  beBLUE");
     return this;
   }
   InputOutput blue4(int in) {
@@ -256,7 +256,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("BLUE");
+    addCommand("  beBLUE");
     return this;
   }
 
@@ -267,7 +267,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("GREEN");
+    addCommand(" beGREEN");
     return this;
   }
   InputOutput green2(int in) {
@@ -277,7 +277,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("GREEN");
+    addCommand(" beGREEN");
     return this;
   }
 
@@ -288,7 +288,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("YELLOW");
+    addCommand("beYELLOW");
     return this;
   }
   InputOutput yellow2(int in) {
@@ -298,7 +298,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("YELLOW");
+    addCommand("beYELLOW");
     return this;
   }  
   InputOutput yellow3(int in) {
@@ -308,7 +308,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("YELLOW");
+    addCommand("beYELLOW");
     return this;
   }  
   InputOutput yellow4(int in) {
@@ -318,7 +318,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("YELLOW");
+    addCommand("beYELLOW");
     return this;
   }
 
@@ -329,7 +329,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("GRAY");
+    addCommand("  beGRAY");
     return this;
   }
   InputOutput gray2(int in) {
@@ -339,7 +339,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("GRAY");
+    addCommand("  beGRAY");
     return this;
   }
   InputOutput gray3(int in) {
@@ -349,7 +349,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("GRAY");
+    addCommand("  beGRAY");
     return this;
   }
 
@@ -360,7 +360,7 @@ class InputOutput {
       isPenDown = false;
     }
 
-    addCommand("PenDown");
+    addCommand(" penDown");
     return this;
   }
 
@@ -371,7 +371,7 @@ class InputOutput {
       isPenDown = true;
     }
 
-    addCommand("PenUp");
+    addCommand("   penUp");
     return this;
   }
 
@@ -382,7 +382,7 @@ class InputOutput {
       penSize = defaultPenSize;
     }
 
-    addCommand("BIG");
+    addCommand("beSTRONG");
     return this;
   }
 
@@ -444,7 +444,7 @@ class InputOutput {
       go(1);
     }
 
-    addCommand("RIGHT");
+    addCommand(" goRIGHT");
     return this;
   }
 
@@ -455,7 +455,7 @@ class InputOutput {
       go(1);
     }
 
-    addCommand("LEFT");
+    addCommand("  goLEFT");
     return this;
   }
 
@@ -465,7 +465,7 @@ class InputOutput {
       direction = 6;
       go(1);
     }
-    addCommand("UP");
+    addCommand("    goUP");
     return this;
   }
 
@@ -476,7 +476,7 @@ class InputOutput {
       go(1);
     }
 
-    addCommand("DOWN");
+    addCommand("  goDOWN");
     return this;
   }
 
@@ -486,7 +486,7 @@ class InputOutput {
       go(1);
     }
 
-    addCommand("UpRight");
+    addCommand(" upRIGHT");
     return this;
   }
   InputOutput upLeft(int in) {
@@ -495,7 +495,7 @@ class InputOutput {
       go(1);
     }
 
-    addCommand("UpLeft");
+    addCommand("  upLEFT");
     return this;
   }
   InputOutput downRight(int in) {
@@ -504,7 +504,7 @@ class InputOutput {
       go(1);
     }
 
-    addCommand("DownRight");
+    addCommand("downRIGHT");
     return this;
   }
   InputOutput downLeft(int in) {
@@ -513,7 +513,7 @@ class InputOutput {
       go(1);
     }
 
-    addCommand("DownLeft");
+    addCommand("downLEFT");
     return this;
   }
 
