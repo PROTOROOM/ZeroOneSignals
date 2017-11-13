@@ -578,7 +578,7 @@ class Display {
       int commandNumber = tables[i].commands.size();
       rect(codeX-5, codeY+i*cg-21, 4, 79);
       int hi = tables[i].hi;
-      text(tables[i].name, codeX+2, codeY+i*cg);
+      text(tables[i].name, codeX+4, codeY+i*cg);
 
       //stroke(255, 0, 0);
       //point(codeX, codeY+i*55);
@@ -601,8 +601,8 @@ class Display {
         //commandString = commandString + ";";
         //text(commandString, codeX, codeY+i*cg+30);
         commandString2 = commandString2 + ";";
-        text(commandString1, codeX, codeY+i*cg+30);
-        text(commandString2, codeX, codeY+i*cg+60);
+        text(commandString1, codeX+2, codeY+i*cg+30);
+        text(commandString2, codeX+2, codeY+i*cg+60);
       }
     }
   }
