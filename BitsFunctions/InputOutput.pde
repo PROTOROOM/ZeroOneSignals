@@ -193,7 +193,7 @@ class InputOutput {
       penColor = defaultPenColor;
     }
 
-    addCommand("赤");
+    addCommand("RED");
     return this;
   }
 
@@ -204,7 +204,7 @@ class InputOutput {
       penColor = defaultPenColor;
     }
 
-    addCommand("赤");
+    addCommand("RED");
     return this;
   }
 
@@ -215,7 +215,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("黒");
+    addCommand("BLACK");
     return this;
   }
 
@@ -226,7 +226,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("青");
+    addCommand("BLUE");
     return this;
   }
   InputOutput blue2(int in) {
@@ -236,7 +236,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("青");
+    addCommand("BLUE");
     return this;
   }
   InputOutput blue3(int in) {
@@ -246,7 +246,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("青");
+    addCommand("BLUE");
     return this;
   }
   InputOutput blue4(int in) {
@@ -256,7 +256,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("青");
+    addCommand("BLUE");
     return this;
   }
 
@@ -267,7 +267,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("緑");
+    addCommand("GREEN");
     return this;
   }
   InputOutput green2(int in) {
@@ -277,7 +277,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("緑");
+    addCommand("GREEN");
     return this;
   }
 
@@ -288,7 +288,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("黄");
+    addCommand("YELLOW");
     return this;
   }
   InputOutput yellow2(int in) {
@@ -298,7 +298,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("黄");
+    addCommand("YELLOW");
     return this;
   }  
   InputOutput yellow3(int in) {
@@ -308,7 +308,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("黄");
+    addCommand("YELLOW");
     return this;
   }  
   InputOutput yellow4(int in) {
@@ -318,7 +318,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("黄");
+    addCommand("YELLOW");
     return this;
   }
 
@@ -329,7 +329,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("黒");
+    addCommand("GRAY");
     return this;
   }
   InputOutput gray2(int in) {
@@ -339,7 +339,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("黒");
+    addCommand("GRAY");
     return this;
   }
   InputOutput gray3(int in) {
@@ -349,7 +349,7 @@ class InputOutput {
       penColor = defaultPenColor;
     } 
 
-    addCommand("黒");
+    addCommand("GRAY");
     return this;
   }
 
@@ -360,7 +360,7 @@ class InputOutput {
       isPenDown = false;
     }
 
-    addCommand("筆下");
+    addCommand("PenDown");
     return this;
   }
 
@@ -371,7 +371,7 @@ class InputOutput {
       isPenDown = true;
     }
 
-    addCommand("筆昇");
+    addCommand("PenUp");
     return this;
   }
 
@@ -382,7 +382,7 @@ class InputOutput {
       penSize = defaultPenSize;
     }
 
-    addCommand("大筆");
+    addCommand("BIG");
     return this;
   }
 
@@ -444,7 +444,7 @@ class InputOutput {
       go(1);
     }
 
-    addCommand("右");
+    addCommand("RIGHT");
     return this;
   }
 
@@ -455,7 +455,7 @@ class InputOutput {
       go(1);
     }
 
-    addCommand("左");
+    addCommand("LEFT");
     return this;
   }
 
@@ -465,7 +465,7 @@ class InputOutput {
       direction = 6;
       go(1);
     }
-    addCommand("上");
+    addCommand("UP");
     return this;
   }
 
@@ -476,7 +476,7 @@ class InputOutput {
       go(1);
     }
 
-    addCommand("下");
+    addCommand("DOWN");
     return this;
   }
 
@@ -486,7 +486,7 @@ class InputOutput {
       go(1);
     }
 
-    addCommand("右上");
+    addCommand("UpRight");
     return this;
   }
   InputOutput upLeft(int in) {
@@ -495,7 +495,7 @@ class InputOutput {
       go(1);
     }
 
-    addCommand("左上");
+    addCommand("UpLeft");
     return this;
   }
   InputOutput downRight(int in) {
@@ -504,7 +504,7 @@ class InputOutput {
       go(1);
     }
 
-    addCommand("右下");
+    addCommand("DownRight");
     return this;
   }
   InputOutput downLeft(int in) {
@@ -513,7 +513,7 @@ class InputOutput {
       go(1);
     }
 
-    addCommand("左下");
+    addCommand("DownLeft");
     return this;
   }
 
