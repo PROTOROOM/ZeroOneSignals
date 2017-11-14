@@ -26,7 +26,7 @@ class Display {
     setHubConf(hub);
 
     if (screenWidth >= 1900) {
-      startX = 506 - 270;
+      startX = 700;//506 - 270;
       dWidth = int(270 * 2);
     } else {
       startX = screenWidth/3/12;

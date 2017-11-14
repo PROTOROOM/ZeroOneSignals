@@ -72,9 +72,9 @@ int state, stateTime;
 
 // ########## Setup ########## 
 void setup() {
-  //fullScreen(P2D, SPAN);
+  fullScreen(P2D, SPAN);
   //size(640, 720, P2D);
-  size(1920, 2160, P2D);
+  //size(1920, 2160, P2D);
   noSmooth();
   noCursor();
   bgColor = color(0);
@@ -254,12 +254,12 @@ void showText(String text) {
 void showModeStatus() {
   fill(bgColor);
   noStroke();
-  rect(width/2-10, 0, 200, 100);
+  rect(width-250, 0, 200, 100);
   if (!isRealDisplayMode) {
     textSize(6);
     textFont(codeFont);
     fill(100);
-    text("Mode: "+displayMode+", Scene: "+scene, width/2, 30);
+    text("Mode: "+displayMode+", Scene: "+scene, width-200, 30);
   }
 }
 
