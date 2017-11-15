@@ -89,6 +89,8 @@ class Display {
     // ---------------------------------------------- SCENE 1
     if (scene == 1) {
       setupCanvas(10, 60);
+      gridBackground = color(252, 248, 239);
+      gridColor = color(120);
 
 
       for (int i=0; i<tables.length; i++) {
@@ -114,9 +116,10 @@ class Display {
 
     // ---------------------------------------------- SCENE 2
     if (scene == 2) {
-      setupCanvas(20, 100);
-      gridBackground = color(#ffff33);
-      gridColor = color(#ff0000);
+      //setupCanvas(20, 100);
+      setupCanvas(10, 30);
+      gridBackground = color(#7166c4);
+      gridColor = color(#ffffff);
 
       for (int i=0; i<tables.length; i++) {
         tables[i].setStartPosition(canvasCol/2, canvasRow/2);
@@ -124,7 +127,9 @@ class Display {
         tables[i].setDefaultPen(int(random(1, 3)));
       }
 
-      //tables[2].setBigPen(40);
+      tables[1].setBigPen(12);
+      tables[2].setBigPen(30);
+
       //tables[2].setDefaultPen(10);
       //tables[5].setBigPen(30);
       //tables[5].setDefaultPen(15);
@@ -160,6 +165,7 @@ class Display {
     // ---------------------------------------------- SCENE 4
     if (scene == 4) {
       setupCanvas(10, 50);
+      gridBackground = color(252, 248, 239);
       showGrid = false;
 
       for (int i=0; i<tables.length; i++) {
@@ -181,6 +187,7 @@ class Display {
     // ---------------------------------------------- SCENE 5
     if (scene == 5) {
       setupCanvas(10, 30);
+      gridBackground = color(#6BC483);
 
       for (int i=0; i<tables.length; i++) {
         tables[i].setStartPosition(canvasCol/2, canvasRow/2);
@@ -200,7 +207,7 @@ class Display {
 
     // ---------------------------------------------- SCENE 6
     if (scene == 6) {
-      setupCanvas(30, 90);
+      setupCanvas(10, 30);
       //setupCanvas(30, 20);
       gridBackground = color(50);
       gridColor = color(70);
@@ -211,8 +218,8 @@ class Display {
         tables[i].setDefaultPen(3);
       }
 
-      //tables[2].setBigPen(40);
-      //tables[2].setDefaultPen(10);
+      tables[1].setBigPen(20);
+      tables[1].setDefaultPen(8);
       //tables[3].setBigPen(40);
       //tables[3].setDefaultPen(10);
       //tables[4].setBigPen(40);
@@ -293,12 +300,15 @@ class Display {
     if (scene == 2) {
       for (int i=0; i<tables.length; i++) {
         if (h.dataChanged(i)) {
-          if (i == 5) {
+          if (i == 1) {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).left(h.bits[i][3])
               .up(h.bits[i][4]).down(h.bits[i][5]).red1(h.bits[i][6]).green2(h.bits[i][7]).end();
             //} else if (i == 5) {
             //  tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
             //    .up(h.bits[i][4]).upRight(h.bits[i][5]).green(h.bits[i][6]).black(h.bits[i][7]).end();
+          } else if (i == 2) {
+            tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
+              .up(h.bits[i][4]).down(h.bits[i][5]).yellow2(h.bits[i][6]).yellow1(h.bits[i][7]).end();
           } else {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).downLeft(h.bits[i][2]).right(h.bits[i][3])
               .left(h.bits[i][4]).gray1(h.bits[i][5]).gray2(h.bits[i][6]).gray3(h.bits[i][7]).end();
@@ -488,7 +498,7 @@ class Display {
               .up(h.bits[i][4]).down(h.bits[i][5]).yellow1(h.bits[i][6]).red2(h.bits[i][7]).end();
           } else if (i == 1) {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
-              .up(h.bits[i][4]).upRight(h.bits[i][5]).blue2(h.bits[i][6]).blue1(h.bits[i][7]).end();
+              .up(h.bits[i][4]).upRight(h.bits[i][5]).blue3(h.bits[i][6]).blue4(h.bits[i][7]).end();
           } else if (i == 2) {
             tables[i].penDown(h.bits[i][0]).bigPen(h.bits[i][1]).left(h.bits[i][2]).right(h.bits[i][3])
               .up(h.bits[i][4]).upRight(h.bits[i][5]).yellow4(h.bits[i][6]).red1(h.bits[i][7]).end();
@@ -596,7 +606,6 @@ class Display {
           } else {
             commandString2 = commandString2 + "." + c + "(" + str(h.bits[hi][j]) + ")";
           }
-          
         }
         //commandString = commandString + ";";
         //text(commandString, codeX, codeY+i*cg+30);
