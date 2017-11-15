@@ -36,7 +36,7 @@ class HubBitsDisplay {
       for (int j=0; j<h.bits[i].length; j++) {
 
         float x = startX + cellW + i*cellW*2;
-        float y = cellW*24 + j*cellW*3;
+        float y = cellW*36 + j*cellW*3; // original center : 24
 
         if (h.bits[j][i] == 1) {
           //fill(tableColors[j]); // be carefull i & j !! TODO
