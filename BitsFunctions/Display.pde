@@ -25,12 +25,17 @@ class Display {
     needToClearCanvas = true;
     setHubConf(hub);
 
-    if (screenWidth >= 1900) {
-      startX = 700;//506 - 270;
-      dWidth = int(270 * 2);
+    if (InstallType == 1) {
+      startX = screenWidth*0.55/2;
+      dWidth = int(screenWidth*0.45);
     } else {
-      startX = screenWidth/3/12;
-      dWidth = int(screenWidth/3/12*10);
+      if (screenWidth >= 1900) {
+        startX = 700;//506 - 270;
+        dWidth = int(270 * 2);
+      } else {
+        startX = screenWidth/3/12;
+        dWidth = int(screenWidth/3/12*10);
+      }
     }
 
     startY = 0;
@@ -598,7 +603,7 @@ class Display {
         String commandString1 = "";
         String commandString2 = "";
 
-        for (int j=0; j<tables[i].commands.size(); j++) {
+        for (int j=0; j<tables[i].commands.size (); j++) {
           String c = tables[i].commands.get(j);
           //commandString = commandString + "." + c + "(" + str(h.bits[hi][j]) + ")";
           if (j < 4) {
@@ -620,3 +625,4 @@ class Display {
     saveFrame = true;
   }
 } // Display end
+

@@ -11,6 +11,10 @@ import processing.pdf.*;
 
 
 // ########## Table Configurations ########## 
+// Installation Type : 1(one projector), 2(two projector)
+int InstallType = 1;
+
+
 // to setup Scene, first change totalSceneNumber
 int totalSceneNumber = 6;
 int scene = 1;
@@ -73,7 +77,8 @@ int state, stateTime;
 // ########## Setup ########## 
 void setup() {
   //fullScreen(P2D, SPAN);
-  size(640, 720, P2D);
+//  size(640, 720, P2D);
+  size(1080, 1920, P2D);
   //size(1920, 2160, P2D);
   noSmooth();
   noCursor();
