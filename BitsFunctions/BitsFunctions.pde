@@ -72,8 +72,8 @@ int state, stateTime;
 
 // ########## Setup ########## 
 void setup() {
-  fullScreen(P2D, SPAN);
-  //size(640, 720, P2D);
+  //fullScreen(P2D, SPAN);
+  size(640, 720, P2D);
   //size(1920, 2160, P2D);
   noSmooth();
   noCursor();
@@ -92,7 +92,7 @@ void setup() {
   // setup font.
   //font = createFont("chifont.ttf", 20);
   codeFont = createFont("PixelMplus12-Regular.ttf", 20);
-  titleFont = createFont("VarelaRound-Regular", 100);
+  titleFont = createFont("VarelaRound-Regular.ttf", 100);
   //textFont(codeFont);
 
   // setup sound.
