@@ -26,8 +26,8 @@ class Display {
     setHubConf(hub);
 
     if (InstallType == 1) {
-      startX = screenWidth*0.55/2;
-      dWidth = int(screenWidth*0.45);
+      startX = screenWidth*0.61/2;
+      dWidth = int(screenWidth*0.39);
     } else {
       if (screenWidth >= 1900) {
         startX = 700;//506 - 270;
@@ -586,7 +586,7 @@ class Display {
     // print code string
     textFont(codeFont);
     textAlign(LEFT, BOTTOM);
-    textSize(20); // ICC:18, 
+    textSize(14); // ICC:18, 
     fill(0);
     int cg = 110; //Command Line Gap, ICC : 55 / SOMAF : 
     for (int i=0; i<tables.length; i++) {
